@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 58d228f6434064c5e8bc53f0760b284e
+guid: 96ffd18d42844412aabb32c6d3e6104b
 TextureImporter:
   fileIDToRecycleName:
     21300000: mushroomheadFaces1
@@ -26,7 +26,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -1
-  maxTextureSize: 1024
+  maxTextureSize: 256
   textureSettings:
     filterMode: -1
     aniso: 1
@@ -50,20 +50,20 @@ TextureImporter:
     - name: mushroomheadFaces1_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 144
-        width: 139
-        height: 135
+        x: 3
+        y: 73
+        width: 72
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: mushroomheadFaces1_1
       rect:
         serializedVersion: 2
-        x: 148
-        y: 13
-        width: 425
-        height: 281
+        x: 79
+        y: 7
+        width: 213
+        height: 142
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -72,8 +72,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 148
-        height: 136
+        width: 75
+        height: 69
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -8,29 +8,60 @@ public class RoomController : MonoBehaviour
 
 		public Sprite myBackGround;
 		
-		public int myRow1NumberOfSlots;
+		[HideInInspector]
+		public int
+				myRow1NumberOfSlots;
+
 		public float myRow1Scale;
 		public float myRow1YOffset;
 		public float myRow1XOffset;
 		public float myRow1PercentOfWidth;
 
-		public int myRow2NumberOfSlots;
+		[HideInInspector]
+		public int
+				myRow2NumberOfSlots;
+
 		public float myRow2Scale;
 		public float myRow2YOffset;
 		public float myRow2XOffset;
 		public float myRow2PercentOfWidth;
 
-		public int myRow3NumberOfSlots;
+		[HideInInspector]
+		public int
+				myRow3NumberOfSlots;
+
 		public float myRow3Scale;
 		public float myRow3YOffset;
 		public float myRow3XOffset;
 		public float myRow3PercentOfWidth;
 
-		public GameObject myEnemyPrefab;
-
-		
-
-
+		public enum RoomDifficultyMod
+		{
+				DEFAULT,
+				EASIEST,
+				EASIER,
+				NORMAL,
+				HARDER,
+				HARDEST}
+		;
+	
+		public RoomDifficultyMod myDifficultyMod;
+	
+		public GameObject EnemyRow1Slot01;
+		public GameObject EnemyRow1Slot02;
+		public GameObject EnemyRow1Slot03;
+		public GameObject EnemyRow1Slot04;
+		public GameObject EnemyRow1Slot05;
+		public GameObject EnemyRow2Slot01;
+		public GameObject EnemyRow2Slot02;
+		public GameObject EnemyRow2Slot03;
+		public GameObject EnemyRow2Slot04;
+		public GameObject EnemyRow2Slot05;
+		public GameObject EnemyRow3Slot01;
+		public GameObject EnemyRow3Slot02;
+		public GameObject EnemyRow3Slot03;
+		public GameObject EnemyRow3Slot04;
+		public GameObject EnemyRow3Slot05;
 
 		
 		[HideInInspector]
@@ -58,7 +89,60 @@ public class RoomController : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
-				
+				myRow1NumberOfSlots = 0;
+				if (EnemyRow1Slot01 != null) {
+						myRow1NumberOfSlots++;
+				}
+				if (EnemyRow1Slot02 != null) {
+						myRow1NumberOfSlots++;
+				}
+				if (EnemyRow1Slot03 != null) {
+						myRow1NumberOfSlots++;
+				}
+				if (EnemyRow1Slot04 != null) {
+						myRow1NumberOfSlots++;
+				}
+				if (EnemyRow1Slot05 != null) {
+						myRow1NumberOfSlots++;
+				}
+
+
+				myRow2NumberOfSlots = 0;
+				if (EnemyRow2Slot01 != null) {
+						myRow2NumberOfSlots++;
+				}
+				if (EnemyRow2Slot02 != null) {
+						myRow2NumberOfSlots++;
+				}
+				if (EnemyRow2Slot03 != null) {
+						myRow2NumberOfSlots++;
+				}
+				if (EnemyRow2Slot04 != null) {
+						myRow2NumberOfSlots++;
+				}
+				if (EnemyRow2Slot05 != null) {
+						myRow2NumberOfSlots++;
+				}
+
+
+				myRow3NumberOfSlots = 0;
+				if (EnemyRow3Slot01 != null) {
+						myRow3NumberOfSlots++;
+				}
+				if (EnemyRow3Slot02 != null) {
+						myRow3NumberOfSlots++;
+				}
+				if (EnemyRow3Slot03 != null) {
+						myRow3NumberOfSlots++;
+				}
+				if (EnemyRow3Slot04 != null) {
+						myRow3NumberOfSlots++;
+				}
+				if (EnemyRow3Slot05 != null) {
+						myRow3NumberOfSlots++;
+				}
+
+
 
 				this.setupRows ();
 
@@ -106,7 +190,7 @@ public class RoomController : MonoBehaviour
 				for (int i = 0; i < myRow1NumberOfSlots; i++) {
 						row1DepthRandomizer.Add (i + 1);
 
-						Debug.Log (row1DepthRandomizer.Count);
+						
 
 				}
 
@@ -114,7 +198,7 @@ public class RoomController : MonoBehaviour
 				for (int i = myRow1NumberOfSlots; i < myRow1NumberOfSlots + myRow2NumberOfSlots; i++) {
 						row2DepthRandomizer.Add (i + 1);
 			
-						Debug.Log (row2DepthRandomizer.Count);
+						
 
 				}
 
@@ -122,16 +206,16 @@ public class RoomController : MonoBehaviour
 				for (int i = myRow2NumberOfSlots + myRow1NumberOfSlots; i < myRow1NumberOfSlots + myRow2NumberOfSlots + myRow3NumberOfSlots; i++) {
 						row3DepthRandomizer.Add (i + 1);
 			
-						Debug.Log (row3DepthRandomizer.Count);
+						
 
 				}
 		
-				for (int i = 0; i < myRow1NumberOfSlots; i++) {
+				for (int i = 0; i < 5; i++) {
 			
 						counter++;
 			
 						
-						float aChunkWidth = (myWidth * myRow1PercentOfWidth) / (float)myRow1NumberOfSlots;
+						float aChunkWidth = (myWidth * myRow1PercentOfWidth) / 5.0f;
 						float insetFromEdgeWidth = (myWidth - (myWidth * myRow1PercentOfWidth)) / 2.0f;
 						float thisPosition = insetFromEdgeWidth + (.5f * aChunkWidth) + (i * aChunkWidth);
 			
@@ -144,27 +228,39 @@ public class RoomController : MonoBehaviour
 
 						tempObject.name = "" + counter;
 
-						GameObject thisEnemy = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myEnemyPrefab, tempObject);
+						GameObject thePrefab = null;
+
+						if (i == 0 && EnemyRow1Slot01 != null) 
+								thePrefab = EnemyRow1Slot01;
+						if (i == 1 && EnemyRow1Slot02 != null)
+								thePrefab = EnemyRow1Slot02;
+						if (i == 2 && EnemyRow1Slot03 != null)
+								thePrefab = EnemyRow1Slot03;
+						if (i == 3 && EnemyRow1Slot04 != null)
+								thePrefab = EnemyRow1Slot04;
+						if (i == 4 && EnemyRow1Slot05 != null)
+								thePrefab = EnemyRow1Slot05;
+
+						if (thePrefab != null) {
+								GameObject thisEnemy = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (thePrefab, tempObject);
 
 					
-						int thisNumber = (row1DepthRandomizer.Count - 1) - Random.Range (0, row1DepthRandomizer.Count - 1);
-						Debug.Log ("this number = " + thisNumber);
+								int thisNumber = (row1DepthRandomizer.Count - 1) - Random.Range (0, row1DepthRandomizer.Count - 1);
 
+								thisEnemy.GetComponent<EnemyArtController> ().setupLayersForRow (1, row1DepthRandomizer [thisNumber]);
 
-						thisEnemy.GetComponent<EnemyArtController> ().setupLayersForRow (1, row1DepthRandomizer [thisNumber]);
-
-						row1DepthRandomizer.RemoveAt (thisNumber);
-			
+								row1DepthRandomizer.RemoveAt (thisNumber);
+						}
 
 			
 				}
 				
-				for (int i = 0; i < myRow2NumberOfSlots; i++) {
+				for (int i = 0; i < 5; i++) {
 			
 						counter++;
 			
 			
-						float aChunkWidth = (myWidth * myRow2PercentOfWidth) / (float)myRow2NumberOfSlots;
+						float aChunkWidth = (myWidth * myRow2PercentOfWidth) / 5.0f;
 						float insetFromEdgeWidth = (myWidth - (myWidth * myRow2PercentOfWidth)) / 2.0f;
 						float thisPosition = insetFromEdgeWidth + (.5f * aChunkWidth) + (i * aChunkWidth);
 			
@@ -176,23 +272,39 @@ public class RoomController : MonoBehaviour
 						myRow2SpawnPoints.Add (tempObject);
 						
 						tempObject.name = "" + counter;
+
+						GameObject thePrefab = null;
 			
-						GameObject thisEnemy = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myEnemyPrefab, tempObject);
+						if (i == 0 && EnemyRow2Slot01 != null) 
+								thePrefab = EnemyRow2Slot01;
+						if (i == 1 && EnemyRow2Slot02 != null)
+								thePrefab = EnemyRow2Slot02;
+						if (i == 2 && EnemyRow2Slot03 != null)
+								thePrefab = EnemyRow2Slot03;
+						if (i == 3 && EnemyRow2Slot04 != null)
+								thePrefab = EnemyRow2Slot04;
+						if (i == 4 && EnemyRow2Slot05 != null)
+								thePrefab = EnemyRow2Slot05;
 
 
-						int thisNumber = (row2DepthRandomizer.Count - 1) - Random.Range (0, row2DepthRandomizer.Count - 1);
+						if (thePrefab != null) {
+								GameObject thisEnemy = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (thePrefab, tempObject);
+
+
+								int thisNumber = (row2DepthRandomizer.Count - 1) - Random.Range (0, row2DepthRandomizer.Count - 1);
 						
-						thisEnemy.GetComponent<EnemyArtController> ().setupLayersForRow (2, row2DepthRandomizer [thisNumber]);
+								thisEnemy.GetComponent<EnemyArtController> ().setupLayersForRow (2, row2DepthRandomizer [thisNumber]);
 
-						row2DepthRandomizer.RemoveAt (thisNumber);
+								row2DepthRandomizer.RemoveAt (thisNumber);
+						}
 			
 				}
 		
-				for (int i = 0; i < myRow3NumberOfSlots; i++) {
+				for (int i = 0; i < 5; i++) {
 						counter++;
 			
 			
-						float aChunkWidth = (myWidth * myRow3PercentOfWidth) / (float)myRow3NumberOfSlots;
+						float aChunkWidth = (myWidth * myRow3PercentOfWidth) / 5.0f;
 						float insetFromEdgeWidth = (myWidth - (myWidth * myRow3PercentOfWidth)) / 2.0f;
 						float thisPosition = insetFromEdgeWidth + (.5f * aChunkWidth) + (i * aChunkWidth);
 			
@@ -204,15 +316,31 @@ public class RoomController : MonoBehaviour
 						myRow3SpawnPoints.Add (tempObject);
 					
 						tempObject.name = "" + counter;
+
+						GameObject thePrefab = null;
 			
-						GameObject thisEnemy = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myEnemyPrefab, tempObject);
+						if (i == 0 && EnemyRow3Slot01 != null) 
+								thePrefab = EnemyRow3Slot01;
+						if (i == 1 && EnemyRow3Slot02 != null)
+								thePrefab = EnemyRow3Slot02;
+						if (i == 2 && EnemyRow3Slot03 != null)
+								thePrefab = EnemyRow3Slot03;
+						if (i == 3 && EnemyRow3Slot04 != null)
+								thePrefab = EnemyRow3Slot04;
+						if (i == 4 && EnemyRow3Slot05 != null)
+								thePrefab = EnemyRow3Slot05;
+
+
+						if (thePrefab != null) {
+								GameObject thisEnemy = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (thePrefab, tempObject);
 			
 
-						int thisNumber = (row3DepthRandomizer.Count - 1) - Random.Range (0, row3DepthRandomizer.Count - 1);
+								int thisNumber = (row3DepthRandomizer.Count - 1) - Random.Range (0, row3DepthRandomizer.Count - 1);
 
-						thisEnemy.GetComponent<EnemyArtController> ().setupLayersForRow (3, row3DepthRandomizer [thisNumber]);
+								thisEnemy.GetComponent<EnemyArtController> ().setupLayersForRow (3, row3DepthRandomizer [thisNumber]);
 
-						row3DepthRandomizer.RemoveAt (thisNumber);
+								row3DepthRandomizer.RemoveAt (thisNumber);
+						}
 
 			
 				}

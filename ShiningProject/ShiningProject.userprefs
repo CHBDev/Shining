@@ -1,9 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/EnemyCoroutines.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/FirstPersonBattleSceneStuff/Scripts/Controllers/RoomController.cs">
     <Files>
-      <File FileName="Assets/EnemyCoroutines.cs" Line="45" Column="3" />
-      <File FileName="Assets/EnemyCoroutines.cs" Line="118" Column="1" />
+      <File FileName="Assets/FirstPersonBattleSceneStuff/Scripts/Controllers/RoomController.cs" Line="305" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

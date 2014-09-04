@@ -1,10 +1,11 @@
 fileFormatVersion: 2
-guid: 41b1d3e0b25414801a5285f194c1af3b
+guid: 6bc2af714714a4f57aa6b91f4aa26cf0
 TextureImporter:
   fileIDToRecycleName:
-    21300000: cloudsfirst
-    21300002: cloudsfirst_0
-    21300004: cloudsfirst_1
+    21300000: blockheadgreensquare
+    21300002: blockheadgreensquare_0
+    21300004: blockheadgreensquare_1
+    21300006: blockheadgreensquare_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,7 +26,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -1
-  maxTextureSize: 1024
+  maxTextureSize: 512
   textureSettings:
     filterMode: -1
     aniso: 1
@@ -46,25 +47,35 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: cloudsfirst_0
+    - name: blockheadgreensquare_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 121
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: blockheadgreensquare_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 121
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: blockheadgreensquare_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 478
-        height: 141
+        width: 121
+        height: 140
       alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: cloudsfirst_1
-      rect:
-        serializedVersion: 2
-        x: 504
-        y: 43
-        width: 391
-        height: 55
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
