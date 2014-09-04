@@ -4,17 +4,9 @@ using System.Collections;
 public class MainDataController : MonoBehaviour
 {
 
-		public int numberOfCharacters;
-		public int numberOfEnemies;
-
-		public enum RoomType
-		{
-				DUNGEON,
-				PUZZLE,
-				DIALOGUE}
-		;
-		public RoomType currentRoomType;
-
+		
+		public GameObject theEnemyHolderPrefab;
+		public GameObject theUIHPBarPrefab;
 
 		// Use this for initialization
 		void Start ()

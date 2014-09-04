@@ -4,15 +4,13 @@ using System.Collections;
 public class RelativeStuff : MonoBehaviour
 {
 
-		static public Transform myTransform;
-
-
+		
 		
 
 		// Use this for initialization
 		void Start ()
 		{
-				myTransform = transform;
+				
 		}
 
 
@@ -25,11 +23,7 @@ public class RelativeStuff : MonoBehaviour
 		public static GameObject instantiatePrefabInObjectAndMakeRelative (GameObject aChild, GameObject aParent, Vector2 aPos)
 		{
 
-				if (myTransform == null) {
-						myTransform = FindObjectOfType<GameContentsHolderController> ().gameObject.transform;
-						
-
-				}
+			
 
 				//Debug.Log (myTransform.localScale);
 
@@ -54,11 +48,7 @@ public class RelativeStuff : MonoBehaviour
 		public static GameObject newGameObjectInObjectAndMakeRelative (GameObject aParent, Vector2 aPos)
 		{
 		
-				if (myTransform == null) {
-						myTransform = FindObjectOfType<GameContentsHolderController> ().gameObject.transform;
-			
-			
-				}
+				
 		
 
 				GameObject tempObj = new GameObject ();
@@ -68,8 +58,7 @@ public class RelativeStuff : MonoBehaviour
 				childTransform.parent = parentTransform;
 		
 				childTransform.localScale = new Vector3 (1, 1, 1);
-				//childTransform.localScale = parentTransform.localScale;
-		
+				
 				
 				childTransform.localPosition = new Vector3 (aPos.x, aPos.y, 0);
 		
@@ -84,18 +73,7 @@ public class RelativeStuff : MonoBehaviour
 				return new Vector3 (currentScale.x * newPercent, currentScale.y * newPercent, currentScale.z);
 		}
 
-		public static Vector3 locationRelativeToScale (Vector2 loc)
-		{
 
-				if (myTransform == null) {
-						myTransform = FindObjectOfType<GameContentsHolderController> ().gameObject.transform;
-				}
-
-				
-
-				return new Vector3 (loc.x * myTransform.localScale.x, loc.y * myTransform.localScale.y, 0);
-
-		}
 
 		public static GameObject instantiatePrefabInObjectAndMakeRelative (GameObject aChild, GameObject aParent)
 		{

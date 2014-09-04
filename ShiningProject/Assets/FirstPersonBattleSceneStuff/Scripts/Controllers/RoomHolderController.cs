@@ -5,16 +5,23 @@ using System.Collections.Generic;
 public class RoomHolderController : MonoBehaviour
 {
 	
-		public GameObject myMainBackGroundPrefab;
-		public GameObject myRoomPrefab;
 		
+		public GameObject myRoomArtPrefab;
+		public GameObject myRoomDataPrefab;
+	
+		[HideInInspector]
+		public GameObject
+				myRoomArtObject;
 
-		[HideInInspector]
-		public GameObject
-				myMainBackGroundObject;
-		[HideInInspector]
-		public GameObject
-				myRoomObject;
+		public enum RoomDifficultyMod
+		{
+				DEFAULT,
+				EASIEST,
+				EASIER,
+				NORMAL,
+				HARDER,
+				HARDEST}
+		;
 		
 
 
@@ -22,20 +29,14 @@ public class RoomHolderController : MonoBehaviour
 		void Start ()
 		{
 
-				myMainBackGroundObject = (GameObject)Instantiate (myMainBackGroundPrefab);
+				
+				myRoomArtObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myRoomArtPrefab, gameObject);
 
-				myRoomObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myRoomPrefab, gameObject);
-
-
-				this.changeMainBackGroundSprite (myRoomObject.GetComponent<RoomController> ().myBackGround);
 
 
 		}
 
-		public void changeMainBackGroundSprite (Sprite theSprite)
-		{
-				myMainBackGroundObject.GetComponent<SpriteRenderer> ().sprite = theSprite;
-		}
+		
 
 
 

@@ -2,11 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class RoomController : MonoBehaviour
+public class RoomArtController : MonoBehaviour
 {
 
 
 		public Sprite myBackGround;
+		public bool shouldTintBackground;
+		public Color32 myTintColor;
+
+
+		[HideInInspector]
+		public GameObject
+				myEnemyHolderPrefab;
 		
 		[HideInInspector]
 		public int
@@ -35,33 +42,54 @@ public class RoomController : MonoBehaviour
 		public float myRow3XOffset;
 		public float myRow3PercentOfWidth;
 
-		public enum RoomDifficultyMod
-		{
-				DEFAULT,
-				EASIEST,
-				EASIER,
-				NORMAL,
-				HARDER,
-				HARDEST}
-		;
+		
 	
-		public RoomDifficultyMod myDifficultyMod;
-	
-		public GameObject EnemyRow1Slot01;
-		public GameObject EnemyRow1Slot02;
-		public GameObject EnemyRow1Slot03;
-		public GameObject EnemyRow1Slot04;
-		public GameObject EnemyRow1Slot05;
-		public GameObject EnemyRow2Slot01;
-		public GameObject EnemyRow2Slot02;
-		public GameObject EnemyRow2Slot03;
-		public GameObject EnemyRow2Slot04;
-		public GameObject EnemyRow2Slot05;
-		public GameObject EnemyRow3Slot01;
-		public GameObject EnemyRow3Slot02;
-		public GameObject EnemyRow3Slot03;
-		public GameObject EnemyRow3Slot04;
-		public GameObject EnemyRow3Slot05;
+		
+		[HideInInspector]
+		public GameObject
+				EnemyRow1Slot01;
+		[HideInInspector]
+		public GameObject
+				EnemyRow1Slot02;
+		[HideInInspector]
+		public GameObject
+				EnemyRow1Slot03;
+		[HideInInspector]
+		public GameObject
+				EnemyRow1Slot04;
+		[HideInInspector]
+		public GameObject
+				EnemyRow1Slot05;
+		[HideInInspector]
+		public GameObject
+				EnemyRow2Slot01;
+		[HideInInspector]
+		public GameObject
+				EnemyRow2Slot02;
+		[HideInInspector]
+		public GameObject
+				EnemyRow2Slot03;
+		[HideInInspector]
+		public GameObject
+				EnemyRow2Slot04;
+		[HideInInspector]
+		public GameObject
+				EnemyRow2Slot05;
+		[HideInInspector]
+		public GameObject
+				EnemyRow3Slot01;
+		[HideInInspector]
+		public GameObject
+				EnemyRow3Slot02;
+		[HideInInspector]
+		public GameObject
+				EnemyRow3Slot03;
+		[HideInInspector]
+		public GameObject
+				EnemyRow3Slot04;
+		[HideInInspector]
+		public GameObject
+				EnemyRow3Slot05;
 
 		
 		[HideInInspector]
@@ -89,6 +117,9 @@ public class RoomController : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
+
+				this.setupEnemiesFromRoomDataOnRoomHolder ();
+
 				myRow1NumberOfSlots = 0;
 				if (EnemyRow1Slot01 != null) {
 						myRow1NumberOfSlots++;
@@ -145,6 +176,76 @@ public class RoomController : MonoBehaviour
 
 
 				this.setupRows ();
+				
+
+
+
+		}
+
+		private void setupEnemiesFromRoomDataOnRoomHolder ()
+		{
+				
+				GameObject theData = GameObject.FindWithTag ("MainData");
+				;
+
+				MainDataController theDataController = theData.GetComponent<MainDataController> ();
+
+
+				myEnemyHolderPrefab = theDataController.theEnemyHolderPrefab;
+
+
+
+				///
+				GameObject theRoomDataPrefab = (GameObject)transform.GetComponentInParent<RoomHolderController> ().myRoomDataPrefab;
+
+				RoomDataController theRoomDataController = theRoomDataPrefab.GetComponent<RoomDataController> ();
+
+				
+
+				EnemyRow1Slot01 = theRoomDataController.EnemyRow1Slot01;
+		
+
+				EnemyRow1Slot02 = theRoomDataController.EnemyRow1Slot02;
+		
+
+				EnemyRow1Slot03 = theRoomDataController.EnemyRow1Slot03;
+		
+
+				EnemyRow1Slot04 = theRoomDataController.EnemyRow1Slot04;
+		
+
+				EnemyRow1Slot05 = theRoomDataController.EnemyRow1Slot05;
+		
+
+				EnemyRow2Slot01 = theRoomDataController.EnemyRow2Slot01;
+		
+
+				EnemyRow2Slot02 = theRoomDataController.EnemyRow2Slot02;
+		
+
+				EnemyRow2Slot03 = theRoomDataController.EnemyRow2Slot03;
+		
+
+				EnemyRow2Slot04 = theRoomDataController.EnemyRow2Slot04;
+		
+
+				EnemyRow2Slot05 = theRoomDataController.EnemyRow2Slot05;
+		
+
+				EnemyRow3Slot01 = theRoomDataController.EnemyRow3Slot01;
+		
+
+				EnemyRow3Slot02 = theRoomDataController.EnemyRow3Slot02;
+		
+
+				EnemyRow3Slot03 = theRoomDataController.EnemyRow3Slot03;
+		
+
+				EnemyRow3Slot04 = theRoomDataController.EnemyRow3Slot04;
+		
+
+				EnemyRow3Slot05 = theRoomDataController.EnemyRow3Slot05;
+
 
 
 		}
@@ -221,7 +322,7 @@ public class RoomController : MonoBehaviour
 			
 						Vector3 thePos = new Vector2 (thisPosition - myWidth / 2, row1Transform.localPosition.y);
 
-						GameObject tempObject = RelativeStuff.newGameObjectInObjectAndMakeRelative (myRow1, thePos);
+						GameObject tempObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myEnemyHolderPrefab, myRow1, thePos);
 						
 
 						myRow1SpawnPoints.Add (tempObject);
@@ -242,8 +343,10 @@ public class RoomController : MonoBehaviour
 								thePrefab = EnemyRow1Slot05;
 
 						if (thePrefab != null) {
-								GameObject thisEnemy = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (thePrefab, tempObject);
-
+								
+								GameObject thisEnemy = tempObject.GetComponent<EnemyHolderController> ().setupMyEnemy (thePrefab);
+				
+							
 					
 								int thisNumber = (row1DepthRandomizer.Count - 1) - Random.Range (0, row1DepthRandomizer.Count - 1);
 
@@ -266,7 +369,7 @@ public class RoomController : MonoBehaviour
 			
 						Vector3 thePos = new Vector3 (thisPosition - myWidth / 2, row2Transform.position.y, 0);
 			
-						GameObject tempObject = RelativeStuff.newGameObjectInObjectAndMakeRelative (myRow2, thePos);
+						GameObject tempObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myEnemyHolderPrefab, myRow2, thePos);
 			
 			
 						myRow2SpawnPoints.Add (tempObject);
@@ -288,14 +391,17 @@ public class RoomController : MonoBehaviour
 
 
 						if (thePrefab != null) {
-								GameObject thisEnemy = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (thePrefab, tempObject);
 
+								GameObject thisEnemy = tempObject.GetComponent<EnemyHolderController> ().setupMyEnemy (thePrefab);
+
+							
 
 								int thisNumber = (row2DepthRandomizer.Count - 1) - Random.Range (0, row2DepthRandomizer.Count - 1);
 						
 								thisEnemy.GetComponent<EnemyArtController> ().setupLayersForRow (2, row2DepthRandomizer [thisNumber]);
 
 								row2DepthRandomizer.RemoveAt (thisNumber);
+								
 						}
 			
 				}
@@ -310,7 +416,7 @@ public class RoomController : MonoBehaviour
 			
 						Vector3 thePos = new Vector3 (thisPosition - myWidth / 2, row3Transform.position.y, 0);
 			
-						GameObject tempObject = RelativeStuff.newGameObjectInObjectAndMakeRelative (myRow3, thePos);
+						GameObject tempObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myEnemyHolderPrefab, myRow3, thePos);
 			
 			
 						myRow3SpawnPoints.Add (tempObject);
@@ -332,8 +438,10 @@ public class RoomController : MonoBehaviour
 
 
 						if (thePrefab != null) {
-								GameObject thisEnemy = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (thePrefab, tempObject);
-			
+
+								GameObject thisEnemy = tempObject.GetComponent<EnemyHolderController> ().setupMyEnemy (thePrefab);
+
+							
 
 								int thisNumber = (row3DepthRandomizer.Count - 1) - Random.Range (0, row3DepthRandomizer.Count - 1);
 
@@ -350,6 +458,30 @@ public class RoomController : MonoBehaviour
 				myRowObjects.Add (myRow1);
 				myRowObjects.Add (myRow2);
 				myRowObjects.Add (myRow3);
+
+
+				changeMainBackGroundSprite ();
+
+
+		}
+
+
+	
+
+
+		public void changeMainBackGroundSprite ()
+		{
+				GameObject mainBackground = GameObject.Find ("MainBackground");
+
+				SpriteRenderer theRenderer = mainBackground.GetComponent<SpriteRenderer> ();
+				theRenderer.sprite = myBackGround;
+
+				if (shouldTintBackground) {
+						theRenderer.color = myTintColor;
+				}
+
+
+
 
 		}
 
