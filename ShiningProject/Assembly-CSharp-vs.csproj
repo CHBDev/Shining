@@ -64,6 +64,7 @@
      <Compile Include="Assets\MainBackGroundController.cs" />
      <Compile Include="Assets\MainMenuController.cs" />
      <Compile Include="Assets\MainUtilController.cs" />
+     <Compile Include="Assets\NewBehaviourScript.cs" />
      <Compile Include="Assets\RelativeStuff.cs" />
      <Compile Include="Assets\RoomDataController.cs" />
      <Compile Include="Assets\SpawnMainCharacters.cs" />

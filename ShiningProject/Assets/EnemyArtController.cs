@@ -12,6 +12,8 @@ public class EnemyArtController : MonoBehaviour
 		public float myShadowScaleSizeX;
 		public float myShadowScaleSizeY;
 
+		public bool shouldDoHealthBar = false;
+
 		// Use this for initialization
 		void Start ()
 		{
@@ -28,11 +30,19 @@ public class EnemyArtController : MonoBehaviour
 				case(1):
 						foreach (SpriteRenderer childRenderer in MyTransform.FindChild("mySelf").GetComponentsInChildren<SpriteRenderer>()) {
 								childRenderer.sortingLayerName = "Enemy" + enemyNumber;
-						}
 
-						foreach (SpriteRenderer childRenderer in MyTransform.FindChild("myHPBar").GetComponentsInChildren<SpriteRenderer>()) {
-								childRenderer.sortingLayerName = "EnemyRow1HPBar";
+								if (shouldDoHealthBar == true) {
+										if (childRenderer.transform.parent.gameObject.name == "myHPBar") {
+												childRenderer.sortingLayerName = "EnemyRow1HPBar";
+										}
+								}
+			
 						}
+			/*
+						foreach (SpriteRenderer childRenderer in MyTransform.FindChild("myHPBar").GetComponentsInChildren<SpriteRenderer>()) {
+								
+						}
+						*/
 						
 
 
@@ -43,11 +53,19 @@ public class EnemyArtController : MonoBehaviour
 				case(2):
 						foreach (SpriteRenderer childRenderer in MyTransform.FindChild("mySelf").GetComponentsInChildren<SpriteRenderer>()) {
 								childRenderer.sortingLayerName = "Enemy" + enemyNumber;
+								
+								if (shouldDoHealthBar == true) {
+										if (childRenderer.transform.parent.gameObject.name == "myHPBar") {
+												childRenderer.sortingLayerName = "EnemyRow2HPBar";
+										}
+								}
+				
 						}
-
+			/*
 						foreach (SpriteRenderer childRenderer in MyTransform.FindChild("myHPBar").GetComponentsInChildren<SpriteRenderer>()) {
-								childRenderer.sortingLayerName = "EnemyRow2HPBar";
+								
 						}
+						*/
 
 						transform.FindChild ("myShadow").gameObject.GetComponent<SpriteRenderer> ().sortingLayerName = "EnemyRow2Shadow";
 						
@@ -55,11 +73,19 @@ public class EnemyArtController : MonoBehaviour
 				case(3):
 						foreach (SpriteRenderer childRenderer in MyTransform.FindChild("mySelf").GetComponentsInChildren<SpriteRenderer>()) {
 								childRenderer.sortingLayerName = "Enemy" + enemyNumber;
+								
+								if (shouldDoHealthBar == true) {
+										if (childRenderer.transform.parent.gameObject.name == "myHPBar") {
+												childRenderer.sortingLayerName = "EnemyRow3HPBar";
+										}
+								}
+				
 						}
-
+			/*
 						foreach (SpriteRenderer childRenderer in MyTransform.FindChild("myHPBar").GetComponentsInChildren<SpriteRenderer>()) {
-								childRenderer.sortingLayerName = "EnemyRow3HPBar";
+								
 						}
+						*/
 
 						transform.FindChild ("myShadow").gameObject.GetComponent<SpriteRenderer> ().sortingLayerName = "EnemyRow3Shadow";
 						

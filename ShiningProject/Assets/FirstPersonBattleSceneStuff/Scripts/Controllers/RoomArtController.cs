@@ -288,24 +288,24 @@ public class RoomArtController : MonoBehaviour
 				int counter = 0;
 
 				List<int> row1DepthRandomizer = new List<int> ();
-				for (int i = 0; i < myRow1NumberOfSlots; i++) {
-						row1DepthRandomizer.Add (i + 1);
+				for (int i = 1; i <= 5; i++) {
+						row1DepthRandomizer.Add (i);
 
 						
 
 				}
 
 				List<int> row2DepthRandomizer = new List<int> ();
-				for (int i = myRow1NumberOfSlots; i < myRow1NumberOfSlots + myRow2NumberOfSlots; i++) {
-						row2DepthRandomizer.Add (i + 1);
+				for (int i = 6; i <= 10; i++) {
+						row2DepthRandomizer.Add (i);
 			
 						
 
 				}
 
 				List<int> row3DepthRandomizer = new List<int> ();
-				for (int i = myRow2NumberOfSlots + myRow1NumberOfSlots; i < myRow1NumberOfSlots + myRow2NumberOfSlots + myRow3NumberOfSlots; i++) {
-						row3DepthRandomizer.Add (i + 1);
+				for (int i = 11; i <= 15; i++) {
+						row3DepthRandomizer.Add (i);
 			
 						
 

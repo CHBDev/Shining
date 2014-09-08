@@ -24,6 +24,8 @@ public class EnemyHolderController : MonoBehaviour
 		public int
 				myEnemyLevel;
 
+		public bool shouldDoHealthBar = false;
+
 
 
 		void Awake ()
@@ -53,23 +55,27 @@ public class EnemyHolderController : MonoBehaviour
 				EnemyArtController anEnemyArtController = myEnemyImHoldingObject.GetComponent<EnemyArtController> ();
 				;
 
-				myHPBarObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myHPBarPrefab, myEnemyImHoldingObject);
-				myHPBarObject.name = "myHPBar";
-
-
 				Transform myEnemyTransform = myEnemyImHoldingObject.transform;
-
+		
 				Transform mySelf = myEnemyTransform.FindChild ("mySelf");
 				Transform myShadow = myEnemyTransform.FindChild ("myShadow");
-				Transform myHPBar = myEnemyTransform.FindChild ("myHPBar");
+
+
+				if (shouldDoHealthBar == true) {
+						myHPBarObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myHPBarPrefab, mySelf.gameObject);
+						myHPBarObject.name = "myHPBar";
+				}
 
 				float adjustY = anEnemyArtController.myBodyOffsetYValue;
 				float adjustX = anEnemyArtController.myBodyOffsetXValue;
 
-
 				myEnemyTransform.localPosition = new Vector3 (adjustX, adjustY, 0);
 				myShadow.localPosition = new Vector3 (-adjustX + anEnemyArtController.myShadowOffsetXValue, -adjustY + anEnemyArtController.myShadowOffsetYValue, 0);
-				myHPBar.localPosition = new Vector3 (-adjustX + anEnemyArtController.myHPBarOffsetXValue, -adjustY + anEnemyArtController.myHPBarOffsetYValue, 0);
+
+				if (shouldDoHealthBar == true) {
+						myHPBarObject.transform.localPosition = new Vector3 (-adjustX + anEnemyArtController.myHPBarOffsetXValue, -adjustY + anEnemyArtController.myHPBarOffsetYValue, 0);
+				}
+
 		
 
 
