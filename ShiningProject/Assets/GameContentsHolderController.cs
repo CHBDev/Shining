@@ -15,6 +15,8 @@ public class GameContentsHolderController : MonoBehaviour
 		{
 				
 				myRoomHolderObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myRoomHolderPrefab, gameObject);
+				//myRoomHolderObject = (GameObject)Instantiate (myRoomHolderPrefab);
+				//myRoomHolderObject.transform.parent = transform;
 
 
 

@@ -10,6 +10,9 @@ public class RoomArtController : MonoBehaviour
 		public bool shouldTintBackground;
 		public Color32 myTintColor;
 
+		[HideInInspector]
+		public GameObject
+				myBackGroundObject;
 
 		[HideInInspector]
 		public GameObject
@@ -92,25 +95,13 @@ public class RoomArtController : MonoBehaviour
 				EnemyRow3Slot05;
 
 		
-		[HideInInspector]
-		public GameObject
-				myRow1;
-
-		[HideInInspector]
-		public GameObject
-				myRow2;
-
-		[HideInInspector]
-		public GameObject
-				myRow3;
+		
 
 		private List<GameObject> myRow1SpawnPoints;
 		private List<GameObject> myRow2SpawnPoints;
 		private List<GameObject> myRow3SpawnPoints;
 	
-		[HideInInspector]
-		public List<GameObject>
-				myRowObjects;
+
 
 
 
@@ -252,36 +243,13 @@ public class RoomArtController : MonoBehaviour
 
 		private void setupRows ()
 		{
+				Camera myCamera = Camera.main;
+
 				myRow1SpawnPoints = new List<GameObject> ();
 				myRow2SpawnPoints = new List<GameObject> ();
 				myRow3SpawnPoints = new List<GameObject> ();
-		
-				
-				myRowObjects = new List<GameObject> ();
-		
-		
-				myRow1 = RelativeStuff.newGameObjectInObjectAndMakeRelative (gameObject, new Vector2 (myRow1XOffset, myRow1YOffset));
-				myRow1.name = "EnemyRow1";
 
-				myRow2 = RelativeStuff.newGameObjectInObjectAndMakeRelative (gameObject, new Vector2 (myRow2XOffset, myRow2YOffset));
-				myRow2.name = "EnemyRow2";
-
-				myRow3 = RelativeStuff.newGameObjectInObjectAndMakeRelative (gameObject, new Vector2 (myRow3XOffset, myRow3YOffset));
-				myRow3.name = "EnemyRow3";
-
-				Transform row1Transform = myRow1.transform;
-		
-				Transform row2Transform = myRow2.transform;
-		
-				Transform row3Transform = myRow3.transform;
-
-
-				row1Transform.localScale = RelativeStuff.returnScaleForNewPercentAdjusted (row1Transform.localScale, myRow1Scale);
-				row2Transform.localScale = RelativeStuff.returnScaleForNewPercentAdjusted (row2Transform.localScale, myRow2Scale);
-				row3Transform.localScale = RelativeStuff.returnScaleForNewPercentAdjusted (row3Transform.localScale, myRow3Scale);
-
-		
-				float myWidth = Screen.width / 100.0f;
+				float myWidth = myCamera.orthographicSize * 2 * myCamera.aspect;
 				Debug.Log ("my width " + myWidth);
 
 				
@@ -316,13 +284,14 @@ public class RoomArtController : MonoBehaviour
 						counter++;
 			
 						
-						float aChunkWidth = (myWidth * myRow1PercentOfWidth) / 5.0f;
-						float insetFromEdgeWidth = (myWidth - (myWidth * myRow1PercentOfWidth)) / 2.0f;
-						float thisPosition = insetFromEdgeWidth + (.5f * aChunkWidth) + (i * aChunkWidth);
+						float aChunkWidth = (myWidth * myRow1Scale * myRow1PercentOfWidth) / 5.0f;
+						float insetFromEdgeWidth = myWidth / 2 - (2 * aChunkWidth);
+						float thisPosition = insetFromEdgeWidth + (i * aChunkWidth);
 			
-						Vector3 thePos = new Vector2 (thisPosition - myWidth / 2, row1Transform.localPosition.y);
+						Vector3 thePos = new Vector2 (thisPosition - myWidth / 2 + myRow1XOffset, myRow1YOffset);
 
-						GameObject tempObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myEnemyHolderPrefab, myRow1, thePos);
+						GameObject tempObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myEnemyHolderPrefab, gameObject, thePos);
+						tempObject.transform.localScale = new Vector3 (myRow1Scale, myRow1Scale, 1);
 						
 
 						myRow1SpawnPoints.Add (tempObject);
@@ -363,14 +332,15 @@ public class RoomArtController : MonoBehaviour
 						counter++;
 			
 			
-						float aChunkWidth = (myWidth * myRow2PercentOfWidth) / 5.0f;
-						float insetFromEdgeWidth = (myWidth - (myWidth * myRow2PercentOfWidth)) / 2.0f;
-						float thisPosition = insetFromEdgeWidth + (.5f * aChunkWidth) + (i * aChunkWidth);
+						float aChunkWidth = (myWidth * myRow2Scale * myRow2PercentOfWidth) / 5.0f;
+						float insetFromEdgeWidth = myWidth / 2 - (2 * aChunkWidth);
+						float thisPosition = insetFromEdgeWidth + (i * aChunkWidth);
+
+						Vector3 thePos = new Vector2 (thisPosition - myWidth / 2 + myRow2XOffset, myRow2YOffset);
 			
-						Vector3 thePos = new Vector3 (thisPosition - myWidth / 2, row2Transform.position.y, 0);
-			
-						GameObject tempObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myEnemyHolderPrefab, myRow2, thePos);
-			
+						GameObject tempObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myEnemyHolderPrefab, gameObject, thePos);
+						tempObject.transform.localScale = new Vector3 (myRow2Scale, myRow2Scale, 1);
+
 			
 						myRow2SpawnPoints.Add (tempObject);
 						
@@ -410,14 +380,15 @@ public class RoomArtController : MonoBehaviour
 						counter++;
 			
 			
-						float aChunkWidth = (myWidth * myRow3PercentOfWidth) / 5.0f;
-						float insetFromEdgeWidth = (myWidth - (myWidth * myRow3PercentOfWidth)) / 2.0f;
-						float thisPosition = insetFromEdgeWidth + (.5f * aChunkWidth) + (i * aChunkWidth);
+						float aChunkWidth = (myWidth * myRow3Scale * myRow3PercentOfWidth) / 5.0f;
+						float insetFromEdgeWidth = myWidth / 2 - (2 * aChunkWidth);
+						float thisPosition = insetFromEdgeWidth + (i * aChunkWidth);
+
+						Vector3 thePos = new Vector2 (thisPosition - myWidth / 2 + myRow3XOffset, myRow3YOffset);
 			
-						Vector3 thePos = new Vector3 (thisPosition - myWidth / 2, row3Transform.position.y, 0);
-			
-						GameObject tempObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myEnemyHolderPrefab, myRow3, thePos);
-			
+						GameObject tempObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myEnemyHolderPrefab, gameObject, thePos);
+						tempObject.transform.localScale = new Vector3 (myRow3Scale, myRow3Scale, 1);
+
 			
 						myRow3SpawnPoints.Add (tempObject);
 					
@@ -455,11 +426,6 @@ public class RoomArtController : MonoBehaviour
 		
 
 				
-				myRowObjects.Add (myRow1);
-				myRowObjects.Add (myRow2);
-				myRowObjects.Add (myRow3);
-
-
 				changeMainBackGroundSprite ();
 
 
@@ -471,12 +437,14 @@ public class RoomArtController : MonoBehaviour
 
 		public void changeMainBackGroundSprite ()
 		{
-				GameObject mainBackground = GameObject.Find ("MainBackground");
-
-				SpriteRenderer theRenderer = mainBackground.GetComponent<SpriteRenderer> ();
+	
+				GameObject theGameContentHolder = GameObject.Find ("gameContentBackground");
+				SpriteRenderer theRenderer = (SpriteRenderer)theGameContentHolder.renderer;
 				theRenderer.sprite = myBackGround;
 
+			
 				if (shouldTintBackground) {
+						
 						theRenderer.color = myTintColor;
 				}
 

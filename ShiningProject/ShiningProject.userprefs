@@ -1,10 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/FirstPersonBattleSceneStuff/Scripts/Controllers/EnemyHolderController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/FirstPersonBattleSceneStuff/Scripts/ScalingAssets/ScaleToWindowContraints.cs">
     <Files>
-      <File FileName="Assets/FirstPersonBattleSceneStuff/Scripts/Controllers/RoomArtController.cs" Line="434" Column="45" />
-      <File FileName="Assets/EnemyArtController.cs" Line="81" Column="10" />
-      <File FileName="Assets/FirstPersonBattleSceneStuff/Scripts/Controllers/EnemyHolderController.cs" Line="27" Column="15" />
+      <File FileName="Assets/MainCameraController.cs" Line="15" Column="1" />
+      <File FileName="Assets/TopLevelHolderController.cs" Line="14" Column="5" />
+      <File FileName="Assets/FirstPersonBattleSceneStuff/Scripts/ScalingAssets/ScaleToWindowContraints.cs" Line="26" Column="7" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
