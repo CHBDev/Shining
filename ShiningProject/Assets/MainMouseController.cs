@@ -16,6 +16,17 @@ public class MainMouseController : MonoBehaviour
 		RuntimePlatform thePlatform;
 		DeviceType theDeviceType;
 
+		//hack
+		private CharacterSelectorController theCharacterSelector;
+
+		[HideInInspector]
+		public Collider2D[]
+				colliderArray;
+
+		private TouchOrMouseStuff mouseObjectScriptTouchedDown, mouseObjectScriptBeingDragged;
+	
+	 
+
 
 		//TOUCH CALCS
 		
@@ -46,6 +57,9 @@ public class MainMouseController : MonoBehaviour
 				//thePlatform = Application.platform;
 				theDeviceType = SystemInfo.deviceType;
 
+				theCharacterSelector = GameObject.Find ("CharacterSelectorHolder").GetComponent<CharacterSelectorController> ();
+
+				colliderArray = new Collider2D[12];
 
 		}
 	
@@ -225,66 +239,137 @@ public class MainMouseController : MonoBehaviour
 
 		private void touchOrMouseDownBegins (Vector2 loc)
 		{
+				
 
-				if (testCircleObject == null) {
-						testCircleObject = (GameObject)Instantiate (testCirclePrefab, loc, Quaternion.identity);
-						SpriteRenderer thisRenderer = testCircleObject.transform.GetComponentInChildren<SpriteRenderer> ();
-						thisRenderer.sortingLayerName = "OverlayUI2";
+
+				mouseObjectScriptTouchedDown = this.findThingThatTouchOrMouseShouldInteractWith (loc);
+
+				if (mouseObjectScriptTouchedDown != null) {
+						
+
+						mouseObjectScriptTouchedDown.touchOrMouseDownBegins (loc);
+
+						
 				} else {
-						Debug.Log ("test circle is already on screen");
+						
+						return;
 				}
+				
 
 
 		}
 
 		private void touchOrMouseMoved (Vector2 loc)
 		{
-
-				if (testCircleObject != null) {
-						testCircleObject.transform.localPosition = loc;
+				if (mouseObjectScriptTouchedDown == null) {
+						return;
 				}
 
+				mouseObjectScriptTouchedDown.touchOrMouseMoved (loc);
+
+
+				
 		}
+
+		
 
 		private void touchOrMouseEndedNotAsTap (Vector2 loc)
 		{
-				if (testCircleObject != null) {
-						Destroy (testCircleObject);
+
+				if (mouseObjectScriptTouchedDown == null) {
+						return;
 				}
+
+				mouseObjectScriptTouchedDown.touchOrMouseEndedNotAsTap (loc);
+
+
 		}
 
 		private void touchOrMouseEndedAsSingleTap (Vector2 loc)
 		{
-				Debug.Log ("SINGLE TAP");
-				if (testCircleObject != null) {
-						Destroy (testCircleObject);
+				//Debug.Log ("SINGLE TAP");
+				if (mouseObjectScriptTouchedDown == null) {
+						return;
 				}
+
+				mouseObjectScriptTouchedDown.touchOrMouseEndedAsSingleTap (loc);
+				
 		}
 
 		private void touchOrMouseEndedAsDoubleTap (Vector2 loc)
 		{
-				Debug.Log ("DOUBLE TAP");
-				if (testCircleObject != null) {
-						Destroy (testCircleObject);
+				//Debug.Log ("DOUBLE TAP");
+				if (mouseObjectScriptTouchedDown == null) {
+						return;
 				}
+				
 		}
 
 		private void touchOrMouseCancelled (Vector2 loc)
 		{
-				if (testCircleObject != null) {
-						Destroy (testCircleObject);
+				if (mouseObjectScriptTouchedDown == null) {
+						return;
 				}
+				mouseObjectScriptTouchedDown.touchOrMouseCancelled (loc);
 		}
 
 		private void touchOrMouseCallsLongTouch (Vector2 loc)
 		{
 
-				Debug.Log ("LONG TOUCH START");
-				if (testCircleObject != null) {
-						testCircleObject.transform.localScale *= 5.0f;
-			
+				//Debug.Log ("LONG TOUCH START");
+				if (mouseObjectScriptTouchedDown == null) {
+						return;
 				}
+				mouseObjectScriptTouchedDown.touchOrMouseCallsLongTouch (loc);
 				
+				
+		}
+
+		private TouchOrMouseStuff findThingThatTouchOrMouseShouldInteractWith (Vector2 loc)
+		{
+				//get all objects at mouse point
+
+				
+
+				int numHit = Physics2D.OverlapPointNonAlloc (loc, colliderArray);
+				//Debug.Log ("num hit " + numHit);
+
+
+				
+				if (numHit > 0) {
+
+						
+						foreach (Collider2D aCollider in colliderArray) {
+
+								if (aCollider == null) {
+										break;
+								}
+
+								GameObject theGameObject = aCollider.gameObject;
+
+								if (theGameObject == null) {
+
+										Debug.Log ("game object on collider is null");
+										break;
+								}
+
+								TouchOrMouseStuff theScript = theGameObject.GetComponent<TouchOrMouseStuff> ();
+
+								if (theScript != null) {
+
+										if (theScript.canBeTouchedOrMoused == true) {
+										
+												return theScript;
+										
+										}
+								}
+
+
+
+						}
+				}
+
+				return null;
 		}
 	
 

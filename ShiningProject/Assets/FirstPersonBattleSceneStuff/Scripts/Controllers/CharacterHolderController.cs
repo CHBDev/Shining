@@ -32,7 +32,7 @@ public class CharacterHolderController : MonoBehaviour
 		void Start ()
 		{
 
-				myCharacterActualObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myCharacterActualPrefab, gameObject, transform.localPosition);
+				myCharacterActualObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myCharacterActualPrefab, gameObject);
 				
 				myCharacterActualObject.GetComponent<CharacterActualController> ().changeMyType (myCharacterTypeEnum);
 

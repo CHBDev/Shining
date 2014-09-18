@@ -26,6 +26,9 @@ public class EnemyArtController : MonoBehaviour
 		public float myShadowYOffsetVal;
 		public float myShadowScaleX = 1;
 		public float myShadowScaleY = 1;
+		public float myHitBoxYOffsetFromCenter = 0;
+		public float myHitBoxRadiusScaleMultiplier = 1;
+
 	
 		// Use this for initialization
 		void Start ()

@@ -46,8 +46,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CharacterHolderMouseInteraction.cs" />
+     <Compile Include="Assets\CharacterSelectorController.cs" />
      <Compile Include="Assets\EnemyArtController.cs" />
      <Compile Include="Assets\EnemyCoroutines.cs" />
+     <Compile Include="Assets\EnemyHolderMouseInteraction.cs" />
      <Compile Include="Assets\FirstPersonBattleSceneStuff\Scripts\Controllers\CharacterActualController.cs" />
      <Compile Include="Assets\FirstPersonBattleSceneStuff\Scripts\Controllers\CharacterHolderController.cs" />
      <Compile Include="Assets\FirstPersonBattleSceneStuff\Scripts\Controllers\CharacterSlotController.cs" />
@@ -71,6 +74,7 @@
      <Compile Include="Assets\RoomDataController.cs" />
      <Compile Include="Assets\SpawnMainCharacters.cs" />
      <Compile Include="Assets\TopLevelHolderController.cs" />
+     <Compile Include="Assets\TouchOrMouseStuff.cs" />
      <Compile Include="Assets\gameTempEffectsController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

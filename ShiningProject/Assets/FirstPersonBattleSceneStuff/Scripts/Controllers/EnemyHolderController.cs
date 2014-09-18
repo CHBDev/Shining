@@ -12,19 +12,15 @@ public class EnemyHolderController : MonoBehaviour
 		public GameObject
 				myEnemyImHoldingObject;
 
-		[HideInInspector]
-		public GameObject
-				myHPBarPrefab;
-
-		[HideInInspector]
-		public GameObject
-				myHPBarObject;
 		
+
 		[HideInInspector]
 		public int
 				myEnemyLevel;
 
 		public bool shouldDoHealthBar = false;
+
+		private CircleCollider2D myCollider;
 
 
 
@@ -35,20 +31,27 @@ public class EnemyHolderController : MonoBehaviour
 				MainDataController theDataController = theData.GetComponent<MainDataController> ();
 		
 		
-				myHPBarPrefab = theDataController.theUIHPBarPrefab;
+				
 
 		}
 
 		// Use this for initialization
 		void Start ()
 		{
-				
-			
+				//Debug.Log ("start enemy holder");
+				myCollider = gameObject.GetComponent<CircleCollider2D> ();
+
+				EnemyArtController anEnemyArtController = myEnemyImHoldingObject.GetComponent<EnemyArtController> ();
+				myCollider.center = new Vector2 (anEnemyArtController.myOverallXOffsetFromShadow, anEnemyArtController.myOverallYOffsetFromShadow + anEnemyArtController.myHitBoxYOffsetFromCenter);
+				myCollider.radius = myCollider.radius * anEnemyArtController.myHitBoxRadiusScaleMultiplier;
+
+
 
 		}
 
 		public GameObject setupMyEnemy (GameObject theEnemyPrefab)
 		{
+				//Debug.Log ("setup my enemy");
 				myEnemyImHoldingPrefab = theEnemyPrefab;
 				myEnemyImHoldingObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myEnemyImHoldingPrefab, gameObject);
 
@@ -96,7 +99,8 @@ public class EnemyHolderController : MonoBehaviour
 				myShadow.localPosition = new Vector3 (-adjustX + anEnemyArtController.myShadowXOffsetVal, -adjustY + anEnemyArtController.myShadowYOffsetVal, 0);
 				myShadow.localScale = new Vector3 (anEnemyArtController.myShadowScaleX, anEnemyArtController.myShadowScaleY, 1);
 
-	
+				
+				
 				return myEnemyImHoldingObject;
 
 		}
