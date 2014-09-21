@@ -13,6 +13,14 @@ public class EnemyHolderController : MonoBehaviour
 				myEnemyImHoldingObject;
 
 		
+		private Vector2
+				myEnemyPositionOffsetToAttack;
+
+		private Vector2 myBasePosition;
+		private Vector2 myBaseScale;
+		
+
+		
 
 		[HideInInspector]
 		public int
@@ -22,13 +30,14 @@ public class EnemyHolderController : MonoBehaviour
 
 		private CircleCollider2D myCollider;
 
+		private Transform myTransform;
 
 
 		void Awake ()
 		{
-				GameObject theData = GameObject.FindWithTag ("MainData");
+				//GameObject theData = GameObject.FindWithTag ("MainData");
 		
-				MainDataController theDataController = theData.GetComponent<MainDataController> ();
+				//MainDataController theDataController = theData.GetComponent<MainDataController> ();
 		
 		
 				
@@ -44,6 +53,13 @@ public class EnemyHolderController : MonoBehaviour
 				EnemyArtController anEnemyArtController = myEnemyImHoldingObject.GetComponent<EnemyArtController> ();
 				myCollider.center = new Vector2 (anEnemyArtController.myOverallXOffsetFromShadow, anEnemyArtController.myOverallYOffsetFromShadow + anEnemyArtController.myHitBoxYOffsetFromCenter);
 				myCollider.radius = myCollider.radius * anEnemyArtController.myHitBoxRadiusScaleMultiplier;
+
+				myTransform = transform;
+
+				myEnemyPositionOffsetToAttack = myCollider.center;
+
+				myBaseScale = myTransform.localScale;
+				myBasePosition = myTransform.localPosition;
 
 
 
@@ -101,8 +117,19 @@ public class EnemyHolderController : MonoBehaviour
 
 				
 				
-				return myEnemyImHoldingObject;
+				
 
+
+				return myEnemyImHoldingObject;
+				
+
+		}
+
+		public Vector2 returnAttackPosition ()
+		{
+				Vector2 scaleChangedOffset = new Vector2 (myEnemyPositionOffsetToAttack.x * myTransform.localScale.x, myEnemyPositionOffsetToAttack.y * myTransform.localScale.y);
+
+				return (Vector2)myTransform.localPosition + scaleChangedOffset;
 		}
 
 	

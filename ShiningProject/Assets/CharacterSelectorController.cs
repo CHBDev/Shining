@@ -46,6 +46,13 @@ public class CharacterSelectorController : MonoBehaviour
 
 		private TouchOrMouseStuff theTouchScript;
 
+		public float fingerOffsetPercentOfScreenHeight = .05f;
+
+		private Vector2 fingerOffsetActual;
+
+		bool stopScaling = false;
+
+
 		//private CircleCollider2D myReticleCollider;
 
 		// Use this for initialization
@@ -83,6 +90,8 @@ public class CharacterSelectorController : MonoBehaviour
 
 				arrayOfCollider2D = new Collider2D[12];
 
+				fingerOffsetActual = new Vector2 (0, fingerOffsetPercentOfScreenHeight * Camera.main.orthographicSize * 2);
+
 				//myReticleCollider = (CircleCollider2D)myReticleUpperPiece.collider2D; 
 				
 	
@@ -102,7 +111,7 @@ public class CharacterSelectorController : MonoBehaviour
 				myMiddleTransform.localPosition = loc;
 				myMiddleDown1Transform.localPosition = loc;
 				myMiddleUp1Transform.localPosition = loc;
-				myReticletUpperPieceTransform.localPosition = loc;
+				myReticletUpperPieceTransform.localPosition = loc + fingerOffsetActual;
 
 		}
 
@@ -110,6 +119,8 @@ public class CharacterSelectorController : MonoBehaviour
 		{
 				topObject = null;
 				hitCount = 0;
+
+				loc = loc + fingerOffsetActual;
 				
 				hitCount = Physics2D.OverlapPointNonAlloc (loc, arrayOfCollider2D);
 
@@ -141,7 +152,7 @@ public class CharacterSelectorController : MonoBehaviour
 										continue;
 								}
 				
-								if (theTouchScript.isAnEnemy == true) {
+								if (theTouchScript.myTargetType == TouchOrMouseStuff.TargetType.ENEMY) {
 					
 										theTopCollider = (CircleCollider2D)theCollider;
 										thingImStuckTo = topObject;
@@ -153,7 +164,7 @@ public class CharacterSelectorController : MonoBehaviour
 										loc = thingImStuckToPosition;
 					
 										break;
-								} else if (theTouchScript.isACharacter == true) {
+								} else if (theTouchScript.myTargetType == TouchOrMouseStuff.TargetType.CHARACTER) {
 										break;
 								}
 
@@ -173,39 +184,63 @@ public class CharacterSelectorController : MonoBehaviour
 				myMiddleUp1Transform.localPosition = Vector3.Lerp (myBaseTransform.localPosition, myReticletUpperPieceTransform.localPosition, .75f);
 
 				float convertedPositionY = halfScreenHeight - (myReticletUpperPieceTransform.localPosition.y * 100);
-				float percentOfScreen = convertedPositionY / screenHeight;
-				float finalMod = percentOfScreen + scaleModifierForTarget;
-				myReticletUpperPieceTransform.localScale = new Vector3 (finalMod, finalMod, 1);
+				
 
+				if (loc.y > 2.6) {
+						stopScaling = true;
+				} else {
+						stopScaling = false;
+				}
+
+				float percentOfScreen = convertedPositionY / screenHeight;
+
+				float finalMod = percentOfScreen + scaleModifierForTarget;
+				if (stopScaling == false) {
+						myReticletUpperPieceTransform.localScale = new Vector3 (finalMod, finalMod, 1);
+
+				}
+				
 				convertedPositionY = halfScreenHeight - (myMiddleUp1Transform.localPosition.y * 100);
 				percentOfScreen = convertedPositionY / screenHeight;
 				finalMod = percentOfScreen + scaleModifierForTarget;
-				myMiddleUp1Transform.localScale = new Vector3 (finalMod, finalMod, 1);
+				if (stopScaling == false) {
+						myMiddleUp1Transform.localScale = new Vector3 (finalMod, finalMod, 1);
+				}
+				
 
 				convertedPositionY = halfScreenHeight - (myMiddleTransform.localPosition.y * 100);
 				percentOfScreen = convertedPositionY / screenHeight;
 				finalMod = percentOfScreen + scaleModifierForTarget;
-				myMiddleTransform.localScale = new Vector3 (finalMod, finalMod, 1);
+				if (stopScaling == false) {
+						myMiddleTransform.localScale = new Vector3 (finalMod, finalMod, 1);
+				}
 
 				convertedPositionY = halfScreenHeight - (myMiddleDown1Transform.localPosition.y * 100);
 				percentOfScreen = convertedPositionY / screenHeight;
 				finalMod = percentOfScreen + scaleModifierForTarget;
-				myMiddleDown1Transform.localScale = new Vector3 (finalMod, finalMod, 1);
+				if (stopScaling == false) {
+						myMiddleDown1Transform.localScale = new Vector3 (finalMod, finalMod, 1);
+				}
 
 		}
 
 		public void stopTracker ()
 		{
-				
+				Debug.Log ("stop tracker");
 				thingImStuckTo = null;
 				setHidden (true);
 
 
 		}
 
+		public GameObject doIHaveATarget ()
+		{
+				return thingImStuckTo;
+		}
+
 		public void setHidden (bool hide)
 		{
-				if (hide) {
+				if (hide == true) {
 						foreach (GameObject obj in myListOfPieces) {
 				
 								obj.SetActive (false);

@@ -11,6 +11,8 @@ public class CharacterHolderMouseInteraction : TouchOrMouseStuff
 
 		private Vector2 myCharacterColliderLoc;
 
+		private CharacterHolderController myCharacterHolderController;
+
 		// Use this for initialization
 		void Start ()
 		{
@@ -23,8 +25,9 @@ public class CharacterHolderMouseInteraction : TouchOrMouseStuff
 
 				myCharacterColliderLoc = (Vector2)transform.localPosition + myCharacterCollider.center;
 
-				isAnEnemy = false;
-				isACharacter = true;
+				myTargetType = TargetType.CHARACTER;
+
+				myCharacterHolderController = GetComponent<CharacterHolderController> ();
 
 
 		}
@@ -61,44 +64,57 @@ public class CharacterHolderMouseInteraction : TouchOrMouseStuff
 		public override void touchOrMouseEndedNotAsTap (Vector2 loc)
 		{
 
-				theSelectorController.stopTracker ();
+				
 
 
 				if (canBeTouchedOrMoused == false) {
 						return;
 				}
+
+				GameObject aTarget = theSelectorController.doIHaveATarget ();
+
+				if (aTarget != null) {
+						myCharacterHolderController.touchEndedWithTarget (aTarget);
+				}
+
+				theSelectorController.stopTracker ();
 		
 		
 		}
 	
 		public override void touchOrMouseEndedAsSingleTap (Vector2 loc)
 		{
-				theSelector.SetActive (false);
+				
+
 				if (canBeTouchedOrMoused == false) {
 						return;
 				}
+
+				theSelectorController.stopTracker ();
 		
 		}
 	
 		public override void touchOrMouseEndedAsDoubleTap (Vector2 loc)
 		{
-		
+				
 				if (canBeTouchedOrMoused == false) {
 						return;
 				}
+				theSelectorController.stopTracker ();
 		}
 	
 		public override void touchOrMouseCancelled (Vector2 loc)
 		{
-				theSelector.SetActive (false);
+				
 				if (canBeTouchedOrMoused == false) {
 						return;
 				}
+				theSelectorController.stopTracker ();
 		}
 	
 		public override void touchOrMouseCallsLongTouch (Vector2 loc)
 		{
-				theSelector.SetActive (false);
+				
 				if (canBeTouchedOrMoused == false) {
 						return;
 				}

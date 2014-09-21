@@ -68,6 +68,7 @@
      <Compile Include="Assets\MainCameraController.cs" />
      <Compile Include="Assets\MainMenuController.cs" />
      <Compile Include="Assets\MainMouseController.cs" />
+     <Compile Include="Assets\MainPhaseController.cs" />
      <Compile Include="Assets\MainUtilController.cs" />
      <Compile Include="Assets\NewBehaviourScript.cs" />
      <Compile Include="Assets\RelativeStuff.cs" />

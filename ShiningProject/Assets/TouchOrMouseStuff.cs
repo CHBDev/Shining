@@ -10,10 +10,19 @@ public class TouchOrMouseStuff : MonoBehaviour
 		public bool
 				canBeTouchedOrMoused;
 
+		
+		public enum TargetType
+		{
+				NULL,
+				ENEMY,
+				CHARACTER,
+				OTHER}
+		;
+
+
 		[HideInInspector]
-		public bool isAnEnemy;
-		[HideInInspector]
-		public bool isACharacter;
+		public TargetType myTargetType;
+		
 
 
 		// Use this for initialization

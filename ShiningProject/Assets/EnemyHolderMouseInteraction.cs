@@ -8,8 +8,7 @@ public class EnemyHolderMouseInteraction : TouchOrMouseStuff
 		void Start ()
 		{
 				canBeTouchedOrMoused = false;
-				isAnEnemy = true;
-				isACharacter = false;
+				myTargetType = TargetType.ENEMY;
 
 		}
 	
