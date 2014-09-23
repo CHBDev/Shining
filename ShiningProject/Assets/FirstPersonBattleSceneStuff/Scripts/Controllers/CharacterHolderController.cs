@@ -30,7 +30,7 @@ public class CharacterHolderController : MonoBehaviour
 				myLocation;
 
 		[HideInInspector]
-		public CharacterActualController.CharacterTypeEnum
+		public CharacterDataSet.CharacterTypes_Enum
 				myCharacterTypeEnum;
 
 		GameObject theGameHolder;
@@ -64,8 +64,8 @@ public class CharacterHolderController : MonoBehaviour
 
 				myTransform = transform;
 
-				cameraHeight = Camera.main.orthographicSize * 2;
-				cameraWidth = cameraHeight * Camera.main.aspect;
+				//cameraHeight = Camera.main.orthographicSize * 2;
+				//cameraWidth = cameraHeight * Camera.main.aspect;
 
 		}
 

@@ -10,9 +10,15 @@ public class SpawnMainCharacters : MonoBehaviour
 		public Vector2 myCharacter2Loc;
 		public Vector2 myCharacter3Loc;
 
-		public CharacterActualController.CharacterTypeEnum myChar1Type;
-		public CharacterActualController.CharacterTypeEnum myChar2Type;
-		public CharacterActualController.CharacterTypeEnum myChar3Type;
+		
+		public CharacterDataSet.CharacterTypes_Enum
+				myChar1Type;
+		
+		public CharacterDataSet.CharacterTypes_Enum
+				myChar2Type;
+		
+		public CharacterDataSet.CharacterTypes_Enum
+				myChar3Type;
 
 		[HideInInspector]
 		public GameObject
@@ -30,7 +36,13 @@ public class SpawnMainCharacters : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
-				
+				if (PlayerStableController.singleton.listOfCharacters.Count > 2) {
+						Debug.Log ("has saved characters");
+						myChar1Type = PlayerStableController.singleton.listOfCharacters [0].myType;
+						myChar2Type = PlayerStableController.singleton.listOfCharacters [1].myType;
+						myChar3Type = PlayerStableController.singleton.listOfCharacters [2].myType;
+				}
+
 
 
 				setupCharacter (1, myChar1Type);
@@ -41,7 +53,7 @@ public class SpawnMainCharacters : MonoBehaviour
 
 		}
 
-		void setupCharacter (int slotNum123, CharacterActualController.CharacterTypeEnum theType)
+		void setupCharacter (int slotNum123, CharacterDataSet.CharacterTypes_Enum theType)
 		{
 				
 				myCharacterHolderPrefab.GetComponent<CharacterHolderController> ().myCharacterTypeEnum = theType;

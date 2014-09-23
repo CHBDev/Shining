@@ -4,6 +4,20 @@ using System.Collections;
 public class MainCameraController : MonoBehaviour
 {
 
+
+		public static MainCameraController singleton;
+	
+	
+		void Awake ()
+		{
+				if (singleton == null) {
+						DontDestroyOnLoad (gameObject);
+						singleton = this;
+				} else if (singleton != this) {
+						Destroy (gameObject);
+				}
+		}
+
 		public float targettedScreenWidth = 1136;
 		public float targettedScreenHeight = 640;
 

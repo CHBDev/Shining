@@ -132,6 +132,16 @@ public class EnemyHolderController : MonoBehaviour
 				return (Vector2)myTransform.localPosition + scaleChangedOffset;
 		}
 
+		public Vector2 returnStartingPosition ()
+		{
+				return myBasePosition;
+		}
+
+		public Vector2 returnStartingScale ()
+		{
+				return myBaseScale;
+		}
+
 	
 		// Update is called once per frame
 		void Update ()

@@ -3,6 +3,21 @@ using System.Collections;
 
 public class MainMouseController : MonoBehaviour
 {
+
+		public static MainMouseController singleton;
+	
+	
+		void Awake ()
+		{
+				if (singleton == null) {
+						DontDestroyOnLoad (gameObject);
+						singleton = this;
+				} else if (singleton != this) {
+						Destroy (gameObject);
+				}
+		}
+
+
 		[HideInInspector]
 		public bool
 				inputEnabled = false;

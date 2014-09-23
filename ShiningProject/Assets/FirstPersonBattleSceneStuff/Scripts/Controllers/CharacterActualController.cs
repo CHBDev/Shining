@@ -4,12 +4,9 @@ using System.Collections;
 public class CharacterActualController : MonoBehaviour
 {
 
-		public enum CharacterTypeEnum
-		{
-				TIRE,
-				CONE,
-				BRICK}
-		;
+		
+
+		public CharacterDataSet myDataSet;
 
 		
 
@@ -21,7 +18,7 @@ public class CharacterActualController : MonoBehaviour
 
 		}
 
-		public void changeMyType (CharacterTypeEnum theType)
+		public void changeMyType (CharacterDataSet.CharacterTypes_Enum theType)
 		{
 
 				
@@ -37,7 +34,7 @@ public class CharacterActualController : MonoBehaviour
 				}
 				
 				switch (theType) {
-				case(CharacterTypeEnum.TIRE):
+				case(CharacterDataSet.CharacterTypes_Enum.TIRE):
 
 						transform.FindChild ("tire1").gameObject.SetActive (true);
 						
@@ -47,7 +44,7 @@ public class CharacterActualController : MonoBehaviour
 			
 						break;
 			
-				case(CharacterTypeEnum.CONE):
+				case(CharacterDataSet.CharacterTypes_Enum.CONE):
 						
 						transform.FindChild ("cone1").gameObject.SetActive (true);
 						
@@ -57,7 +54,7 @@ public class CharacterActualController : MonoBehaviour
 			
 						break;
 			
-				case(CharacterTypeEnum.BRICK):
+				case(CharacterDataSet.CharacterTypes_Enum.BRICK):
 			
 						transform.FindChild ("brick1").gameObject.SetActive (true);
 						

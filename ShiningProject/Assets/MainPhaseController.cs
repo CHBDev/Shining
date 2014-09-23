@@ -3,6 +3,20 @@ using System.Collections;
 
 public class MainPhaseController : MonoBehaviour
 {
+
+		public static MainPhaseController singleton;
+	
+	
+		void Awake ()
+		{
+				if (singleton == null) {
+						DontDestroyOnLoad (gameObject);
+						singleton = this;
+				} else if (singleton != this) {
+						Destroy (gameObject);
+				}
+		}
+
 	
 		[HideInInspector]
 		enum GamePhase
@@ -21,7 +35,7 @@ public class MainPhaseController : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
-				theMainMouse = GameObject.Find ("MainMouse").GetComponent<MainMouseController> ();
+				theMainMouse = MainMouseController.singleton;
 				//hack
 				currentGamePhase = GamePhase.GAMEPLAY;
 		}
