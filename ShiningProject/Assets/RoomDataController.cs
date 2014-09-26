@@ -4,6 +4,7 @@ using System.Collections;
 public class RoomDataController : MonoBehaviour
 {
 
+		private MainNavigationController.MovementDirections[] myMovementDirections;
 
 		public GameObject
 				EnemyRow1Slot01;
@@ -62,4 +63,15 @@ public class RoomDataController : MonoBehaviour
 		{
 	
 		}
+
+		public void setRoomData (MainNavigationController.MovementDirections[] theDirections)
+		{
+				myMovementDirections = theDirections;
+		}
+
+		public MainNavigationController.MovementDirections[] getMovementDirectionsFromRoom ()
+		{
+				return myMovementDirections;
+		}
+
 }

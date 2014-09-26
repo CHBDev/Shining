@@ -4,19 +4,45 @@ using System.Collections;
 public class GameContentsHolderController : MonoBehaviour
 {
 
-		public GameObject myRoomHolderPrefab;
+
+		public static GameContentsHolderController singleton;
+	
+	
+		void Awake ()
+		{
+				Debug.Log ("awake gamecontents");
+				if (singleton == null) {
+						DontDestroyOnLoad (gameObject);
+						singleton = this;
+				} else if (singleton != this) {
+						Destroy (gameObject);
+				}
+		}
+
+		public GameObject myRoomHolder;
 		
 		[HideInInspector]
 		public GameObject
 				myRoomHolderObject;
 
+		//[HideInInspector]
+		public RoomHolderController
+				myRoomHolderController;
+
 		// Use this for initialization
 		void Start ()
 		{
-				
-				myRoomHolderObject = RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myRoomHolderPrefab, gameObject);
-				//myRoomHolderObject = (GameObject)Instantiate (myRoomHolderPrefab);
-				//myRoomHolderObject.transform.parent = transform;
+				Debug.Log ("start gamecontents");
+				setupRoom ();
+
+		}
+
+		public void setupRoom ()
+		{
+				//myRoomHolderObject = MainMakeStuffController.newGameObjectInObject (gameObject);
+				myRoomHolderObject = MainMakeStuffController.instantiatePrefabInObject (myRoomHolder, gameObject);
+				//busted
+
 
 
 

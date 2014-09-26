@@ -61,7 +61,7 @@ public class SpawnMainCharacters : MonoBehaviour
 				switch (slotNum123) {
 				case(1):
 						
-						RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myCharacterHolderPrefab, gameObject, myCharacter1Loc);
+						MainMakeStuffController.instantiatePrefabInObject (myCharacterHolderPrefab, gameObject, myCharacter1Loc);
 
 						
 						
@@ -69,7 +69,7 @@ public class SpawnMainCharacters : MonoBehaviour
 				case(2):
 
 					
-						RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myCharacterHolderPrefab, gameObject, myCharacter2Loc);
+						MainMakeStuffController.instantiatePrefabInObject (myCharacterHolderPrefab, gameObject, myCharacter2Loc);
 
 
 						
@@ -77,7 +77,7 @@ public class SpawnMainCharacters : MonoBehaviour
 				case(3):
 
 						
-						RelativeStuff.instantiatePrefabInObjectAndMakeRelative (myCharacterHolderPrefab, gameObject, myCharacter3Loc);
+						MainMakeStuffController.instantiatePrefabInObject (myCharacterHolderPrefab, gameObject, myCharacter3Loc);
 
 					
 						break;

@@ -88,7 +88,9 @@ public class PlayButtonTemp : MonoBehaviour
 				}
 
 				if (GUI.Button (new Rect (Screen.width / 2, Screen.height - 50, 200, 50), "PLAY")) {
-						Application.LoadLevel ("FirstPersonScene1");
+						MainNavigationController.singleton.mainMenuCallsPlayButton ();
+
+						
 				}
 
 		}
