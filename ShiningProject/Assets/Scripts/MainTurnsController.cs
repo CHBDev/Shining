@@ -14,6 +14,7 @@ public class MainTurnsController : MonoBehaviour
 				if (singleton == null) {
 						DontDestroyOnLoad (gameObject);
 						singleton = this;
+						cleanSlateOnNewRoom ();
 				} else if (singleton != this) {
 						Destroy (gameObject);
 				}
@@ -21,7 +22,10 @@ public class MainTurnsController : MonoBehaviour
 
 
 
-		private TurnTracker[] theEnemyList, theCharacterList;
+		private TurnTracker[] theEnemyTurnTrackers, theCharacterTurnTrackers;
+
+		public EnemyHolderController[] enemyHolderControllerArray;
+		public CharacterHolderController[] characterHolderControllerArray;
 
 		
 
@@ -29,25 +33,24 @@ public class MainTurnsController : MonoBehaviour
 		void Start ()
 		{
 	
-				cleanSlateOnNewRoom ();
-			
-
-
 		}
 
 		public void cleanSlateOnNewRoom ()
 		{
-				theEnemyList = new TurnTracker[16];
+				Debug.Log ("clean slate new room");
+				theEnemyTurnTrackers = new TurnTracker[16];
+				enemyHolderControllerArray = new EnemyHolderController[16];
 
-				for (int i = 0; i < theEnemyList.Length; i++) {
-						theEnemyList [i] = new TurnTracker ();
+				for (int i = 0; i < theEnemyTurnTrackers.Length; i++) {
+						theEnemyTurnTrackers [i] = new TurnTracker ();
 				}
 		
-				theCharacterList = new TurnTracker[4];
+				theCharacterTurnTrackers = new TurnTracker[4];
+				characterHolderControllerArray = new CharacterHolderController[4];
 
-				for (int i = 0; i < theCharacterList.Length; i++) {
-						theCharacterList [i] = new TurnTracker ();
-						theCharacterList [i].isCharacter = true;
+				for (int i = 0; i < theCharacterTurnTrackers.Length; i++) {
+						theCharacterTurnTrackers [i] = new TurnTracker ();
+						
 				}
 
 				
@@ -61,10 +64,10 @@ public class MainTurnsController : MonoBehaviour
 	
 		}
 
-		private bool isThisTheLastEnemyThatCanMove (int enemyPosition)
+		private bool areAllEnemiesFinishedMoving (int enemyPosition)
 		{
-				for (int i = enemyPosition; i < theEnemyList.Length; i++) {
-						TurnTracker theTracker = theEnemyList [i];
+				for (int i = enemyPosition; i < theEnemyTurnTrackers.Length; i++) {
+						TurnTracker theTracker = theEnemyTurnTrackers [i];
 						if (theTracker.canThisThingMakeAMoveThisRound () == true) {
 								return false;
 						}
@@ -80,9 +83,12 @@ public class MainTurnsController : MonoBehaviour
 		{
 
 
-				foreach (TurnTracker theTracker in theCharacterList) {
-						if (theTracker.canThisThingMakeAMoveThisRound () == true)
+				foreach (TurnTracker theTracker in theCharacterTurnTrackers) {
+						//Debug.Log ("check a tracker");
+						if (theTracker.canThisThingMakeAMoveThisRound () == true) {
+								
 								return false;
+						}
 				}
 
 		
@@ -92,44 +98,59 @@ public class MainTurnsController : MonoBehaviour
 
 		private void changeTurnsToCharacterSide ()
 		{
-				//do something to tell characters to increment turn trackers by 1, for incapacitated and charge moves
-				tellAllCharactersThatOneTurnHasPassed ();
+				Debug.Log ("CHARACTER TURNS BEGIN");
 
-
-				foreach (TurnTracker theT in theCharacterList) {
+				foreach (TurnTracker theT in theCharacterTurnTrackers) {
 						theT.hasUsedMainTurnThisRound = false;
 						theT.hasUsedSecondaryTurnThisRound = false;
 				}
+				
+				//hack
+				//do stuff for characters, for now, just enable them to be clicked
+				Debug.Log (characterHolderControllerArray.Length);
+				foreach (CharacterHolderController theController in characterHolderControllerArray) {
+						if (theController == null) {
+								continue;
+						}
+						theController.myTurnThisRoundIsAvailable = true;
+				}
+
+
+
 		}
 
 		private void changeTurnsToEnemySide ()
 		{
-				tellAllEnemiesThatOneTurnHasPassed ();
 
-				foreach (TurnTracker theT in theEnemyList) {
+
+
+				foreach (TurnTracker theT in theEnemyTurnTrackers) {
 						theT.hasUsedMainTurnThisRound = false;
 						theT.hasUsedSecondaryTurnThisRound = false;
 				}
 
+				Debug.Log ("ENEMY TURNS BEGIN");
+
+				//update all turns counters on enemies by 1
+
+				tellNextEnemyToGoPassLastEnemy (-1);
+				
+
 		}
 
-		private void tellAllCharactersThatOneTurnHasPassed ()
-		{
-				//hack
+		
 
-		}
-
-		private void tellAllEnemiesThatOneTurnHasPassed ()
+		private void tellNextEnemyToGoPassLastEnemy (int lastEnemyPosition)
 		{
-				//hack
-		}
+				for (int i = lastEnemyPosition + 1; i < theEnemyTurnTrackers.Length; i++) {
+						
 
-		private void tellNextEnemyToGo (int lastEnemyPosition)
-		{
-				for (int i = lastEnemyPosition; i < theEnemyList.Length; i++) {
-						TurnTracker theT = theEnemyList [i];
+						TurnTracker theT = theEnemyTurnTrackers [i];
 						if (theT.canThisThingMakeAMoveThisRound () == true) {
 								//tell the enemy is position i to go
+
+								enemyHolderControllerArray [i].tellEnemyToStartTurn ();			
+
 								return;
 						}
 				}
@@ -139,10 +160,10 @@ public class MainTurnsController : MonoBehaviour
 
 		private void checkAfterEnemyUpdate (int enemyPosition)
 		{
-				if (isThisTheLastEnemyThatCanMove (enemyPosition) == true) {
+				if (areAllEnemiesFinishedMoving (enemyPosition) == true) {
 						changeTurnsToCharacterSide ();
 				} else {
-						tellNextEnemyToGo (enemyPosition);
+						tellNextEnemyToGoPassLastEnemy (enemyPosition);
 				}
 		}
 
@@ -153,51 +174,76 @@ public class MainTurnsController : MonoBehaviour
 				}
 		}
 
+		public void tellMainTurnsThatCharacterHasFinishedMainTurn (int characterPosition)
+		{
+				setCharacterHasUsedMainTurnThisRound (characterPosition, true);
+				checkAfterCharacterUpdate ();
+		}
+
+		public void tellMainTurnsThatEnemyHasFinishedMainTurn (int enemySlot)
+		{
+				setEnemyUsedMainTurn (enemySlot, true);
+				checkAfterEnemyUpdate (enemySlot);
+		}
+
+
 
 		public void setEnemyUsedMainTurn (int enemyPosition, bool usedMainTurn)
 		{
-				theEnemyList [enemyPosition].hasUsedMainTurnThisRound = usedMainTurn;
+				theEnemyTurnTrackers [enemyPosition].hasUsedMainTurnThisRound = usedMainTurn;
 
-				checkAfterEnemyUpdate (enemyPosition);
+				
 
 		}
 
 		public void setEnemyIsIncapacitated (int enemyPosition, bool isIncapacitated)
 		{
-				theEnemyList [enemyPosition].isIncapacitated = isIncapacitated;
-				checkAfterEnemyUpdate (enemyPosition);
+				theEnemyTurnTrackers [enemyPosition].isIncapacitated = isIncapacitated;
+				
 		}
 
 		public void setEnemyIsEmpty (int enemyPosition, bool isEmpty)
 		{
-				theEnemyList [enemyPosition].isEmpty = isEmpty;
-				checkAfterEnemyUpdate (enemyPosition);
+				theEnemyTurnTrackers [enemyPosition].isEmpty = isEmpty;
+				
 		}
 
 		public void setCharacterHasUsedMainTurnThisRound (int characterPosition, bool hasUsedMainTurn)
 		{
-				theCharacterList [characterPosition].hasUsedMainTurnThisRound = hasUsedMainTurn;
-				checkAfterCharacterUpdate ();
+				
+				theCharacterTurnTrackers [characterPosition].hasUsedMainTurnThisRound = hasUsedMainTurn;
+				
 
 		}
 
 		public void setCharacterHasUsedSecondaryTurnThisRound (int characterPosition, bool hasUsedSecond)
 		{
-				theCharacterList [characterPosition].hasUsedSecondaryTurnThisRound = hasUsedSecond;
+				theCharacterTurnTrackers [characterPosition].hasUsedSecondaryTurnThisRound = hasUsedSecond;
 				
 		}
 
 		public void setCharacterIsIncapacitated (int characterPosition, bool isIncapacitated)
 		{
-				theCharacterList [characterPosition].isIncapacitated = isIncapacitated;
-				checkAfterCharacterUpdate ();
+				theCharacterTurnTrackers [characterPosition].isIncapacitated = isIncapacitated;
+				
 		}
 
 		public void setCharacterIsEmpty (int characterPosition, bool isEmpty)
 		{
-				theCharacterList [characterPosition].isEmpty = isEmpty;
-				checkAfterCharacterUpdate ();
+				theCharacterTurnTrackers [characterPosition].isEmpty = isEmpty;
+				
 		}
+
+		public void activateCharacter (int slot)
+		{
+				theCharacterTurnTrackers [slot].activateAsCharacter ();
+		}
+
+		public void activateEnemy (int slot)
+		{
+				theEnemyTurnTrackers [slot].activateAsEnemy ();
+		}
+	
 
 }
 
@@ -211,18 +257,46 @@ public class TurnTracker
 
 		public bool canThisThingMakeAMoveThisRound ()
 		{
-				if (isEmpty == true)
-						return false;
 
-				if (hasUsedMainTurnThisRound == true)
+				//Debug.Log ("empty " + isEmpty + "/usedTurn " + hasUsedMainTurnThisRound + "/isIncap " + isIncapacitated);
+				if (isEmpty == true) {
 						return false;
+				}
+						
 
-				if (isIncapacitated == true)
+				if (hasUsedMainTurnThisRound == true) {
 						return false;
+				}
+
+				if (isIncapacitated == true) {
+						return false;
+				}
 
 
 				return true;
 		}
+
+		public void activateAsCharacter ()
+		{
+				
+				activate ();
+				isCharacter = true;
+		}
+
+		public void activateAsEnemy ()
+		{
+				activate ();
+				isCharacter = false;
+		}
+
+		private void activate ()
+		{
+				hasUsedMainTurnThisRound = false;
+				hasUsedSecondaryTurnThisRound = false;
+				isEmpty = false;
+				isIncapacitated = false;
+		}
+
 
 
 

@@ -5,16 +5,9 @@ using System;
 public class CharacterDataSet
 {
 
-		public enum CharacterTypes_Enum
-		{
-				NULL = 0,
-				CONE = 1,
-				BRICK = 2,
-				TIRE = 3,
-				ENDOFLIST = 999,
-		}
+		
 
-		public CharacterTypes_Enum myType;
+		public CharacterPrefabHolderController.CharacterTypes myType;
 		public int myXP;
 		
 		
@@ -34,7 +27,7 @@ public class CharacterDataSet
 	
 		}
 
-		static public CharacterDataSet returnNewCharacterDataSet (CharacterTypes_Enum theType, int theXP)
+		static public CharacterDataSet returnNewCharacterDataSet (CharacterPrefabHolderController.CharacterTypes theType, int theXP)
 		{
 				CharacterDataSet thisCharacter = new CharacterDataSet ();
 				thisCharacter.myType = theType;
@@ -53,7 +46,7 @@ public class CharacterDataSet
 				if (theObject == null) {
 						
 				} else {
-						myType = (CharacterTypes_Enum)theObject.myType;
+						myType = (CharacterPrefabHolderController.CharacterTypes)theObject.myType;
 						myXP = theObject.myXP;
 						myCharacterID = theObject.myCharacterID;
 				}

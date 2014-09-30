@@ -201,7 +201,7 @@ public class MainMouseController : MonoBehaviour
 								mouseLongClickCurrentlyDown = false;
 								mouseTimeSinceLastClickStarted = 0;
 								mouseThisTouchCanBeALongTouch = true;
-								Debug.Log ("got to get mouse button");
+								
 								touchOrMouseDownBegins (Camera.main.ScreenToWorldPoint (Input.mousePosition));
 
 								if (mouseFirstTapRegistered == false) {
@@ -304,7 +304,7 @@ public class MainMouseController : MonoBehaviour
 		private void touchOrMouseDownBegins (Vector2 loc)
 		{
 				
-				Debug.Log ("mouseDown");
+				//Debug.Log ("mouseDown");
 
 				mouseObjectScriptTouchedDown = this.findThingThatTouchOrMouseShouldInteractWith (loc);
 				
@@ -341,7 +341,7 @@ public class MainMouseController : MonoBehaviour
 
 		private void touchOrMouseEndedNotAsTap (Vector2 loc)
 		{
-				Debug.Log ("mouseEndNotTap");
+				//Debug.Log ("mouseEndNotTap");
 
 				if (mouseObjectScriptTouchedDown == null) {
 						return;
@@ -354,7 +354,7 @@ public class MainMouseController : MonoBehaviour
 
 		private void touchOrMouseEndedAsSingleTap (Vector2 loc)
 		{
-				Debug.Log ("mouseEndSingleTap");
+				//Debug.Log ("mouseEndSingleTap");
 				//Debug.Log ("SINGLE TAP");
 				if (mouseObjectScriptTouchedDown == null) {
 						return;
@@ -366,7 +366,7 @@ public class MainMouseController : MonoBehaviour
 
 		private void touchOrMouseEndedAsDoubleTap (Vector2 loc)
 		{
-				Debug.Log ("mouseEndDoubleTap");
+				//Debug.Log ("mouseEndDoubleTap");
 				//Debug.Log ("DOUBLE TAP");
 				if (mouseObjectScriptTouchedDown == null) {
 						return;

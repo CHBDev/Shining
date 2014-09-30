@@ -111,74 +111,74 @@ public class RoomArtController : MonoBehaviour
 
 				this.setupEnemiesFromRoomDataOnRoomHolder ();
 
-				MainTurnsController.singleton.cleanSlateOnNewRoom ();
+				
 
 				myRow1NumberOfSlots = 0;
 				if (EnemyRow1Slot01 != null) {
 						myRow1NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (1, false);
+						MainTurnsController.singleton.activateEnemy (1);
 				}
 				if (EnemyRow1Slot02 != null) {
 						myRow1NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (2, false);
+						MainTurnsController.singleton.activateEnemy (2);
 				}
 				if (EnemyRow1Slot03 != null) {
 						myRow1NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (3, false);
+						MainTurnsController.singleton.activateEnemy (3);
 				}
 				if (EnemyRow1Slot04 != null) {
 						myRow1NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (4, false);
+						MainTurnsController.singleton.activateEnemy (4);
 				}
 				if (EnemyRow1Slot05 != null) {
 						myRow1NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (5, false);
+						MainTurnsController.singleton.activateEnemy (5);
 				}
 
 
 				myRow2NumberOfSlots = 0;
 				if (EnemyRow2Slot01 != null) {
 						myRow2NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (6, false);
+						MainTurnsController.singleton.activateEnemy (6);
 				}
 				if (EnemyRow2Slot02 != null) {
 						myRow2NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (7, false);
+						MainTurnsController.singleton.activateEnemy (7);
 				}
 				if (EnemyRow2Slot03 != null) {
 						myRow2NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (8, false);
+						MainTurnsController.singleton.activateEnemy (8);
 				}
 				if (EnemyRow2Slot04 != null) {
 						myRow2NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (9, false);
+						MainTurnsController.singleton.activateEnemy (9);
 				}
 				if (EnemyRow2Slot05 != null) {
 						myRow2NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (10, false);
+						MainTurnsController.singleton.activateEnemy (10);
 				}
 
 
 				myRow3NumberOfSlots = 0;
 				if (EnemyRow3Slot01 != null) {
 						myRow3NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (11, false);
+						MainTurnsController.singleton.activateEnemy (11);
 				}
 				if (EnemyRow3Slot02 != null) {
 						myRow3NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (12, false);
+						MainTurnsController.singleton.activateEnemy (12);
 				}
 				if (EnemyRow3Slot03 != null) {
 						myRow3NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (13, false);
+						MainTurnsController.singleton.activateEnemy (13);
 				}
 				if (EnemyRow3Slot04 != null) {
 						myRow3NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (14, false);
+						MainTurnsController.singleton.activateEnemy (14);
 				}
 				if (EnemyRow3Slot05 != null) {
 						myRow3NumberOfSlots++;
-						MainTurnsController.singleton.setEnemyIsEmpty (15, false);
+						MainTurnsController.singleton.activateEnemy (15);
 				}
 
 
@@ -193,13 +193,9 @@ public class RoomArtController : MonoBehaviour
 		private void setupEnemiesFromRoomDataOnRoomHolder ()
 		{
 				
-				GameObject theData = GameObject.FindWithTag ("MainData");
-				;
-
-				MainDataController theDataController = theData.GetComponent<MainDataController> ();
-
-
-				myEnemyHolderPrefab = theDataController.theEnemyHolderPrefab;
+				
+				
+				myEnemyHolderPrefab = MainDataController.singleton.theEnemyHolderPrefab;
 
 
 
@@ -210,49 +206,49 @@ public class RoomArtController : MonoBehaviour
 
 				
 
-				EnemyRow1Slot01 = theRoomDataController.EnemyRow1Slot01;
+				EnemyRow1Slot01 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow1Slot01);
 		
 
-				EnemyRow1Slot02 = theRoomDataController.EnemyRow1Slot02;
+				EnemyRow1Slot02 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow1Slot02);
 		
 
-				EnemyRow1Slot03 = theRoomDataController.EnemyRow1Slot03;
+				EnemyRow1Slot03 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow1Slot03);
 		
 
-				EnemyRow1Slot04 = theRoomDataController.EnemyRow1Slot04;
+				EnemyRow1Slot04 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow1Slot04);
 		
 
-				EnemyRow1Slot05 = theRoomDataController.EnemyRow1Slot05;
+				EnemyRow1Slot05 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow1Slot05);
 		
 
-				EnemyRow2Slot01 = theRoomDataController.EnemyRow2Slot01;
+				EnemyRow2Slot01 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow2Slot01);
 		
 
-				EnemyRow2Slot02 = theRoomDataController.EnemyRow2Slot02;
+				EnemyRow2Slot02 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow2Slot02);
 		
 
-				EnemyRow2Slot03 = theRoomDataController.EnemyRow2Slot03;
+				EnemyRow2Slot03 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow2Slot03);
 		
 
-				EnemyRow2Slot04 = theRoomDataController.EnemyRow2Slot04;
+				EnemyRow2Slot04 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow2Slot04);
 		
 
-				EnemyRow2Slot05 = theRoomDataController.EnemyRow2Slot05;
+				EnemyRow2Slot05 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow2Slot05);
 		
 
-				EnemyRow3Slot01 = theRoomDataController.EnemyRow3Slot01;
+				EnemyRow3Slot01 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow3Slot01);
 		
 
-				EnemyRow3Slot02 = theRoomDataController.EnemyRow3Slot02;
+				EnemyRow3Slot02 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow3Slot02);
 		
 
-				EnemyRow3Slot03 = theRoomDataController.EnemyRow3Slot03;
+				EnemyRow3Slot03 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow3Slot03);
 		
 
-				EnemyRow3Slot04 = theRoomDataController.EnemyRow3Slot04;
+				EnemyRow3Slot04 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow3Slot04);
 		
 
-				EnemyRow3Slot05 = theRoomDataController.EnemyRow3Slot05;
+				EnemyRow3Slot05 = MainMakeStuffController.returnEnemyPrefabOfType (theRoomDataController.EnemyRow3Slot05);
 
 
 
@@ -330,15 +326,21 @@ public class RoomArtController : MonoBehaviour
 
 						if (thePrefab != null) {
 								
-								GameObject thisEnemy = tempObject.GetComponent<EnemyHolderController> ().setupMyEnemy (thePrefab);
-				
-							
+								EnemyHolderController thisHolder = tempObject.GetComponent<EnemyHolderController> ();
+								EnemyActualController thisActual = thisHolder.myEnemyActualController;
+								GameObject thisEnemy = thisActual.setupMyEnemy (thePrefab);
+
+								//slot ID calc //+0 for row 1, plus 5 for ROW 2, plus 10 for row 3
+								int slotID = i + 0 + 1;
+								thisHolder.mySlotID = slotID;
 					
 								int thisNumber = (row1DepthRandomizer.Count - 1) - Random.Range (0, row1DepthRandomizer.Count - 1);
 
 								thisEnemy.GetComponent<EnemyArtController> ().setupLayersForRow (1, row1DepthRandomizer [thisNumber]);
 
 								row1DepthRandomizer.RemoveAt (thisNumber);
+
+								MainTurnsController.singleton.enemyHolderControllerArray [slotID] = thisHolder;
 						}
 
 			
@@ -379,7 +381,13 @@ public class RoomArtController : MonoBehaviour
 
 						if (thePrefab != null) {
 
-								GameObject thisEnemy = tempObject.GetComponent<EnemyHolderController> ().setupMyEnemy (thePrefab);
+								EnemyHolderController thisHolder = tempObject.GetComponent<EnemyHolderController> ();
+								EnemyActualController thisActual = thisHolder.myEnemyActualController;
+								GameObject thisEnemy = thisActual.setupMyEnemy (thePrefab);
+				
+								//slot ID calc //+0 for row 1, plus 5 for ROW 2, plus 10 for row 3
+								int slotID = i + 5 + 1;
+								thisHolder.mySlotID = slotID;
 
 							
 
@@ -388,6 +396,7 @@ public class RoomArtController : MonoBehaviour
 								thisEnemy.GetComponent<EnemyArtController> ().setupLayersForRow (2, row2DepthRandomizer [thisNumber]);
 
 								row2DepthRandomizer.RemoveAt (thisNumber);
+								MainTurnsController.singleton.enemyHolderControllerArray [slotID] = thisHolder;
 								
 						}
 			
@@ -427,7 +436,13 @@ public class RoomArtController : MonoBehaviour
 
 						if (thePrefab != null) {
 
-								GameObject thisEnemy = tempObject.GetComponent<EnemyHolderController> ().setupMyEnemy (thePrefab);
+								EnemyHolderController thisHolder = tempObject.GetComponent<EnemyHolderController> ();
+								EnemyActualController thisActual = thisHolder.myEnemyActualController;
+								GameObject thisEnemy = thisActual.setupMyEnemy (thePrefab);
+				
+								//slot ID calc //+0 for row 1, plus 5 for ROW 2, plus 10 for row 3
+								int slotID = i + 10 + 1;
+								thisHolder.mySlotID = slotID;
 
 							
 
@@ -436,6 +451,8 @@ public class RoomArtController : MonoBehaviour
 								thisEnemy.GetComponent<EnemyArtController> ().setupLayersForRow (3, row3DepthRandomizer [thisNumber]);
 
 								row3DepthRandomizer.RemoveAt (thisNumber);
+
+								MainTurnsController.singleton.enemyHolderControllerArray [slotID] = thisHolder;
 						}
 
 			

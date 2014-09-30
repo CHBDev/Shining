@@ -38,10 +38,15 @@ public class MainHubData : MonoBehaviour
 	
 		}
 
+		public void setupTheDungeon ()
+		{
+
+		}
+
 		public  GameObject returnRoomForNewDungeon ()
 		{
-				MainDungeonData.singleton.getRoomForHubNumber (currentHubNumber);
+				return MainDungeonData.singleton.getFirstRoomInDungeon (currentHubNumber);
 
-				return null;
+				
 		}
 }

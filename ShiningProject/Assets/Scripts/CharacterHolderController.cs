@@ -18,15 +18,12 @@ public class CharacterHolderController : MonoBehaviour
 		}
 
 		
-		public GameObject myCharacterActualPrefab;
 
 		[HideInInspector]
 		public GameObject
 				myCharacterActualObject;
-		[HideInInspector]
-		public Animator
-				myCharacterActualAnimator;
-
+		
+		public GameObject myCharacterActualPrefab;
 		private CharacterActualController myCharacterActualController;
 
 		[HideInInspector]
@@ -34,12 +31,11 @@ public class CharacterHolderController : MonoBehaviour
 				myLocation;
 
 		[HideInInspector]
-		public CharacterDataSet.CharacterTypes_Enum
+		public CharacterPrefabHolderController.CharacterTypes 
 				myCharacterTypeEnum;
-
-		GameObject theGameHolder;
+	
 		Transform myTransform;
-		//MainMakeStuffController LocationScaler;
+		
 
 		CharacterHolderMouseInteraction myCharacterHolderMouseInteraction;
 
@@ -54,6 +50,12 @@ public class CharacterHolderController : MonoBehaviour
 		private Vector2 myBaseScale;
 		private string myBaseLayer;
 
+		public int myPositionID;
+
+		void Awake ()
+		{
+
+		}
 
 		// Use this for initialization
 		void Start ()
@@ -63,19 +65,16 @@ public class CharacterHolderController : MonoBehaviour
 
 				
 				myCharacterActualController = myCharacterActualObject.GetComponent<CharacterActualController> ();
-				myCharacterActualController.changeMyType (myCharacterTypeEnum);
+				myCharacterActualController.setMyType (myCharacterTypeEnum);
 				myCharacterActualController.myCharacterHolderController = this;
 
 
-				myCharacterActualAnimator = myCharacterActualObject.GetComponent<Animator> ();
-
+				
 				myCharacterHolderMouseInteraction = GetComponent<CharacterHolderMouseInteraction> ();
 
 				myTransform = transform;
 
-				//cameraHeight = Camera.main.orthographicSize * 2;
-				//cameraWidth = cameraHeight * Camera.main.aspect;
-
+			
 		}
 
 	
@@ -109,76 +108,42 @@ public class CharacterHolderController : MonoBehaviour
 		{
 				if (myTargetTouchOrMouseStuff.myTargetType == TouchOrMouseStuff.TargetType.ENEMY) {
 						
-						tellAnimatorToAttack ();
-						
+						myTurnThisRoundIsAvailable = false;
+						myCharacterActualController.tellActualToBeginAttackAnimation ();
 
 
 				} else {
 						assistCharacter ();
 				}
 		}
+	
 
-		public void tellAnimatorToAttack ()
-		{
-				myCharacterActualAnimator.SetTrigger ("attackEnemy");
-				myTurnThisRoundIsAvailable = false;
-
-		}
+		
 
 		public void moveHolderToTargetAsPartOfAttackEnemy (float totalAnimationTime)
 		{
 				
 				
-				//do stuff
+				
 				
 
 				
 				EnemyHolderController myTargetHolder = myTarget.GetComponent<EnemyHolderController> ();
 
 
-				//hack
+				
 				Vector2 myPos = (Vector2)myTransform.localPosition;
-				//Vector2 myPos = (Vector2)myCharacterActualObject.transform.localPosition;
+				
 
 				Vector2 targetPos = myTargetHolder.returnAttackPosition ();
 
-				/*
-				float highestPoint = targetPos.y * 1.5f;
 
-				Vector2 vectorToTarget = myPos + targetPos;
-				Debug.Log (vectorToTarget);
-
-				vectorToTarget.Normalize ();
-				
-
-				Vector2 lerp25 = Vector2.Lerp (myPos, targetPos, .25f);
-
-				Vector2 lerp50 = Vector2.Lerp (myPos, targetPos, .50f);
-				Vector2 lerp75 = Vector2.Lerp (myPos, targetPos, .75f);
-
-				float float25 = lerp25.x;
-				float float50 = lerp50.x;
-				float float75 = lerp75.x;
-
-				float float25y = lerp25.y;
-				float float50y = lerp50.y;
-				float float75y = lerp75.y;
-
-
-				Vector2 firstArc = new Vector2 (float25, float25y);
-				Vector2 midArc = new Vector2 (float50, float50y);
-				Vector2 lastArc = new Vector2 (float75, float75y);
-
-				Debug.Log (firstArc);
-				Debug.Log (midArc);
-				Debug.Log (lastArc);
-				*/
 
 				myBasePosition = myTransform.localPosition;
 				myBaseScale = myTransform.localScale;
 
 
-				doMoveMePositionAndScale (gameObject, myPos, targetPos, totalAnimationTime, myTargetTransform.localScale);
+				MainMoveStuffController.singleton.doMoveMePositionAndScale (gameObject, myPos, targetPos, totalAnimationTime, myTargetTransform.localScale);
 				
 				;
 
@@ -188,17 +153,16 @@ public class CharacterHolderController : MonoBehaviour
 
 		public void doMoveBackToHome (float time)
 		{
-				Invoke ("turnTurnFlagBackOn", time);
 
-
-				doMoveMePositionAndScale (gameObject, myTransform.localPosition, myBasePosition, time, myBaseScale);
+				MainMoveStuffController.singleton.doMoveMePositionAndScale (gameObject, myTransform.localPosition, myBasePosition, time, myBaseScale);
 
 		}
 
-		private void turnTurnFlagBackOn ()
+		public void attackIsComplete ()
 		{
-				//myTurnThisRoundIsAvailable = true;
+				MainTurnsController.singleton.tellMainTurnsThatCharacterHasFinishedMainTurn (myPositionID);
 		}
+	
 
 
 		private void assistCharacter ()
@@ -206,54 +170,16 @@ public class CharacterHolderController : MonoBehaviour
 				//do stuff
 		}
 
-		public void endAttack ()
+		public Vector2 returnAttackPosition ()
 		{
-				myCharacterActualAnimator.SetTrigger ("endAttck");
+				return  (Vector2)myTransform.localPosition;
 		}
 
-		private void doMoveMePositionAndScale (GameObject aThing, Vector2 StartPos, Vector2 EndPos, float time1, Vector2 endScale)
+		public void setupCharacterUsingArtPrefab (GameObject artPrefab)
 		{
-				
-				AnimationCurve theXPath = AnimationCurve.Linear (0, StartPos.x, time1, EndPos.x);
-				AnimationCurve theYPath = AnimationCurve.Linear (0, StartPos.y, time1, EndPos.y);
-				
-				AnimationCurve theScaleX = AnimationCurve.Linear (0, aThing.transform.localScale.x, time1, endScale.x);
-				AnimationCurve theScaleY = AnimationCurve.Linear (0, aThing.transform.localScale.y, time1, endScale.y);
-
-
-
-				
-
-				AnimationClip clip = new AnimationClip ();
-
-				clip.SetCurve ("", typeof(Transform), "localPosition.x", theXPath);
-				clip.SetCurve ("", typeof(Transform), "localPosition.y", theYPath);
-				clip.SetCurve ("", typeof(Transform), "localScale.x", theScaleX);
-				clip.SetCurve ("", typeof(Transform), "localScale.y", theScaleY);
-
-
-
-		
-				if (aThing.GetComponent ("Animation") == null) {
-						aThing.AddComponent ("Animation");
-				}
-
-				Animation theAnimation = aThing.GetComponent<Animation> ();
-			
-		
-				theAnimation.AddClip (clip, "clip");
-				
-
-				
-				//theAnimation ["clipX"].blendMode = AnimationBlendMode.Additive;
-				//theAnimation ["clipY"].blendMode = AnimationBlendMode.Additive;
-				//theAnimation.Play ("clipY");
-				//theAnimation.Play ("clipY");
-				theAnimation.Play ("clip");
-				//TempGO.animation.wrapMode = WrapMode.PingPong;
-
 
 		}
+	
 
 
 

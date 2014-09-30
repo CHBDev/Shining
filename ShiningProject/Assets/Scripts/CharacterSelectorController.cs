@@ -226,7 +226,7 @@ public class CharacterSelectorController : MonoBehaviour
 
 		public void stopTracker ()
 		{
-				Debug.Log ("stop tracker");
+				//Debug.Log ("stop tracker");
 				thingImStuckTo = null;
 				setHidden (true);
 

@@ -3,15 +3,16 @@ using System.Collections;
 
 public class EnemyHolderController : MonoBehaviour
 {
+		
+		public GameObject myEnemyActualPrefab;
+
+		[HideInInspector]
+		public EnemyActualController
+				myEnemyActualController;
 
 		[HideInInspector]
 		public GameObject
-				myEnemyImHoldingPrefab;
-	
-		[HideInInspector]
-		public GameObject
-				myEnemyImHoldingObject;
-
+				myEnemyActualObject;
 		
 		private Vector2
 				myEnemyPositionOffsetToAttack;
@@ -25,112 +26,72 @@ public class EnemyHolderController : MonoBehaviour
 		[HideInInspector]
 		public int
 				myEnemyLevel;
-
-		public bool shouldDoHealthBar = false;
-
+	
 		private CircleCollider2D myCollider;
 
 		private Transform myTransform;
 
+		
+		public int
+				mySlotID;
+
+		private GameObject myTarget;
+		Transform myTargetTransform;
+		TouchOrMouseStuff myTargetTouchOrMouseStuff;
+
 
 		void Awake ()
 		{
-				//GameObject theData = GameObject.FindWithTag ("MainData");
-		
-				//MainDataController theDataController = theData.GetComponent<MainDataController> ();
-		
-		
 				
+				myCollider = gameObject.GetComponent<CircleCollider2D> ();
+				myEnemyActualPrefab.GetComponent<EnemyActualController> ().myEnemyHolderController = this;
+		
+				myEnemyActualObject = MainMakeStuffController.instantiatePrefabInObject (myEnemyActualPrefab, gameObject);
+				myEnemyActualObject.GetComponent<EnemyActualController> ().myEnemyHolderController = this;
+		
+				myTransform = transform;
+		
+				myBaseScale = myTransform.localScale;
+				myBasePosition = myTransform.localPosition;
+		
 
+		
+		
 		}
 
 		// Use this for initialization
 		void Start ()
 		{
-				//Debug.Log ("start enemy holder");
-				myCollider = gameObject.GetComponent<CircleCollider2D> ();
+				
+				
+				
 
-				EnemyArtController anEnemyArtController = myEnemyImHoldingObject.GetComponent<EnemyArtController> ();
-				myCollider.center = new Vector2 (anEnemyArtController.myOverallXOffsetFromShadow, anEnemyArtController.myOverallYOffsetFromShadow + anEnemyArtController.myHitBoxYOffsetFromCenter);
-				myCollider.radius = myCollider.radius * anEnemyArtController.myHitBoxRadiusScaleMultiplier;
 
-				myTransform = transform;
+		}
 
+		public void setupTarget (GameObject theTarget)
+		{
+				myTarget = theTarget;
+				myTargetTransform = theTarget.transform;
+				myTargetTouchOrMouseStuff = theTarget.GetComponent<TouchOrMouseStuff> ();
+		}
+
+		public void enemyActualCallsThisAfterItFinishesBeingSetup ()
+		{
+				myEnemyActualController = myEnemyActualObject.GetComponent<EnemyActualController> ();
+		
+				EnemyArtController myEnemyArtController = myEnemyActualController.myEnemyArtController;
+				myCollider.center = new Vector2 (myEnemyArtController.myOverallXOffsetFromShadow, myEnemyArtController.myOverallYOffsetFromShadow + myEnemyArtController.myHitBoxYOffsetFromCenter);
+				myCollider.radius = myCollider.radius * myEnemyArtController.myHitBoxRadiusScaleMultiplier;
+		
+		
 				myEnemyPositionOffsetToAttack = myCollider.center;
 
-				myBaseScale = myTransform.localScale;
-				myBasePosition = myTransform.localPosition;
-
-
-
 		}
-
-		public GameObject setupMyEnemy (GameObject theEnemyPrefab)
-		{
-				//Debug.Log ("setup my enemy");
-				myEnemyImHoldingPrefab = theEnemyPrefab;
-				myEnemyImHoldingObject = MainMakeStuffController.instantiatePrefabInObject (myEnemyImHoldingPrefab, gameObject);
-
-				EnemyArtController anEnemyArtController = myEnemyImHoldingObject.GetComponent<EnemyArtController> ();
-				;
-
-				Transform myEnemyTransform = myEnemyImHoldingObject.transform;
-		
-				
-
-				float adjustX = anEnemyArtController.myOverallXOffsetFromShadow;
-				float adjustY = anEnemyArtController.myOverallYOffsetFromShadow;
-
-				myEnemyTransform.localPosition = new Vector3 (adjustX, adjustY, 0);
-
-				Transform myHead = myEnemyTransform.FindChild ("myHead");
-				myHead.localPosition = new Vector3 (myHead.localPosition.x + anEnemyArtController.myHeadXOffsetVal, myHead.localPosition.y + anEnemyArtController.myHeadYOffsetVal, 0);
-
-				Transform myBody;
-				Transform myLeft;
-				Transform myRight;
-				Transform myFeet;
-
-				if (anEnemyArtController.hasBody) {
-						myBody = myEnemyTransform.FindChild ("myBody");
-						myBody.localPosition = new Vector3 (myBody.localPosition.x + anEnemyArtController.myBodyXOffsetVal, myBody.localPosition.y + anEnemyArtController.myBodyYOffsetVal, 0);
-				}
-
-				if (anEnemyArtController.hasLeft) {
-						myLeft = myEnemyTransform.FindChild ("myLeft");
-						myLeft.localPosition = new Vector3 (myLeft.localPosition.x + anEnemyArtController.myLeftPartXOffsetVal, myLeft.localPosition.y + anEnemyArtController.myLeftPartYOffsetVal, 0);
-				}
-
-				if (anEnemyArtController.hasRight) {
-						myRight = myEnemyTransform.FindChild ("myRight");
-						myRight.localPosition = new Vector3 (myRight.localPosition.x + anEnemyArtController.myRightPartXOffsetVal, myRight.localPosition.y + anEnemyArtController.myRightPartYOffsetVal, 0);
-				}
-
-				if (anEnemyArtController.hasFeet) {
-						myFeet = myEnemyTransform.FindChild ("myFeet");
-						myFeet.localPosition = new Vector3 (myFeet.localPosition.x + anEnemyArtController.myFeetXOffsetVal, myFeet.localPosition.y + anEnemyArtController.myFeetYOffsetVal, 0);
-				}
-
-				Transform myShadow = myEnemyTransform.FindChild ("myShadow");
-				myShadow.localPosition = new Vector3 (-adjustX + anEnemyArtController.myShadowXOffsetVal, -adjustY + anEnemyArtController.myShadowYOffsetVal, 0);
-				myShadow.localScale = new Vector3 (anEnemyArtController.myShadowScaleX, anEnemyArtController.myShadowScaleY, 1);
-
-				
-				
-				
-
-
-				return myEnemyImHoldingObject;
-				
-
-		}
-
-		public Vector2 returnAttackPosition ()
-		{
-				Vector2 scaleChangedOffset = new Vector2 (myEnemyPositionOffsetToAttack.x * myTransform.localScale.x, myEnemyPositionOffsetToAttack.y * myTransform.localScale.y);
-
-				return (Vector2)myTransform.localPosition + scaleChangedOffset;
-		}
+	
+	
+	
+	
 
 		public Vector2 returnStartingPosition ()
 		{
@@ -142,10 +103,78 @@ public class EnemyHolderController : MonoBehaviour
 				return myBaseScale;
 		}
 
+		public bool tellEnemyToStartTurn ()
+		{
+				//ask main AI what I should do
+
+				//then tell artcontroller to do it
+
+				//art controller will tell this holder if it needs to move the whole enemy holder to a target
+				//Debug.Log (MainTurnsController.singleton.characterHolderControllerArray.Length);
+				GameObject theTarget = MainTurnsController.singleton.characterHolderControllerArray [Random.Range (1, 3)].gameObject;
+
+				setupTarget (theTarget);
+				myEnemyActualController.tellActualToBeginAttackAnimation ();
+
+				return true;
+		}
+
+
+		public void moveHolderToTargetAsPartOfAttackEnemy (float totalAnimationTime)
+		{
+		
+		
+			
+		
+				CharacterHolderController myTargetHolder = myTarget.GetComponent<CharacterHolderController> ();
+		
+		
+				
+				Vector2 myPos = (Vector2)myTransform.localPosition;
+				
+				Vector2 targetPos = myTargetHolder.returnAttackPosition ();
+
+		
+				myBasePosition = myTransform.localPosition;
+				myBaseScale = myTransform.localScale;
+		
+		
+				MainMoveStuffController.singleton.doMoveMePositionAndScale (gameObject, myPos, targetPos, totalAnimationTime, myTargetTransform.localScale);
+		
+				;
+		
+		
+		
+		}
+	
+		public void doMoveBackToHome (float time)
+		{
+		
+				MainMoveStuffController.singleton.doMoveMePositionAndScale (gameObject, myTransform.localPosition, myBasePosition, time, myBaseScale);
+		
+		}
+	
+		public void attackIsComplete ()
+		{
+				MainTurnsController.singleton.tellMainTurnsThatEnemyHasFinishedMainTurn (mySlotID);
+		}
+
 	
 		// Update is called once per frame
 		void Update ()
 		{
 	
 		}
+		
+
+		public Vector2 returnAttackPosition ()
+		{
+				
+				Vector2 scaleChangedOffset = new Vector2 (myEnemyPositionOffsetToAttack.x * myTransform.localScale.x, myEnemyPositionOffsetToAttack.y * myTransform.localScale.y);
+		
+				return (Vector2)myTransform.localPosition + scaleChangedOffset;
+
+				
+		}
 }
+

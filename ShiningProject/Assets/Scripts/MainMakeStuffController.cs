@@ -4,7 +4,22 @@ using System.Collections;
 public class MainMakeStuffController : MonoBehaviour
 {
 
-		
+
+		public static MainMakeStuffController singleton;
+	
+	
+		void Awake ()
+		{
+				if (singleton == null) {
+						DontDestroyOnLoad (gameObject);
+						singleton = this;
+				} else if (singleton != this) {
+						Destroy (gameObject);
+				}
+		}
+
+		public CharacterPrefabHolderController theCharacterPrefabHolderController;
+		public EnemyPrefabHolderController theEnemyPrefabHolderController;
 		
 
 		// Use this for initialization
@@ -19,6 +34,28 @@ public class MainMakeStuffController : MonoBehaviour
 		{
 	
 		}
+
+
+		public static GameObject returnEnemyPrefabOfType (EnemyPrefabHolderController.EnemyArtType theType)
+		{
+				return singleton.theEnemyPrefabHolderController.returnEnemyPrefabForType (theType);
+		}
+
+		public GameObject returnEnemyPrefabOfTypeAlso (EnemyPrefabHolderController.EnemyArtType theType)
+		{
+				return theEnemyPrefabHolderController.returnEnemyPrefabForType (theType);
+		}
+
+		public static GameObject returnCharacterPrefabOfType (CharacterPrefabHolderController.CharacterTypes theType)
+		{
+				return singleton.theCharacterPrefabHolderController.returnCharacterPrefabForType (theType);
+		}
+	
+		public GameObject returnCharacterPrefabOfTypeAlso (CharacterPrefabHolderController.CharacterTypes theType)
+		{
+				return theCharacterPrefabHolderController.returnCharacterPrefabForType (theType);
+		}
+
 
 
 

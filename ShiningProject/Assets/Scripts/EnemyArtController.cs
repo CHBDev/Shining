@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyArtController : MonoBehaviour
 {
+
 		//in order to line up the shadow at the "row height", and have a rough anchor point
 		//at the bottom of the image, we instead ask them to put everything in and then add an offset.
 		
@@ -29,11 +31,42 @@ public class EnemyArtController : MonoBehaviour
 		public float myHitBoxYOffsetFromCenter = 0;
 		public float myHitBoxRadiusScaleMultiplier = 1;
 
-	
+
+		[HideInInspector]
+		public EnemyActualController
+				myEnemyActualController;
+
+		[HideInInspector]
+		public string
+				myBaseSortingLayer;
+
+		SpriteRenderer[] mySpriteRenderers;
+
 		// Use this for initialization
 		void Start ()
 		{
-	
+				
+		}
+
+		void Awake ()
+		{
+				
+		}
+
+		public void changeSortingLayerTo (string theName, bool overrideToAttack, bool overrideToBase)
+		{
+				string theFinal;
+
+				if (overrideToBase == true) {
+						theFinal = myBaseSortingLayer;
+				} else if (overrideToAttack == true) {
+						theFinal = "EnemyAttacking";
+				} else {
+						theFinal = theName;
+				}
+				foreach (SpriteRenderer childRenderer in mySpriteRenderers) {
+						childRenderer.sortingLayerName = theFinal;
+				}
 		}
 
 
@@ -42,33 +75,55 @@ public class EnemyArtController : MonoBehaviour
 
 				Transform MyTransform = transform;
 
-				foreach (SpriteRenderer childRenderer in MyTransform.GetComponentsInChildren<SpriteRenderer>()) {
-						childRenderer.sortingLayerName = "Enemy" + enemyNumber;
+				Transform theShadow = MyTransform.FindChild ("myShadow");
+
+				myBaseSortingLayer = "Enemy" + enemyNumber;
+
+				mySpriteRenderers = MyTransform.GetComponentsInChildren<SpriteRenderer> ();
+				List<SpriteRenderer> tempList = new List<SpriteRenderer> ();
+
+
+				foreach (SpriteRenderer childRenderer in mySpriteRenderers) {
+						childRenderer.sortingLayerName = myBaseSortingLayer;
+						tempList.Add (childRenderer);
 				}
 
+				SpriteRenderer theShadowRenderer = theShadow.gameObject.GetComponent<SpriteRenderer> ();
+				tempList.Remove (theShadowRenderer);
+				mySpriteRenderers = tempList.ToArray ();
+
+				
 
 
 				switch (rowNumber) {
 				case(1):
 						
-						transform.FindChild ("myShadow").gameObject.GetComponent<SpriteRenderer> ().sortingLayerName = "EnemyRow1Shadow";
+						theShadowRenderer.sortingLayerName = "EnemyRow1Shadow";
 						
 						break;
 				case(2):
 						
-						transform.FindChild ("myShadow").gameObject.GetComponent<SpriteRenderer> ().sortingLayerName = "EnemyRow2Shadow";
+						theShadowRenderer.sortingLayerName = "EnemyRow2Shadow";
 						
 						break;
 				case(3):
 						
-						transform.FindChild ("myShadow").gameObject.GetComponent<SpriteRenderer> ().sortingLayerName = "EnemyRow3Shadow";
+						theShadowRenderer.sortingLayerName = "EnemyRow3Shadow";
 						
 						break;
 
 				}
 
+				myEnemyActualController.tellEnemyActualToTakeShadowOver (theShadow);
+
 
 		}
+
+
+
+
+
+
 
 	
 		// Update is called once per frame
@@ -76,4 +131,6 @@ public class EnemyArtController : MonoBehaviour
 		{
 	
 		}
+		
 }
+

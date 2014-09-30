@@ -46,14 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\GameContentsHolderController.cs" />
-     <Compile Include="Assets\LoadingBehindSplash.cs" />
-     <Compile Include="Assets\MainNavigationController.cs" />
-     <Compile Include="Assets\MainUtilController.cs" />
-     <Compile Include="Assets\PlayButtonTemp.cs" />
-     <Compile Include="Assets\PlayerDataController.cs" />
-     <Compile Include="Assets\PlayerStableController.cs" />
-     <Compile Include="Assets\RoomDataController.cs" />
+     <Compile Include="Assets\CharacterArtController.cs" />
+     <Compile Include="Assets\CharacterPrefabHolderController.cs" />
+     <Compile Include="Assets\EnemyActualController.cs" />
+     <Compile Include="Assets\EnemyPrefabHolderController.cs" />
+     <Compile Include="Assets\MainAIController.cs" />
+     <Compile Include="Assets\MainMoveStuffController.cs" />
      <Compile Include="Assets\Scripts\AchievementsController.cs" />
      <Compile Include="Assets\Scripts\AllSingletonsController.cs" />
      <Compile Include="Assets\Scripts\CharacterActualController.cs" />
@@ -63,33 +61,45 @@
      <Compile Include="Assets\Scripts\CharacterSelectorController.cs" />
      <Compile Include="Assets\Scripts\CharacterSlotController.cs" />
      <Compile Include="Assets\Scripts\ClickToGoToDungeonController.cs" />
-     <Compile Include="Assets\Scripts\DungeonActualController.cs" />
+     <Compile Include="Assets\Scripts\DungeonScripts\DungeonActualController.cs" />
+     <Compile Include="Assets\Scripts\DungeonScripts\DungeonChunkController.cs" />
+     <Compile Include="Assets\Scripts\DungeonScripts\DungeonCreatorController.cs" />
+     <Compile Include="Assets\Scripts\DungeonScripts\DungeonRoomArtAssembler.cs" />
+     <Compile Include="Assets\Scripts\DungeonScripts\DungeonRoomCreatorController.cs" />
+     <Compile Include="Assets\Scripts\DungeonScripts\DungeonRoomRawData.cs" />
+     <Compile Include="Assets\Scripts\DungeonScripts\MainDungeonData.cs" />
      <Compile Include="Assets\Scripts\EnemyArtController.cs" />
-     <Compile Include="Assets\Scripts\EnemyController.cs" />
      <Compile Include="Assets\Scripts\EnemyCoroutines.cs" />
      <Compile Include="Assets\Scripts\EnemyHolderController.cs" />
      <Compile Include="Assets\Scripts\EnemyHolderMouseInteraction.cs" />
      <Compile Include="Assets\Scripts\EnemyRowHolderController.cs" />
+     <Compile Include="Assets\Scripts\GameContentsHolderController.cs" />
      <Compile Include="Assets\Scripts\GameDataController.cs" />
+     <Compile Include="Assets\Scripts\LoadingBehindSplash.cs" />
      <Compile Include="Assets\Scripts\MainCameraController.cs" />
      <Compile Include="Assets\Scripts\MainDataController.cs" />
-     <Compile Include="Assets\Scripts\MainDungeonData.cs" />
      <Compile Include="Assets\Scripts\MainHubData.cs" />
      <Compile Include="Assets\Scripts\MainMakeStuffController.cs" />
      <Compile Include="Assets\Scripts\MainMenuController.cs" />
      <Compile Include="Assets\Scripts\MainMouseController.cs" />
+     <Compile Include="Assets\Scripts\MainNavigationController.cs" />
      <Compile Include="Assets\Scripts\MainPhaseController.cs" />
      <Compile Include="Assets\Scripts\MainStatsController.cs" />
      <Compile Include="Assets\Scripts\MainTurnsController.cs" />
      <Compile Include="Assets\Scripts\MainUIController.cs" />
+     <Compile Include="Assets\Scripts\MainUtilController.cs" />
      <Compile Include="Assets\Scripts\PersistedGameDataController.cs" />
+     <Compile Include="Assets\Scripts\PlayButtonTemp.cs" />
+     <Compile Include="Assets\Scripts\PlayerDataController.cs" />
+     <Compile Include="Assets\Scripts\PlayerStableController.cs" />
      <Compile Include="Assets\Scripts\RoomArtController.cs" />
+     <Compile Include="Assets\Scripts\RoomDataController.cs" />
      <Compile Include="Assets\Scripts\RoomHolderController.cs" />
      <Compile Include="Assets\Scripts\SettingsController.cs" />
+     <Compile Include="Assets\Scripts\SpawnMainCharacters.cs" />
      <Compile Include="Assets\Scripts\TouchOrMouseStuff.cs" />
      <Compile Include="Assets\Scripts\z_NotUsing\ScaleToWindowContraints.cs" />
      <Compile Include="Assets\Scripts\z_NotUsing\ScreenRelativePosition.cs" />
-     <Compile Include="Assets\SpawnMainCharacters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

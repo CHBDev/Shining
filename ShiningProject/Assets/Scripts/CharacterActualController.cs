@@ -11,13 +11,29 @@ public class CharacterActualController : MonoBehaviour
 		public CharacterHolderController
 				myCharacterHolderController;
 
+		[HideInInspector]
+		public CharacterArtController
+				myCharacterArtController;
+
+		[HideInInspector]
+		public GameObject
+				myCharacterArtObject;
+
+		[HideInInspector]
+		public GameObject
+				myCharacterArtPrefab;
+
+		[HideInInspector]
+		public Animator
+				myCharacterActualAnimator;
+
 		
 
 		// Use this for initialization
 		void Start ()
 		{
 
-
+				myCharacterActualAnimator = gameObject.GetComponent<Animator> ();
 
 		}
 
@@ -31,59 +47,42 @@ public class CharacterActualController : MonoBehaviour
 				myCharacterHolderController.doMoveBackToHome (time);
 		}
 
-		public void tellActualAttackAnimationIsComplete ()
+		public void tellActualAttackAnimationReachedTarget ()
 		{
-				myCharacterHolderController.myCharacterActualAnimator.SetTrigger ("moveBackHome");
+				myCharacterActualAnimator.SetTrigger ("attackReachedEnemy");
+		}
+
+		public void tellActualToBeginAttackAnimation ()
+		{
+				myCharacterActualAnimator.SetTrigger ("attackMoveToEnemy");
+		
+
+		}
+
+		public void tellActualAnimationBackHomeFinished ()
+		{
+				myCharacterActualAnimator.SetTrigger ("attackComplete");
+				myCharacterHolderController.attackIsComplete ();
+		}
+
+		public void tellActualAttackReachedEnemyAnimationComplete ()
+		{
+				myCharacterActualAnimator.SetTrigger ("attackMoveBackHome");
 		}
 
 
-		public void changeMyType (CharacterDataSet.CharacterTypes_Enum theType)
+		public void setMyType (CharacterPrefabHolderController.CharacterTypes  theType)
 		{
 
-				
-
-
-				foreach (Transform child in transform) {
-			
-						
-						child.gameObject.SetActive (false);
-						//SpriteRenderer aRenderer = child.GetComponent<SpriteRenderer> ();
-						//aRenderer.enabled = false;
-			
+				if (myCharacterArtObject != null) {
+						Destroy (myCharacterArtObject);
 				}
 				
-				switch (theType) {
-				case(CharacterDataSet.CharacterTypes_Enum.TIRE):
-
-						transform.FindChild ("tire1").gameObject.SetActive (true);
+				myCharacterArtPrefab = MainMakeStuffController.returnCharacterPrefabOfType (theType);
+				myCharacterArtObject = MainMakeStuffController.instantiatePrefabInObject (myCharacterArtPrefab, gameObject);
+				myCharacterArtController = myCharacterArtObject.GetComponent<CharacterArtController> ();
 						
-						//activeRenderer = activeChild.GetComponent<SpriteRenderer> ();
-						//activeRenderer.enabled = true;
 			
-			
-						break;
-			
-				case(CharacterDataSet.CharacterTypes_Enum.CONE):
-						
-						transform.FindChild ("cone1").gameObject.SetActive (true);
-						
-						//activeRenderer = activeChild.GetComponent<SpriteRenderer> ();
-						//activeRenderer.enabled = true;
-			
-			
-						break;
-			
-				case(CharacterDataSet.CharacterTypes_Enum.BRICK):
-			
-						transform.FindChild ("brick1").gameObject.SetActive (true);
-						
-						//activeRenderer = activeChild.GetComponent<SpriteRenderer> ();
-						//activeRenderer.enabled = true;
-			
-			
-						break;
-			
-				}
 				
 		}
 	
