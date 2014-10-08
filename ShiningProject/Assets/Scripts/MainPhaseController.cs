@@ -10,9 +10,10 @@ public class MainPhaseController : MonoBehaviour
 		void Awake ()
 		{
 				if (singleton == null) {
-						DontDestroyOnLoad (gameObject);
+						
 						singleton = this;
 				} else if (singleton != this) {
+						gameObject.SetActive (false);
 						Destroy (gameObject);
 				}
 		}

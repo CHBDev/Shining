@@ -69,9 +69,9 @@ public class PlayButtonTemp : MonoBehaviour
 						int int2 = Random.Range (1, 4);
 						int int3 = Random.Range (1, 4);
 
-						CharacterPrefabHolderController.CharacterTypes enum1 = (CharacterPrefabHolderController.CharacterTypes)int1;
-						CharacterPrefabHolderController.CharacterTypes enum2 = (CharacterPrefabHolderController.CharacterTypes)int2;
-						CharacterPrefabHolderController.CharacterTypes enum3 = (CharacterPrefabHolderController.CharacterTypes)int3;
+						CharacterPrefabBucketController.CharacterTypes enum1 = (CharacterPrefabBucketController.CharacterTypes)int1;
+						CharacterPrefabBucketController.CharacterTypes enum2 = (CharacterPrefabBucketController.CharacterTypes)int2;
+						CharacterPrefabBucketController.CharacterTypes enum3 = (CharacterPrefabBucketController.CharacterTypes)int3;
 
 						Debug.Log ("int 1: " + int1 + ", enum1: " + enum1);
 						Debug.Log ("int 2: " + int2 + ", enum2: " + enum2);

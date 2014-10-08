@@ -94,7 +94,7 @@ public class CharacterSelectorController : MonoBehaviour
 
 				//myReticleCollider = (CircleCollider2D)myReticleUpperPiece.collider2D; 
 				
-	
+				setHidden (true);
 		}
 	
 		// Update is called once per frame

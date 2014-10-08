@@ -39,7 +39,7 @@ public class CharacterActualController : MonoBehaviour
 
 		public void doAttackMovementToTargetOnHolder (float time)
 		{
-				myCharacterHolderController.moveHolderToTargetAsPartOfAttackEnemy (time);
+				myCharacterHolderController.moveHolderToTargetAsPartOfAttackEnemy (time, true);
 		}
 
 		public void doReturnMovementBackToHome (float time)
@@ -49,6 +49,8 @@ public class CharacterActualController : MonoBehaviour
 
 		public void tellActualAttackAnimationReachedTarget ()
 		{
+				//hack, because the animation should really decide when to do the actual popups, etc, bur for now, just got tehre is fine
+				myCharacterHolderController.triggerActualStatsAndStatusUpdatesForCurrentAbility ();
 				myCharacterActualAnimator.SetTrigger ("attackReachedEnemy");
 		}
 
@@ -71,7 +73,7 @@ public class CharacterActualController : MonoBehaviour
 		}
 
 
-		public void setMyType (CharacterPrefabHolderController.CharacterTypes  theType)
+		public void setMyType (CharacterPrefabBucketController.CharacterTypes  theType)
 		{
 
 				if (myCharacterArtObject != null) {

@@ -15,10 +15,7 @@ public class PersistedGameDataController : MonoBehaviour
 		[HideInInspector]
 		public AchievementsController
 				theAchievementsController;
-		[HideInInspector]
-		public GameDataController
-				theGameDataController;
-
+		
 		
 		private string myPlayerDataFileName = "/ss_dat777888.dat";
 		private string myPlayerDataFileBackupName = "ss_dat777888.bak" ;
@@ -43,8 +40,7 @@ public class PersistedGameDataController : MonoBehaviour
 				thePlayerDataController = GetComponent<PlayerDataController> ();
 				theSettingsController = GetComponent<SettingsController> ();
 				theAchievementsController = GetComponent<AchievementsController> ();
-				theGameDataController = GetComponent<GameDataController> ();
-
+				
 		}
 
 		// Use this for initialization
@@ -105,10 +101,7 @@ public class PersistedGameDataController : MonoBehaviour
 
 		}
 
-		public void SaveGameData ()
-		{
 		
-		}
 
 		public void LoadPlayerData ()
 		{
@@ -135,10 +128,7 @@ public class PersistedGameDataController : MonoBehaviour
 		
 		}
 
-		public void LoadGameData ()
-		{
 		
-		}
 
 		public void LoadAchievements ()
 		{
@@ -168,13 +158,15 @@ public class PersistedGameDataController : MonoBehaviour
 
 		}
 
-		public void LoadAll ()
+		public bool LoadAll ()
 		{
 
 				this.LoadPlayerData ();
 				this.LoadSettings ();
-				this.LoadGameData ();
+				
 				this.LoadAchievements ();
+
+				return true;
 			
 
 		}

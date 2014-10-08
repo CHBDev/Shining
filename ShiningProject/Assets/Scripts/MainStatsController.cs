@@ -4,7 +4,31 @@ using System.Collections;
 public class MainStatsController : MonoBehaviour
 {
 
-
+		public enum AbilitiesEnum
+		{
+				NullEnumValue,
+		
+				AttackRangedSingleBig,
+				AttackRangedSingleSmall,
+				AttackRangedAOEBig,
+				AttackRangedAOESmall,
+		
+				AttackMeleeSingleBig,
+				AttackMeleeSingleSmall,
+				AttackMeleeAOEBig,
+				AttackMeleeAOESmall,
+		
+				CureSingle,
+				CureAOE,
+				HealSingleBig,
+				HealSingleSmall,
+				HealAOEBig,
+				HealAOESmall,
+				BuffSingle,
+				BuffAOE,
+				DoNothing,
+		
+		}
 
 		public static MainStatsController singleton;
 	
@@ -12,9 +36,10 @@ public class MainStatsController : MonoBehaviour
 		void Awake ()
 		{
 				if (singleton == null) {
-						DontDestroyOnLoad (gameObject);
+						
 						singleton = this;
 				} else if (singleton != this) {
+						gameObject.SetActive (false);
 						Destroy (gameObject);
 				}
 		}
@@ -31,6 +56,15 @@ public class MainStatsController : MonoBehaviour
 		{
 	
 		}
+
+		public void characterDidThisAbilityToEnemy (CharacterHolderController theChar, AbilitiesEnum theAbil, EnemyHolderController theEnemy)
+		{
+				
+				//hack to kill enemy
+				MainTurnsController.singleton.setEnemyIsDead (theEnemy.mySlotID, true);
+				theEnemy.beKilledByCharacterAttack ();
+		}
+
 
 		public void getLevelUpStats (CharacterHolderController theCharacter)
 		{

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MainMakeStuffController : MonoBehaviour
+public class MainMakeStuffController : CHBController
 {
 
 
@@ -11,21 +11,39 @@ public class MainMakeStuffController : MonoBehaviour
 		void Awake ()
 		{
 				if (singleton == null) {
-						DontDestroyOnLoad (gameObject);
+						
 						singleton = this;
 				} else if (singleton != this) {
+						gameObject.SetActive (false);
 						Destroy (gameObject);
+						return;
 				}
+
+				
 		}
 
-		public CharacterPrefabHolderController theCharacterPrefabHolderController;
-		public EnemyPrefabHolderController theEnemyPrefabHolderController;
+		[HideInInspector]
+		public CharacterPrefabBucketController
+				theCharacterPrefabBucketController;
+		[HideInInspector]
+		public EnemyPrefabBucketController
+				theEnemyPrefabBucketController;
+
+		public GameObject theEnemyHolderPrefab, theCharacterHolderPrefab, theRoomHolderPrefab;
+		public GameObject theCharacterPrefabBucketPrefab, theEnemyPrefabBucketPrefab;
 		
+		
+
 
 		// Use this for initialization
 		void Start ()
 		{
-				
+				theCharacterPrefabBucketController = theCharacterPrefabBucketPrefab.GetComponent<CharacterPrefabBucketController> ();
+				theEnemyPrefabBucketController = theEnemyPrefabBucketPrefab.GetComponent<EnemyPrefabBucketController> ();
+
+				Debug.Log ("Character stuff");
+				Debug.Log (theCharacterPrefabBucketPrefab);
+				Debug.Log (theCharacterPrefabBucketController);
 		}
 
 
@@ -35,28 +53,24 @@ public class MainMakeStuffController : MonoBehaviour
 	
 		}
 
-
-		public static GameObject returnEnemyPrefabOfType (EnemyPrefabHolderController.EnemyArtType theType)
+		public Vector2 returnCharacterHolderControllerDefaultScale ()
 		{
-				return singleton.theEnemyPrefabHolderController.returnEnemyPrefabForType (theType);
-		}
-
-		public GameObject returnEnemyPrefabOfTypeAlso (EnemyPrefabHolderController.EnemyArtType theType)
-		{
-				return theEnemyPrefabHolderController.returnEnemyPrefabForType (theType);
-		}
-
-		public static GameObject returnCharacterPrefabOfType (CharacterPrefabHolderController.CharacterTypes theType)
-		{
-				return singleton.theCharacterPrefabHolderController.returnCharacterPrefabForType (theType);
-		}
-	
-		public GameObject returnCharacterPrefabOfTypeAlso (CharacterPrefabHolderController.CharacterTypes theType)
-		{
-				return theCharacterPrefabHolderController.returnCharacterPrefabForType (theType);
+				float allEm = theCharacterPrefabBucketController.baseCharacterHolderScale;
+				return new Vector3 (allEm, allEm, 1);
 		}
 
 
+		public static GameObject returnEnemyPrefabOfType (EnemyPrefabBucketController.EnemyArtType theType)
+		{
+				return singleton.theEnemyPrefabBucketController.returnEnemyPrefabForType (theType);
+		}
+
+		
+
+		public static GameObject returnCharacterPrefabOfType (CharacterPrefabBucketController.CharacterTypes theType)
+		{
+				return singleton.theCharacterPrefabBucketController.returnCharacterPrefabForType (theType);
+		}
 
 
 		public static GameObject instantiatePrefabInObject (GameObject aChild, GameObject aParent, Vector2 aPos)
@@ -112,8 +126,20 @@ public class MainMakeStuffController : MonoBehaviour
 				return newGameObjectInObject (aParent, new Vector2 (0, 0));
 		}
 
-		
+		public static GameObject newHiddenDisabledGameObjectInObject (GameObject aParent)
+		{
+				GameObject theObject = newGameObjectInObject (aParent, new Vector2 (0, 0));
+				theObject.hideFlags = HideFlags.HideInHierarchy;
+				theObject.SetActive (false);
+				return theObject;
+		}
 
+
+		public static void enableGameObject (GameObject theObject)
+		{
+				theObject.SetActive (true);
+				theObject.hideFlags = HideFlags.None;
+		}
 
 
 		public static GameObject instantiatePrefabInObject (GameObject aChild, GameObject aParent)
@@ -122,4 +148,6 @@ public class MainMakeStuffController : MonoBehaviour
 				return instantiatePrefabInObject (aChild, aParent, new Vector2 (0, 0));
 
 		}
+
+
 }

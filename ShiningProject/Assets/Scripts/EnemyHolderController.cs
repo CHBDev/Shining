@@ -18,7 +18,7 @@ public class EnemyHolderController : MonoBehaviour
 				myEnemyPositionOffsetToAttack;
 
 		private Vector2 myBasePosition;
-		private Vector2 myBaseScale;
+		private Vector3 myBaseScale;
 		
 
 		
@@ -35,9 +35,13 @@ public class EnemyHolderController : MonoBehaviour
 		public int
 				mySlotID;
 
-		private GameObject myTarget;
-		Transform myTargetTransform;
-		TouchOrMouseStuff myTargetTouchOrMouseStuff;
+		public GameObject myTarget;
+		public Transform myTargetTransform;
+		public TouchOrMouseStuff myTargetTouchOrMouseStuff;
+
+		public MainStatsController.AbilitiesEnum myNextAbilityToDo;
+
+		public bool myNextTargetIsACharacter;
 
 
 		void Awake ()
@@ -69,13 +73,14 @@ public class EnemyHolderController : MonoBehaviour
 
 		}
 
-		public void setupTarget (GameObject theTarget)
+		public void setPermanantBaseScale (Vector3 theScale)
 		{
-				myTarget = theTarget;
-				myTargetTransform = theTarget.transform;
-				myTargetTouchOrMouseStuff = theTarget.GetComponent<TouchOrMouseStuff> ();
+				
+				myTransform.localScale = theScale;
+				myBaseScale = theScale;
 		}
 
+		
 		public void enemyActualCallsThisAfterItFinishesBeingSetup ()
 		{
 				myEnemyActualController = myEnemyActualObject.GetComponent<EnemyActualController> ();
@@ -98,7 +103,7 @@ public class EnemyHolderController : MonoBehaviour
 				return myBasePosition;
 		}
 
-		public Vector2 returnStartingScale ()
+		public Vector3 returnStartingScale ()
 		{
 				return myBaseScale;
 		}
@@ -111,37 +116,68 @@ public class EnemyHolderController : MonoBehaviour
 
 				//art controller will tell this holder if it needs to move the whole enemy holder to a target
 				//Debug.Log (MainTurnsController.singleton.characterHolderControllerArray.Length);
-				GameObject theTarget = MainTurnsController.singleton.characterHolderControllerArray [Random.Range (1, 3)].gameObject;
+				
+				
+				MainAIController.singleton.setupFieldsOnThisEnemyForNextAction (this);
 
-				setupTarget (theTarget);
 				myEnemyActualController.tellActualToBeginAttackAnimation ();
+
+				//store something to do, blarg, i don't know
 
 				return true;
 		}
 
 
-		public void moveHolderToTargetAsPartOfAttackEnemy (float totalAnimationTime)
+		public void moveHolderToTargetAsPartOfAttackEnemy (float totalAnimationTime, bool matchTargetScale)
 		{
 		
 		
+				if (myNextTargetIsACharacter == true) {
+						CharacterHolderController myTargetHolder = myTarget.GetComponent<CharacterHolderController> ();
 			
-		
-				CharacterHolderController myTargetHolder = myTarget.GetComponent<CharacterHolderController> ();
-		
-		
-				
-				Vector2 myPos = (Vector2)myTransform.localPosition;
-				
-				Vector2 targetPos = myTargetHolder.returnAttackPosition ();
+			
+			
+						Vector2 myPos = (Vector2)myTransform.localPosition;
+			
+						Vector2 targetPos = myTargetHolder.returnAttackPosition ();
+			
+						Vector2 myTargetScale = myTargetHolder.returnBaseScale ();
+			
+						myBasePosition = myTransform.localPosition;
+			
+						if (matchTargetScale == false) {
+								myBaseScale = myTransform.localScale;
+						}
+			
+			
+			
+						MainMoveStuffController.singleton.doMoveMePositionAndScale (gameObject, myPos, targetPos, totalAnimationTime, myTargetScale);
 
+				} else {
+						EnemyHolderController myTargetHolder = myTarget.GetComponent<EnemyHolderController> ();
+			
+			
+			
+						Vector2 myPos = (Vector2)myTransform.localPosition;
+			
+						Vector2 targetPos = myTargetHolder.returnAttackPosition ();
+			
+						Vector2 myTargetScale = myTargetHolder.returnStartingScale ();
+			
+						myBasePosition = myTransform.localPosition;
+			
+						if (matchTargetScale == false) {
+								myBaseScale = myTransform.localScale;
+						}
+			
+			
+			
+						MainMoveStuffController.singleton.doMoveMePositionAndScale (gameObject, myPos, targetPos, totalAnimationTime, myTargetScale);
+
+				}
 		
-				myBasePosition = myTransform.localPosition;
-				myBaseScale = myTransform.localScale;
-		
-		
-				MainMoveStuffController.singleton.doMoveMePositionAndScale (gameObject, myPos, targetPos, totalAnimationTime, myTargetTransform.localScale);
-		
-				;
+			
+				
 		
 		
 		
@@ -157,6 +193,14 @@ public class EnemyHolderController : MonoBehaviour
 		public void attackIsComplete ()
 		{
 				MainTurnsController.singleton.tellMainTurnsThatEnemyHasFinishedMainTurn (mySlotID);
+		}
+
+		public void beKilledByCharacterAttack ()
+		{
+				//hack
+				
+
+				myTransform.localScale = new Vector3 (myTransform.localScale.x * .1f, myTransform.localScale.y * .1f, 1);
 		}
 
 	

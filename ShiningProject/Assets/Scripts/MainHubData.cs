@@ -19,9 +19,10 @@ public class MainHubData : MonoBehaviour
 		void Awake ()
 		{
 				if (singleton == null) {
-						DontDestroyOnLoad (gameObject);
+						
 						singleton = this;
 				} else if (singleton != this) {
+						gameObject.SetActive (false);
 						Destroy (gameObject);
 				}
 		}
@@ -37,16 +38,12 @@ public class MainHubData : MonoBehaviour
 		{
 	
 		}
+	
 
-		public void setupTheDungeon ()
+		public void hackEnterDungeonFromHackMenu ()
 		{
-
+				MainNavigationController.singleton.HubCallsDungeon ();
 		}
 
-		public  GameObject returnRoomForNewDungeon ()
-		{
-				return MainDungeonData.singleton.getFirstRoomInDungeon (currentHubNumber);
 
-				
-		}
 }

@@ -33,7 +33,7 @@ public class PlayerStableController: MonoBehaviour
 	
 		}
 
-		public void addCharacterToStable (CharacterPrefabHolderController.CharacterTypes theType, int theXP)
+		public void addCharacterToStable (CharacterPrefabBucketController.CharacterTypes theType, int theXP)
 		{
 				if (listOfCharacters == null) {
 						Debug.Log ("ERROR: 841123990");

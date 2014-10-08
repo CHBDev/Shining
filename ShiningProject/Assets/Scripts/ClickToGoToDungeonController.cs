@@ -19,7 +19,7 @@ public class ClickToGoToDungeonController : MonoBehaviour
 		void OnGUI ()
 		{
 				if (GUI.Button (new Rect (0, 0, 200, 50), "TEMP DUNGEON")) {
-						MainNavigationController.singleton.enterNewDungeon ();
+						MainHubData.singleton.hackEnterDungeonFromHackMenu ();
 				}
 		}
 }

@@ -11,17 +11,16 @@ public class MainDataController : MonoBehaviour
 		void Awake ()
 		{
 				if (singleton == null) {
-						DontDestroyOnLoad (gameObject);
+						
 						singleton = this;
 
 				} else if (singleton != this) {
+						gameObject.SetActive (false);
 						Destroy (gameObject);
 				}
 		}
 		
-		public GameObject theEnemyHolderPrefab;
-		public GameObject theCharacterHolderPrefab;
-
+		
 
 		// Use this for initialization
 		void Start ()

@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_5_3;UNITY_4_5;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_IPHONE_API;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_5_3;UNITY_4_5;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -46,42 +46,48 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CharacterArtController.cs" />
-     <Compile Include="Assets\CharacterPrefabHolderController.cs" />
-     <Compile Include="Assets\EnemyActualController.cs" />
-     <Compile Include="Assets\EnemyPrefabHolderController.cs" />
-     <Compile Include="Assets\MainAIController.cs" />
-     <Compile Include="Assets\MainMoveStuffController.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DungeonActualController.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DungeonHolderController.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DungeonMakerController.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DungeonMakerEditor.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DungeonPrefabBucketController.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DungeonRoomActualController.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DungeonRoomArtController.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DungeonRoomHolderController.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\MainDungeonData.cs" />
      <Compile Include="Assets\Scripts\AchievementsController.cs" />
      <Compile Include="Assets\Scripts\AllSingletonsController.cs" />
+     <Compile Include="Assets\Scripts\CHBParents\ActualController.cs" />
+     <Compile Include="Assets\Scripts\CHBParents\ArtController.cs" />
+     <Compile Include="Assets\Scripts\CHBParents\BucketController.cs" />
+     <Compile Include="Assets\Scripts\CHBParents\CHBController.cs" />
+     <Compile Include="Assets\Scripts\CHBParents\CHBScript.cs" />
+     <Compile Include="Assets\Scripts\CHBParents\HolderController.cs" />
      <Compile Include="Assets\Scripts\CharacterActualController.cs" />
+     <Compile Include="Assets\Scripts\CharacterArtController.cs" />
      <Compile Include="Assets\Scripts\CharacterDataSet.cs" />
      <Compile Include="Assets\Scripts\CharacterHolderController.cs" />
      <Compile Include="Assets\Scripts\CharacterHolderMouseInteraction.cs" />
+     <Compile Include="Assets\Scripts\CharacterPrefabBucketController.cs" />
      <Compile Include="Assets\Scripts\CharacterSelectorController.cs" />
      <Compile Include="Assets\Scripts\CharacterSlotController.cs" />
      <Compile Include="Assets\Scripts\ClickToGoToDungeonController.cs" />
-     <Compile Include="Assets\Scripts\DungeonScripts\DungeonActualController.cs" />
-     <Compile Include="Assets\Scripts\DungeonScripts\DungeonChunkController.cs" />
-     <Compile Include="Assets\Scripts\DungeonScripts\DungeonCreatorController.cs" />
-     <Compile Include="Assets\Scripts\DungeonScripts\DungeonRoomArtAssembler.cs" />
-     <Compile Include="Assets\Scripts\DungeonScripts\DungeonRoomCreatorController.cs" />
-     <Compile Include="Assets\Scripts\DungeonScripts\DungeonRoomRawData.cs" />
-     <Compile Include="Assets\Scripts\DungeonScripts\MainDungeonData.cs" />
+     <Compile Include="Assets\Scripts\EnemyActualController.cs" />
      <Compile Include="Assets\Scripts\EnemyArtController.cs" />
      <Compile Include="Assets\Scripts\EnemyCoroutines.cs" />
      <Compile Include="Assets\Scripts\EnemyHolderController.cs" />
      <Compile Include="Assets\Scripts\EnemyHolderMouseInteraction.cs" />
-     <Compile Include="Assets\Scripts\EnemyRowHolderController.cs" />
-     <Compile Include="Assets\Scripts\GameContentsHolderController.cs" />
-     <Compile Include="Assets\Scripts\GameDataController.cs" />
+     <Compile Include="Assets\Scripts\EnemyPrefabBucketController.cs" />
      <Compile Include="Assets\Scripts\LoadingBehindSplash.cs" />
+     <Compile Include="Assets\Scripts\MainAIController.cs" />
      <Compile Include="Assets\Scripts\MainCameraController.cs" />
      <Compile Include="Assets\Scripts\MainDataController.cs" />
+     <Compile Include="Assets\Scripts\MainDebugController.cs" />
      <Compile Include="Assets\Scripts\MainHubData.cs" />
      <Compile Include="Assets\Scripts\MainMakeStuffController.cs" />
      <Compile Include="Assets\Scripts\MainMenuController.cs" />
      <Compile Include="Assets\Scripts\MainMouseController.cs" />
+     <Compile Include="Assets\Scripts\MainMoveStuffController.cs" />
      <Compile Include="Assets\Scripts\MainNavigationController.cs" />
      <Compile Include="Assets\Scripts\MainPhaseController.cs" />
      <Compile Include="Assets\Scripts\MainStatsController.cs" />
@@ -92,11 +98,8 @@
      <Compile Include="Assets\Scripts\PlayButtonTemp.cs" />
      <Compile Include="Assets\Scripts\PlayerDataController.cs" />
      <Compile Include="Assets\Scripts\PlayerStableController.cs" />
-     <Compile Include="Assets\Scripts\RoomArtController.cs" />
-     <Compile Include="Assets\Scripts\RoomDataController.cs" />
-     <Compile Include="Assets\Scripts\RoomHolderController.cs" />
      <Compile Include="Assets\Scripts\SettingsController.cs" />
-     <Compile Include="Assets\Scripts\SpawnMainCharacters.cs" />
+     <Compile Include="Assets\Scripts\SpawnCharactersInDungeon.cs" />
      <Compile Include="Assets\Scripts\TouchOrMouseStuff.cs" />
      <Compile Include="Assets\Scripts\z_NotUsing\ScaleToWindowContraints.cs" />
      <Compile Include="Assets\Scripts\z_NotUsing\ScreenRelativePosition.cs" />

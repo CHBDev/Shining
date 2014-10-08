@@ -31,7 +31,7 @@ public class CharacterHolderController : MonoBehaviour
 				myLocation;
 
 		[HideInInspector]
-		public CharacterPrefabHolderController.CharacterTypes 
+		public CharacterPrefabBucketController.CharacterTypes 
 				myCharacterTypeEnum;
 	
 		Transform myTransform;
@@ -42,18 +42,25 @@ public class CharacterHolderController : MonoBehaviour
 		GameObject myTarget;
 		Transform myTargetTransform;
 		TouchOrMouseStuff myTargetTouchOrMouseStuff;
+		TouchOrMouseStuff.TargetType myTargetType;
+		EnemyHolderController myTargetEnemyHolderController;
+		CharacterHolderController myTargetCharacterHolderController;
+
+		MainStatsController.AbilitiesEnum myCurrentlyAnimatingAbility;
 
 		float cameraWidth;
 		float cameraHeight;
 
 		private Vector2 myBasePosition;
-		private Vector2 myBaseScale;
-		private string myBaseLayer;
+		private Vector3 myBaseScale;
+		
 
 		public int myPositionID;
 
 		void Awake ()
 		{
+				myTransform = transform;
+				myBaseScale = myTransform.localScale;
 
 		}
 
@@ -72,8 +79,7 @@ public class CharacterHolderController : MonoBehaviour
 				
 				myCharacterHolderMouseInteraction = GetComponent<CharacterHolderMouseInteraction> ();
 
-				myTransform = transform;
-
+				
 			
 		}
 
@@ -96,9 +102,15 @@ public class CharacterHolderController : MonoBehaviour
 
 
 				myTargetTouchOrMouseStuff = tempTM;
+				myTargetType = tempTM.myTargetType;
 
+				if (myTargetType == TouchOrMouseStuff.TargetType.ENEMY) {
+						myTargetEnemyHolderController = myTarget.GetComponent<EnemyHolderController> ();
+				} else if (myTargetType == TouchOrMouseStuff.TargetType.CHARACTER) {
+						myTargetCharacterHolderController = myTarget.GetComponent<CharacterHolderController> ();
+				}
 
-
+				//this might do a UI ability picker thing first, no clue
 
 				doSomethingToMyTarget ();
 
@@ -108,19 +120,36 @@ public class CharacterHolderController : MonoBehaviour
 		{
 				if (myTargetTouchOrMouseStuff.myTargetType == TouchOrMouseStuff.TargetType.ENEMY) {
 						
+						myCurrentlyAnimatingAbility = MainStatsController.AbilitiesEnum.AttackMeleeSingleBig;
 						myTurnThisRoundIsAvailable = false;
 						myCharacterActualController.tellActualToBeginAttackAnimation ();
 
 
 				} else {
-						assistCharacter ();
+						//doing something to a character or a thing
 				}
 		}
 	
+		public Vector3 returnBaseScale ()
+		{
+				return myBaseScale;
+		}
 
+		public void setPermanentBaseScale (Vector3 theScale)
+		{
+				myBaseScale = theScale;
+				myTransform.localScale = theScale;
+		}
 		
+		public void triggerActualStatsAndStatusUpdatesForCurrentAbility ()
+		{
+				//hack get stats from somewhere
 
-		public void moveHolderToTargetAsPartOfAttackEnemy (float totalAnimationTime)
+
+				MainStatsController.singleton.characterDidThisAbilityToEnemy (this, myCurrentlyAnimatingAbility, myTargetEnemyHolderController);
+		}
+
+		public void moveHolderToTargetAsPartOfAttackEnemy (float totalAnimationTime, bool matchTargetScale)
 		{
 				
 				
@@ -137,13 +166,20 @@ public class CharacterHolderController : MonoBehaviour
 
 				Vector2 targetPos = myTargetHolder.returnAttackPosition ();
 
+				Vector2 myTargetScale = myTargetHolder.returnStartingScale ();
 
 
 				myBasePosition = myTransform.localPosition;
 				myBaseScale = myTransform.localScale;
 
+				if (matchTargetScale == false) {
+						myTargetScale = myBaseScale;
+				}
 
-				MainMoveStuffController.singleton.doMoveMePositionAndScale (gameObject, myPos, targetPos, totalAnimationTime, myTargetTransform.localScale);
+				
+
+
+				MainMoveStuffController.singleton.doMoveMePositionAndScale (gameObject, myPos, targetPos, totalAnimationTime, myTargetScale);
 				
 				;
 
@@ -165,20 +201,13 @@ public class CharacterHolderController : MonoBehaviour
 	
 
 
-		private void assistCharacter ()
-		{
-				//do stuff
-		}
-
 		public Vector2 returnAttackPosition ()
 		{
 				return  (Vector2)myTransform.localPosition;
 		}
 
-		public void setupCharacterUsingArtPrefab (GameObject artPrefab)
-		{
+		
 
-		}
 	
 
 

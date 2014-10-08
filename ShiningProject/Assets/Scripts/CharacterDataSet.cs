@@ -7,7 +7,7 @@ public class CharacterDataSet
 
 		
 
-		public CharacterPrefabHolderController.CharacterTypes myType;
+		public CharacterPrefabBucketController.CharacterTypes myType;
 		public int myXP;
 		
 		
@@ -27,7 +27,7 @@ public class CharacterDataSet
 	
 		}
 
-		static public CharacterDataSet returnNewCharacterDataSet (CharacterPrefabHolderController.CharacterTypes theType, int theXP)
+		static public CharacterDataSet returnNewCharacterDataSet (CharacterPrefabBucketController.CharacterTypes theType, int theXP)
 		{
 				CharacterDataSet thisCharacter = new CharacterDataSet ();
 				thisCharacter.myType = theType;
@@ -46,7 +46,7 @@ public class CharacterDataSet
 				if (theObject == null) {
 						
 				} else {
-						myType = (CharacterPrefabHolderController.CharacterTypes)theObject.myType;
+						myType = (CharacterPrefabBucketController.CharacterTypes)theObject.myType;
 						myXP = theObject.myXP;
 						myCharacterID = theObject.myCharacterID;
 				}

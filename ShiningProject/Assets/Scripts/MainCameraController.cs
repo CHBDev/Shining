@@ -11,9 +11,13 @@ public class MainCameraController : MonoBehaviour
 		void Awake ()
 		{
 				if (singleton == null) {
-						DontDestroyOnLoad (gameObject);
+						
 						singleton = this;
+						Camera.main.orthographicSize = targettedScreenWidth / Camera.main.aspect / 2 / 100.0f;
+						Debug.Log ("Camera.main orthosize " + Camera.main.orthographicSize);
+
 				} else if (singleton != this) {
+						gameObject.SetActive (false);
 						Destroy (gameObject);
 				}
 		}
@@ -25,9 +29,7 @@ public class MainCameraController : MonoBehaviour
 		void Start ()
 		{
 
-				Camera.main.orthographicSize = targettedScreenWidth / Camera.main.aspect / 2 / 100.0f;
-
-
+				
 
 
 				/*
@@ -52,6 +54,18 @@ public class MainCameraController : MonoBehaviour
 
 
 
+		}
+
+		
+
+		public float returnCameraOrthoScreenWidth ()
+		{
+				return Camera.main.orthographicSize * Camera.main.aspect * 2;
+		}
+
+		public float returnCameraOrthoScreenHeight ()
+		{
+				return Camera.main.orthographicSize * 2;
 		}
 	
 		// Update is called once per frame

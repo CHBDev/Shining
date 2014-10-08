@@ -11,9 +11,10 @@ public class MainUIController : MonoBehaviour
 		void Awake ()
 		{
 				if (singleton == null) {
-						DontDestroyOnLoad (gameObject);
+						
 						singleton = this;
 				} else if (singleton != this) {
+						gameObject.SetActive (false);
 						Destroy (gameObject);
 				}
 		}
@@ -30,10 +31,5 @@ public class MainUIController : MonoBehaviour
 	
 		}
 
-		public void putUpMovementOptions (MainNavigationController.MovementDirections[] theDirections)
-		{
-				foreach (MainNavigationController.MovementDirections theDir in theDirections) {
-						//put a thing on screen to click or something like that
-				}
-		}
+		
 }

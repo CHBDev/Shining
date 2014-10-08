@@ -1,16 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/EnemyActualController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/DungeonBuilderStuff/DungeonMakerController.cs">
     <Files>
-      <File FileName="Assets/Scripts/MainTurnsController.cs" Line="113" Column="18" />
-      <File FileName="Assets/Scripts/EnemyHolderController.cs" Line="113" Column="7" />
-      <File FileName="Assets/Scripts/EnemyArtController.cs" Line="111" Column="24" />
-      <File FileName="Assets/Scripts/CharacterActualController.cs" Line="72" Column="2" />
-      <File FileName="Assets/CharacterArtController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CharacterHolderController.cs" Line="57" Column="3" />
-      <File FileName="Assets/EnemyActualController.cs" Line="113" Column="68" />
-      <File FileName="Assets/Scripts/SpawnMainCharacters.cs" Line="92" Column="3" />
-      <File FileName="Assets/Scripts/RoomArtController.cs" Line="444" Column="32" />
+      <File FileName="Assets/DungeonBuilderStuff/DungeonRoomHolderController.cs" Line="12" Column="47" />
+      <File FileName="Assets/DungeonBuilderStuff/DungeonRoomActualController.cs" Line="1" Column="1" />
+      <File FileName="Assets/DungeonBuilderStuff/DungeonRoomArtController.cs" Line="1" Column="1" />
+      <File FileName="Assets/DungeonBuilderStuff/DungeonActualController.cs" Line="1" Column="1" />
+      <File FileName="Assets/DungeonBuilderStuff/DungeonMakerController.cs" Line="175" Column="63" />
+      <File FileName="Assets/DungeonBuilderStuff/MainDungeonData.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/LoadingBehindSplash.cs" Line="31" Column="4" />
+      <File FileName="Assets/Scripts/MainDebugController.cs" Line="1" Column="1" />
+      <File FileName="Assets/DungeonBuilderStuff/DungeonMakerEditor.cs" Line="25" Column="5" />
+      <File FileName="Assets/Scripts/MainCameraController.cs" Line="17" Column="75" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

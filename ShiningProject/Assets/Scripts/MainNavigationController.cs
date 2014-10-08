@@ -20,8 +20,7 @@ public class MainNavigationController : MonoBehaviour
 		
 		public RoomType currentRoomType;
 		public MainHubData.HubNumber currentHubNumber;
-		public GameObject currentRoomHolder;
-		public RoomHolderController currentRoomHolderController;
+
 
 		public enum MovementDirections
 		{
@@ -42,10 +41,15 @@ public class MainNavigationController : MonoBehaviour
 	
 		void Awake ()
 		{
+
+				Debug.Log ("main nav awake");
 				if (singleton == null) {
-						DontDestroyOnLoad (gameObject);
+						Debug.Log ("no main nav singleton");
+						
 						singleton = this;
 				} else if (singleton != this) {
+						Debug.Log ("is nav singleton");
+						gameObject.SetActive (false);
 						Destroy (gameObject);
 				}
 		}
@@ -62,27 +66,31 @@ public class MainNavigationController : MonoBehaviour
 	
 		}
 
-
-		public void thisDungeonRoomIsComplete ()
+		public void allEnemiesAreDeadInCurrentRoom ()
 		{
+
+				//do we put up a loot screen here? xp and loot? or skip it?
+				//maybe a treasure chest drops sometimes.
+
 				//determine if dungeon is complete, else, what moves are available
 				//tell UI to put up available moves
 				//maybe there's no choice, like if you do something odd, forces you down, etc
 
+				Debug.Log ("ALL ENEMIES ARE DEAD");
 				//check on some stuff
-				MainUIController.singleton.putUpMovementOptions (currentRoomHolderController.getMovementDirectionsFromRoom ());
+				
+				//maybe features in the room glow, the trap door or the lever, or the door.
 		
-		
-		
+
 		}
-	
+
 		public void moveInDirection (MovementDirections theDir)
 		{
 
 				switch (currentRoomType) {
 				case RoomType.Dungeon:
 						{
-								RoomDataController nextRoom = MainDungeonData.singleton.getNextRoomInDirection (theDir);
+								
 						}
 						break;
 				}
@@ -90,26 +98,35 @@ public class MainNavigationController : MonoBehaviour
 
 		}
 	
-		public void enterNewDungeon ()
+		public void HubCallsDungeon ()
 		{
-				Application.LoadLevel ("FirstPersonScene1");
-
+				Debug.Log ("Main Nav says enter new dungeon");
 				currentRoomType = RoomType.Dungeon;
-				//not wired up
-				MainHubData.singleton.setupTheDungeon ();
 
+				Application.LoadLevel ("DungeonScene");
 				
-				
-				//GameContentsHolderController.singleton.setupRoom ();
-
+			
 
 		}
 
-		public void addRoomToGameContents (GameObject theGameContents)
+		void OnLevelWasLoaded ()
 		{
-				//hack
-				GameContentsHolderController.singleton.hackARoom ();
+				if (this != singleton) {
+						Debug.Log ("MORE THAN !!!!111");
+				}
+
+				if (Application.loadedLevelName == "DungeonScene") {
+						Debug.Log ("LEVEL LOADED DUNGEON SCENE");
+						MainDungeonData.singleton.setupDungeon (currentHubNumber);
+				}
+
+
+
+				
+
 		}
+
+
 
 
 	

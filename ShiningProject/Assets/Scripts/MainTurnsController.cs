@@ -12,10 +12,11 @@ public class MainTurnsController : MonoBehaviour
 		void Awake ()
 		{
 				if (singleton == null) {
-						DontDestroyOnLoad (gameObject);
+						
 						singleton = this;
 						cleanSlateOnNewRoom ();
 				} else if (singleton != this) {
+						gameObject.SetActive (false);
 						Destroy (gameObject);
 				}
 		}
@@ -27,12 +28,13 @@ public class MainTurnsController : MonoBehaviour
 		public EnemyHolderController[] enemyHolderControllerArray;
 		public CharacterHolderController[] characterHolderControllerArray;
 
+		private bool allEnemiesAreDead;
 		
 
 		// Use this for initialization
 		void Start ()
 		{
-	
+				
 		}
 
 		public void cleanSlateOnNewRoom ()
@@ -52,6 +54,8 @@ public class MainTurnsController : MonoBehaviour
 						theCharacterTurnTrackers [i] = new TurnTracker ();
 						
 				}
+
+				allEnemiesAreDead = false;
 
 				
 		}
@@ -98,6 +102,10 @@ public class MainTurnsController : MonoBehaviour
 
 		private void changeTurnsToCharacterSide ()
 		{
+				if (allEnemiesAreDead == true) {
+						return;
+				}
+
 				Debug.Log ("CHARACTER TURNS BEGIN");
 
 				foreach (TurnTracker theT in theCharacterTurnTrackers) {
@@ -107,7 +115,7 @@ public class MainTurnsController : MonoBehaviour
 				
 				//hack
 				//do stuff for characters, for now, just enable them to be clicked
-				Debug.Log (characterHolderControllerArray.Length);
+				
 				foreach (CharacterHolderController theController in characterHolderControllerArray) {
 						if (theController == null) {
 								continue;
@@ -185,9 +193,7 @@ public class MainTurnsController : MonoBehaviour
 				setEnemyUsedMainTurn (enemySlot, true);
 				checkAfterEnemyUpdate (enemySlot);
 		}
-
-
-
+	
 		public void setEnemyUsedMainTurn (int enemyPosition, bool usedMainTurn)
 		{
 				theEnemyTurnTrackers [enemyPosition].hasUsedMainTurnThisRound = usedMainTurn;
@@ -206,6 +212,25 @@ public class MainTurnsController : MonoBehaviour
 		{
 				theEnemyTurnTrackers [enemyPosition].isEmpty = isEmpty;
 				
+		}
+
+		public void setEnemyIsDead (int enemyPosition, bool isDead)
+		{
+				theEnemyTurnTrackers [enemyPosition].isDead = isDead;
+
+				bool allEnemiesAreDead = true;
+
+				foreach (TurnTracker theTurnT in theEnemyTurnTrackers) {
+						if (theTurnT.isDead == false && theTurnT.isEmpty == false) {
+								allEnemiesAreDead = false;
+						}
+				}
+
+				if (allEnemiesAreDead == true) {
+						Debug.Log ("all enemies are dead");
+						allEnemiesAreDead = true;
+						announceAllEnemiesAreDead ();
+				}
 		}
 
 		public void setCharacterHasUsedMainTurnThisRound (int characterPosition, bool hasUsedMainTurn)
@@ -234,6 +259,11 @@ public class MainTurnsController : MonoBehaviour
 				
 		}
 
+		public void setCharacterIsDead (int characterPosition, bool isDead)
+		{
+				theCharacterTurnTrackers [characterPosition].isDead = isDead;
+		}
+
 		public void activateCharacter (int slot)
 		{
 				theCharacterTurnTrackers [slot].activateAsCharacter ();
@@ -243,7 +273,11 @@ public class MainTurnsController : MonoBehaviour
 		{
 				theEnemyTurnTrackers [slot].activateAsEnemy ();
 		}
-	
+
+		public void announceAllEnemiesAreDead ()
+		{
+				MainNavigationController.singleton.allEnemiesAreDeadInCurrentRoom ();
+		}
 
 }
 
@@ -254,6 +288,7 @@ public class TurnTracker
 		public bool hasUsedSecondaryTurnThisRound = false;
 		public bool isEmpty = true;
 		public bool isIncapacitated = false;
+		public bool isDead = false;
 
 		public bool canThisThingMakeAMoveThisRound ()
 		{
@@ -269,6 +304,10 @@ public class TurnTracker
 				}
 
 				if (isIncapacitated == true) {
+						return false;
+				}
+
+				if (isDead == true) {
 						return false;
 				}
 
@@ -295,6 +334,7 @@ public class TurnTracker
 				hasUsedSecondaryTurnThisRound = false;
 				isEmpty = false;
 				isIncapacitated = false;
+				isDead = false;
 		}
 
 
