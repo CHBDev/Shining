@@ -46,14 +46,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\DungeonBuilderStuff\DungeonActualController.cs" />
-     <Compile Include="Assets\DungeonBuilderStuff\DungeonHolderController.cs" />
-     <Compile Include="Assets\DungeonBuilderStuff\DungeonMakerController.cs" />
-     <Compile Include="Assets\DungeonBuilderStuff\DungeonMakerEditor.cs" />
-     <Compile Include="Assets\DungeonBuilderStuff\DungeonPrefabBucketController.cs" />
-     <Compile Include="Assets\DungeonBuilderStuff\DungeonRoomActualController.cs" />
-     <Compile Include="Assets\DungeonBuilderStuff\DungeonRoomArtController.cs" />
-     <Compile Include="Assets\DungeonBuilderStuff\DungeonRoomHolderController.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DunBucketControl.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DunControl.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DunMakerControl.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DunMakerCustomEdit.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DunRoomBGBucketControl.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DunRoomBGControl.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DunRoomControl.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DunRoomEncounterControl.cs" />
+     <Compile Include="Assets\DungeonBuilderStuff\DunRoomSetDecControl.cs" />
      <Compile Include="Assets\DungeonBuilderStuff\MainDungeonData.cs" />
      <Compile Include="Assets\Scripts\AchievementsController.cs" />
      <Compile Include="Assets\Scripts\AllSingletonsController.cs" />

@@ -29,7 +29,7 @@ public class MainMakeStuffController : CHBController
 		public EnemyPrefabBucketController
 				theEnemyPrefabBucketController;
 
-		public GameObject theEnemyHolderPrefab, theCharacterHolderPrefab, theRoomHolderPrefab;
+		public GameObject theEnemyHolderPrefab, theCharacterHolderPrefab;
 		public GameObject theCharacterPrefabBucketPrefab, theEnemyPrefabBucketPrefab;
 		
 		

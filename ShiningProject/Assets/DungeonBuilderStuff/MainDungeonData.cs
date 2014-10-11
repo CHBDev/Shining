@@ -7,13 +7,20 @@ public class MainDungeonData : MonoBehaviour
 
 
 		public static MainDungeonData singleton;
-		private DungeonActualController theActiveDungeonActualController;
+		
 		private GameObject theActiveDungeon;
 
-		public GameObject theDungeonBucketPrefab;
-		private DungeonPrefabBucketController theDungeonPrefabBucketController;
+		public GameObject theDungeonBucket;
+		[HideInInspector]
+		public DunBucketControl
+				theDunBucketControl;
 
+		public GameObject theDungeonRoomBackgroundBucket;
+		[HideInInspector]
+		public DunRoomBGBucketControl
+				theDunRoomBGBucketControl;
 
+		
 		
 		
 		void Awake ()
@@ -32,16 +39,7 @@ public class MainDungeonData : MonoBehaviour
 
 		public void setupDungeon (MainHubData.HubNumber hubNumber)
 		{
-				theActiveDungeon = theDungeonPrefabBucketController.myDungeonPrefabs [(int)hubNumber];
-				theActiveDungeonActualController = theActiveDungeon.GetComponent<DungeonActualController> ();
-
-				if (theActiveDungeonActualController != null) {
-						Debug.Log ("DC IS NOT NULL");
-				}
-
-				DungeonHolderController.singleton.addActualDungeonObject (theActiveDungeon);
-
-
+			
 
 				
 				
@@ -52,7 +50,8 @@ public class MainDungeonData : MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
-				theDungeonPrefabBucketController = theDungeonBucketPrefab.GetComponent<DungeonPrefabBucketController> ();
+				theDunBucketControl = theDungeonBucket.GetComponent<DunBucketControl> ();
+				theDunRoomBGBucketControl = theDungeonRoomBackgroundBucket.GetComponent<DunRoomBGBucketControl> ();
 		}
 	
 		// Update is called once per frame

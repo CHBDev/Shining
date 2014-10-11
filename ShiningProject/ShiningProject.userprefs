@@ -1,17 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/DungeonBuilderStuff/DungeonMakerController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/DungeonBuilderStuff/DunMakerControl.cs">
     <Files>
-      <File FileName="Assets/DungeonBuilderStuff/DungeonRoomHolderController.cs" Line="12" Column="47" />
-      <File FileName="Assets/DungeonBuilderStuff/DungeonRoomActualController.cs" Line="1" Column="1" />
-      <File FileName="Assets/DungeonBuilderStuff/DungeonRoomArtController.cs" Line="1" Column="1" />
-      <File FileName="Assets/DungeonBuilderStuff/DungeonActualController.cs" Line="1" Column="1" />
-      <File FileName="Assets/DungeonBuilderStuff/DungeonMakerController.cs" Line="175" Column="63" />
-      <File FileName="Assets/DungeonBuilderStuff/MainDungeonData.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LoadingBehindSplash.cs" Line="31" Column="4" />
-      <File FileName="Assets/Scripts/MainDebugController.cs" Line="1" Column="1" />
-      <File FileName="Assets/DungeonBuilderStuff/DungeonMakerEditor.cs" Line="25" Column="5" />
-      <File FileName="Assets/Scripts/MainCameraController.cs" Line="17" Column="75" />
+      <File FileName="Assets/DungeonBuilderStuff/DunRoomBGControl.cs" Line="30" Column="61" />
+      <File FileName="Assets/DungeonBuilderStuff/DunMakerControl.cs" Line="122" Column="138" />
+      <File FileName="Assets/DungeonBuilderStuff/DunRoomControl.cs" Line="573" Column="2" />
+      <File FileName="Assets/DungeonBuilderStuff/DunRoomSetDecControl.cs" Line="37" Column="65" />
+      <File FileName="Assets/DungeonBuilderStuff/DunControl.cs" Line="62" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
