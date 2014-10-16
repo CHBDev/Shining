@@ -3,6 +3,9 @@ using System.Collections;
 
 public class DunRoomEncounterControl : MonoBehaviour
 {
+
+		GameObject myGameObjectForEnemies;
+
 		public enum DifficultyLevel
 		{
 				ZERO,
@@ -83,9 +86,26 @@ public class DunRoomEncounterControl : MonoBehaviour
 	
 		}
 
-		public void activate (DunControl theDunControl)
+		public void tearDownSelf ()
 		{
-				GameObject theRoom = theDunControl.gameObject;
+
+				if (myGameObjectForEnemies == null)
+						return;
+
+				myGameObjectForEnemies.SetActive (false);
+				Destroy (myGameObjectForEnemies);
+		}
+
+		public void activate (DunRoomControl theDunRoomControl)
+		{
+				GameObject theRoom = theDunRoomControl.gameObject;
+
+				myGameObjectForEnemies = MainMakeStuffController.newGameObjectInObject (theRoom);
+				myGameObjectForEnemies.name = theRoom.name + "_Enemies";
+
+				theDunRoomControl.setupEnemyPrefabs ();
+				theDunRoomControl.setupEnemies ();
+				theDunRoomControl.setupRows (myGameObjectForEnemies);
 
 		}
 

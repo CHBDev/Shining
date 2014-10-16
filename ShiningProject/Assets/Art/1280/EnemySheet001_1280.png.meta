@@ -1,0 +1,268 @@
+fileFormatVersion: 2
+guid: 077d9267f2aaa4532874553ed51c0395
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: EnemySheet001_1280
+    21300002: EnemySheet001_1280_0
+    21300004: EnemySheet001_1280_1
+    21300006: EnemySheet001_1280_2
+    21300008: EnemySheet001_1280_3
+    21300010: EnemySheet001_1280_4
+    21300012: EnemySheet001_1280_5
+    21300014: EnemySheet001_1280_6
+    21300016: EnemySheet001_1280_7
+    21300018: EnemySheet001_1280_8
+    21300020: EnemySheet001_1280_9
+    21300022: EnemySheet001_1280_10
+    21300024: EnemySheet001_1280_11
+    21300026: EnemySheet001_1280_12
+    21300028: EnemySheet001_1280_13
+    21300030: EnemySheet001_1280_14
+    21300032: EnemySheet001_1280_15
+    21300034: EnemySheet001_1280_16
+    21300036: EnemySheet001_1280_17
+    21300038: EnemySheet001_1280_18
+    21300040: EnemySheet001_1280_19
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: EnemySheet001_1280_0
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 1856
+        width: 152
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_1
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 1797
+        width: 275
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_2
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 1817
+        width: 136
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_3
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 1775
+        width: 118
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_4
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 1775
+        width: 118
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_5
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 1628
+        width: 154
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_6
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 1676
+        width: 152
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_7
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 1636
+        width: 88
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_8
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 1554
+        width: 266
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_9
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 1693
+        width: 89
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_10
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 1669
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_11
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 1684
+        width: 108
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_12
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 1496
+        width: 152
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_13
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 1543
+        width: 93
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_14
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 1570
+        width: 64
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_15
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 1563
+        width: 71
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_16
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 1072
+        width: 264
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_17
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 1295
+        width: 252
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_18
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 1386
+        width: 186
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: EnemySheet001_1280_19
+      rect:
+        serializedVersion: 2
+        x: 1066
+        y: 1387
+        width: 186
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

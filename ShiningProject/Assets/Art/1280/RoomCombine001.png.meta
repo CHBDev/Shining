@@ -1,0 +1,213 @@
+fileFormatVersion: 2
+guid: 4ca9621a6353d40ad83a5b2e2f9a6e54
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: RoomCombine001
+    21300002: RoomCombine001_0
+    21300004: RoomCombine001_1
+    21300006: RoomCombine001_2
+    21300008: RoomCombine001_3
+    21300010: RoomCombine001_4
+    21300012: RoomCombine001_5
+    21300014: RoomCombine001_6
+    21300016: RoomCombine001_7
+    21300018: RoomCombine001_8
+    21300020: RoomCombine001_9
+    21300022: RoomCombine001_10
+    21300024: RoomCombine001_11
+    21300026: RoomCombine001_12
+    21300028: RoomCombine001_13
+    21300030: RoomCombine001_14
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: RoomCombine001_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1776
+        width: 1140
+        height: 272
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_1
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 1738
+        width: 654
+        height: 310
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_2
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 1536
+        width: 228
+        height: 512
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_3
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 1541
+        width: 575
+        height: 198
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_4
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 1381
+        width: 653
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 783
+        width: 678
+        height: 577
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_6
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 981
+        width: 125
+        height: 170
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_7
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 784
+        width: 674
+        height: 585
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_8
+      rect:
+        serializedVersion: 2
+        x: 1589
+        y: 677
+        width: 191
+        height: 629
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_9
+      rect:
+        serializedVersion: 2
+        x: 1845
+        y: 1005
+        width: 203
+        height: 515
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_10
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 795
+        width: 120
+        height: 170
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_11
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 506
+        width: 266
+        height: 493
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_12
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 1349
+        height: 771
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_13
+      rect:
+        serializedVersion: 2
+        x: 1561
+        y: 0
+        width: 199
+        height: 661
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: RoomCombine001_14
+      rect:
+        serializedVersion: 2
+        x: 1769
+        y: 8
+        width: 279
+        height: 492
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

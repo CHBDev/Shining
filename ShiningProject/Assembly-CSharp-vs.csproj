@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DunBackdropSwitch.cs" />
      <Compile Include="Assets\DungeonBuilderStuff\DunBucketControl.cs" />
      <Compile Include="Assets\DungeonBuilderStuff\DunControl.cs" />
      <Compile Include="Assets\DungeonBuilderStuff\DunMakerControl.cs" />
@@ -56,6 +57,7 @@
      <Compile Include="Assets\DungeonBuilderStuff\DunRoomEncounterControl.cs" />
      <Compile Include="Assets\DungeonBuilderStuff\DunRoomSetDecControl.cs" />
      <Compile Include="Assets\DungeonBuilderStuff\MainDungeonData.cs" />
+     <Compile Include="Assets\MainDunMapControl.cs" />
      <Compile Include="Assets\Scripts\AchievementsController.cs" />
      <Compile Include="Assets\Scripts\AllSingletonsController.cs" />
      <Compile Include="Assets\Scripts\CHBParents\ActualController.cs" />
@@ -79,6 +81,7 @@
      <Compile Include="Assets\Scripts\EnemyHolderController.cs" />
      <Compile Include="Assets\Scripts\EnemyHolderMouseInteraction.cs" />
      <Compile Include="Assets\Scripts\EnemyPrefabBucketController.cs" />
+     <Compile Include="Assets\Scripts\GameAssetsControl.cs" />
      <Compile Include="Assets\Scripts\LoadingBehindSplash.cs" />
      <Compile Include="Assets\Scripts\MainAIController.cs" />
      <Compile Include="Assets\Scripts\MainCameraController.cs" />
@@ -102,6 +105,7 @@
      <Compile Include="Assets\Scripts\SettingsController.cs" />
      <Compile Include="Assets\Scripts\SpawnCharactersInDungeon.cs" />
      <Compile Include="Assets\Scripts\TouchOrMouseStuff.cs" />
+     <Compile Include="Assets\Scripts\UIAssetsControl.cs" />
      <Compile Include="Assets\Scripts\z_NotUsing\ScaleToWindowContraints.cs" />
      <Compile Include="Assets\Scripts\z_NotUsing\ScreenRelativePosition.cs" />
   </ItemGroup>

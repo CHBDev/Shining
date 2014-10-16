@@ -18,29 +18,8 @@ public class DunRoomControl : MonoBehaviour
 		public Color32 myTintColor;
 
 
-		public enum DungeonRoomExits
-		{
-				North,
-				South,
-				East,
-				West,
-				StairsUp,
-				StairsDown,
-				LadderUp,
-				LadderDown,
-				TrapdoorUp_VisualOnly,
-				TrapdoorDown,
-				CollapsedTrapdoorUp_VisualOnly,
-				CollapsedTrapdoorDown,
-				Teleport,
-				Evacuate,
+		public MainNavigationController.DungeonExits[] myDungeonExits;
 
-		}
-
-
-
-		
-		
 		
 		[HideInInspector]
 		public GameObject
@@ -154,13 +133,47 @@ public class DunRoomControl : MonoBehaviour
 		private List<GameObject> myRow2SpawnPoints;
 		private List<GameObject> myRow3SpawnPoints;
 
+		[HideInInspector]
+		public GameObject
+				myRoomObject;
 
+		[HideInInspector]
+		public Transform
+				myRoomObjectTransform;
+
+	 
+		public void tearDownRoomForExport ()
+		{
+				myDunRoomBGControl.tearDownSelf ();
+				myDunRoomEncounterControl.tearDownSelf ();
+
+		}
+
+		public void setRefForParentAndParentTransform ()
+		{
+				myRoomObject = this.gameObject;
+				myRoomObjectTransform = myRoomObject.transform;
+		}
+
+		public void moveRoomToCamera ()
+		{
+				myRoomObjectTransform.localPosition = new Vector2 (3000f, 3000f);
+		}
 
 		public void buildDungeonRoomForMaker ()
 		{
+
+				if (myDungeonExits == null) {
+						myDungeonExits = new MainNavigationController.DungeonExits[0];
+				}
+				
 				
 				myDunRoomBGControl.activate (this);
 				myDunRoomSetDecControl.activate (this);
+
+				if (shouldTintBackground == true) {
+						myDunRoomBGControl.tintBGContents (myTintColor);
+				}
 
 				//note we do not turn on enemies by default in dungeon for performance
 				//myDunRoomEncounterControl.activate (gameObject);
@@ -168,19 +181,24 @@ public class DunRoomControl : MonoBehaviour
 
 		}
 
-		public void buildDungeonRoomForRuntime ()
+		public void activateDungeonRoomForRuntime ()
 		{
-				this.setupEnemyPrefabs ();
-				setupEnemies ();
-				this.setupRows (gameObject);
+				if (myDungeonExits == null) {
+						myDungeonExits = new MainNavigationController.DungeonExits[0];
+				}
+				myDunRoomEncounterControl.activate (this);
+
 				myDunRoomBGControl.activate (this);
 				myDunRoomSetDecControl.activate (this);
 
 				//enemy activate doesn't do anything, as the room goes and does it all right now.
 
 				if (shouldTintBackground == true) {
-						myDunRoomBGControl.myCurrentBGObjectArt.GetComponent<SpriteRenderer> ().color = myTintColor;
+						myDunRoomBGControl.tintBGContents (myTintColor);
 				}
+
+				myRoomObjectTransform.localPosition = new Vector2 (0f, 0f);
+
 		}
 
 
@@ -192,7 +210,7 @@ public class DunRoomControl : MonoBehaviour
 				myY = yy;
 		}
 	
-		private void setupEnemies ()
+		public void setupEnemies ()
 		{
 				
 		
@@ -273,7 +291,7 @@ public class DunRoomControl : MonoBehaviour
 		}
 
 	
-		private void setupEnemyPrefabs ()
+		public void setupEnemyPrefabs ()
 		{
 		
 		
@@ -329,7 +347,7 @@ public class DunRoomControl : MonoBehaviour
 		
 		}
 	
-		private void setupRows (GameObject theRoom)
+		public void setupRows (GameObject encounterObject)
 		{
 				Camera myCamera = Camera.main;
 		
@@ -378,7 +396,7 @@ public class DunRoomControl : MonoBehaviour
 			
 						Vector3 thePos = new Vector2 (thisPosition - myWidth / 2 + myRow1XOffset, myRow1YOffset);
 			
-						GameObject tempObject = MainMakeStuffController.instantiatePrefabInObject (myEnemyHolderPrefab, theRoom, thePos);
+						GameObject tempObject = MainMakeStuffController.instantiatePrefabInObject (myEnemyHolderPrefab, encounterObject, thePos);
 						EnemyHolderController thisHolder = tempObject.GetComponent<EnemyHolderController> ();
 						thisHolder.setPermanantBaseScale (new Vector3 (myRow1Scale, myRow1Scale, 1));
 			
@@ -435,7 +453,7 @@ public class DunRoomControl : MonoBehaviour
 			
 						Vector3 thePos = new Vector2 (thisPosition - myWidth / 2 + myRow2XOffset, myRow2YOffset);
 			
-						GameObject tempObject = MainMakeStuffController.instantiatePrefabInObject (myEnemyHolderPrefab, theRoom, thePos);
+						GameObject tempObject = MainMakeStuffController.instantiatePrefabInObject (myEnemyHolderPrefab, encounterObject, thePos);
 						EnemyHolderController thisHolder = tempObject.GetComponent<EnemyHolderController> ();
 						thisHolder.setPermanantBaseScale (new Vector3 (myRow2Scale, myRow2Scale, 1));
 			
@@ -493,7 +511,7 @@ public class DunRoomControl : MonoBehaviour
 			
 						Vector3 thePos = new Vector2 (thisPosition - myWidth / 2 + myRow3XOffset, myRow3YOffset);
 			
-						GameObject tempObject = MainMakeStuffController.instantiatePrefabInObject (myEnemyHolderPrefab, theRoom, thePos);
+						GameObject tempObject = MainMakeStuffController.instantiatePrefabInObject (myEnemyHolderPrefab, encounterObject, thePos);
 						EnemyHolderController thisHolder = tempObject.GetComponent<EnemyHolderController> ();
 						thisHolder.setPermanantBaseScale (new Vector3 (myRow3Scale, myRow3Scale, 1));
 			

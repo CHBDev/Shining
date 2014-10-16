@@ -141,6 +141,10 @@ public class MainMakeStuffController : CHBController
 				theObject.hideFlags = HideFlags.None;
 		}
 
+		public static GameObject instantiatePrefabInObjectUsePrefabPos (GameObject aChild, GameObject aParent)
+		{
+				return instantiatePrefabInObject (aChild, aParent, aChild.transform.localPosition);
+		}
 
 		public static GameObject instantiatePrefabInObject (GameObject aChild, GameObject aParent)
 		{

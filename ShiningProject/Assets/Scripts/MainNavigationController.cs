@@ -6,6 +6,7 @@ public class MainNavigationController : MonoBehaviour
 
 		public enum RoomType
 		{
+				Empty,		
 				Dungeon,
 				Hub,
 				Map,
@@ -24,6 +25,7 @@ public class MainNavigationController : MonoBehaviour
 
 		public enum MovementDirections
 		{
+				Empty,		
 				North,
 				South,
 				East,
@@ -36,15 +38,31 @@ public class MainNavigationController : MonoBehaviour
 		
 		}
 
+		public enum DungeonExits
+		{
+				Empty,		
+				NorthDoor,
+				SouthDoor,
+				EastDoor,
+				WestDoor,
+				LeftStairsUp,
+				LeftStairsDown,
+				RightStairsUp,
+				RightStairsDown,
+				TrapdoorVisibleDown,
+				TrapdoorInCeiling,
+				TrapdoorHiddenDown,
+
+		}
+
 		public static MainNavigationController singleton;
 	
 	
 		void Awake ()
 		{
 
-				Debug.Log ("main nav awake");
+				;
 				if (singleton == null) {
-						Debug.Log ("no main nav singleton");
 						
 						singleton = this;
 				} else if (singleton != this) {
@@ -66,6 +84,11 @@ public class MainNavigationController : MonoBehaviour
 	
 		}
 
+		bool isThereLootPhase ()
+		{
+				return false;
+		}
+
 		public void allEnemiesAreDeadInCurrentRoom ()
 		{
 
@@ -78,6 +101,12 @@ public class MainNavigationController : MonoBehaviour
 
 				Debug.Log ("ALL ENEMIES ARE DEAD");
 				//check on some stuff
+
+				if (isThereLootPhase ()) {
+						//do some loot uff
+				} else {
+
+				}
 				
 				//maybe features in the room glow, the trap door or the lever, or the door.
 		

@@ -7,7 +7,7 @@ public class DunMakerControl : MonoBehaviour
 
 		public static DunMakerControl singleton;
 
-		public GameObject[,,] currentRooms;
+		public DunRoomControl[,,] currentRooms;
 		
 
 		void Awake ()
@@ -42,6 +42,7 @@ public class DunMakerControl : MonoBehaviour
 
 		public float cameraWidth;
 		public float cameraHeight;
+
 		public float roomWidthBuffer;
 		public float roomHeightBuffer;
 
@@ -70,13 +71,25 @@ public class DunMakerControl : MonoBehaviour
 		}
 
 
+		public void makerDestroy (GameObject theThing)
+		{
+				if (theThing == null)
+						return;
+
+				if (Application.isEditor == true) {
+						DestroyImmediate (theThing);
+				} else {
+						Destroy (theThing);
+				}
+		}
 
 
 		public void newObjectInEditSlot ()
 		{
 
 
-				Destroy (editSlotForDungeonActualObject);
+				makerDestroy (editSlotForDungeonActualObject);
+				
 				editSlotForDungeonActualObject = null;
 				setupNewDungeon ();
 
@@ -87,21 +100,23 @@ public class DunMakerControl : MonoBehaviour
 				if (importSlotForDungeonExportObject == null)
 						return;
 
-				Destroy (editSlotForDungeonActualObject);
+				makerDestroy (editSlotForDungeonActualObject);
 
 				editSlotForDungeonActualObject = (GameObject)Instantiate (importSlotForDungeonExportObject);
 
 				DunControl dunControl = editSlotForDungeonActualObject.GetComponent<DunControl> ();	
 
-				dunControl.theRooms = new GameObject[dunControl.numberOfLevels, dunControl.roomsInX, dunControl.roomsInY];
+				dunControl.theRooms = new DunRoomControl[dunControl.numberOfLevels, dunControl.roomsInX, dunControl.roomsInY];
 
 			
-				currentRooms = new GameObject[dunControl.numberOfLevels, dunControl.roomsInX, dunControl.roomsInY];
+				currentRooms = new DunRoomControl[dunControl.numberOfLevels, dunControl.roomsInX, dunControl.roomsInY];
 
 				foreach (DunRoomControl roomControl in editSlotForDungeonActualObject.GetComponentsInChildren<DunRoomControl>()) {
 
-						dunControl.theRooms [roomControl.myZ, roomControl.myX, roomControl.myY] = roomControl.gameObject;
-						currentRooms [roomControl.myZ, roomControl.myX, roomControl.myY] = roomControl.gameObject;
+						dunControl.theRooms [roomControl.myZ, roomControl.myX, roomControl.myY] = roomControl;
+						currentRooms [roomControl.myZ, roomControl.myX, roomControl.myY] = roomControl;
+
+						roomControl.buildDungeonRoomForMaker ();
 
 				}
 
@@ -116,14 +131,27 @@ public class DunMakerControl : MonoBehaviour
 
 			
 				
-				string saveFileLoc = "Assets/DungeonBuilderStuff/testoutput/" + dungeonName + dungeonVersion + ".prefab";
+				
+				foreach (DunRoomControl theRoomControl in currentRooms) {
+						theRoomControl.tearDownRoomForExport ();
+				}
 
+
+				Invoke ("makePrefabOfEditSlot", 2.0f);
+
+		}
+
+
+		private void makePrefabOfEditSlot ()
+		{
+
+				string saveFileLoc = "Assets/DungeonBuilderStuff/testoutput/" + "Dungeon_" + dungeonName + dungeonVersion + ".prefab";
 
 				GameObject thePrefab = PrefabUtility.CreatePrefab (saveFileLoc, editSlotForDungeonActualObject, ReplacePrefabOptions.ReplaceNameBased);
 
-			
+
+
 		}
-	
 
 		private void setupNewDungeon ()
 		{
@@ -151,7 +179,7 @@ public class DunMakerControl : MonoBehaviour
 
 				GameObject theDungeon = theController.gameObject;
 
-				this.currentRooms = new GameObject[numberOfLevels, roomsInX, roomsInY];
+				this.currentRooms = new DunRoomControl[numberOfLevels, roomsInX, roomsInY];
 
 				for (int z = 0; z < numberOfLevels; z++) {
 						for (int x = 0; x < roomsInX; x++) {
@@ -163,10 +191,11 @@ public class DunMakerControl : MonoBehaviour
 					
 										GameObject theRoom = MainMakeStuffController.newGameObjectInObject (theDungeon, thisPos);
 
-										this.currentRooms [z, x, y] = theRoom;
-
-										theRoom.name = "" + dungeonName + dungeonVersion + "Room" + z + x + y;
+										
+										theRoom.name = "" + dungeonName + dungeonVersion + "Room" + "_Z" + z + "X" + x + "Y" + y;
 										DunRoomControl theRoomController = theRoom.AddComponent<DunRoomControl> ();
+
+										this.currentRooms [z, x, y] = theRoomController;
 
 										
 					

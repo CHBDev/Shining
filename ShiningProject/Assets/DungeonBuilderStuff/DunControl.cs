@@ -5,7 +5,7 @@ public class DunControl : MonoBehaviour
 {
 
 
-		public GameObject[,,] theRooms;
+		public DunRoomControl[,,] theRooms;
 
 		
 
@@ -15,7 +15,7 @@ public class DunControl : MonoBehaviour
 
 
 
-		public GameObject returnDungeonRoomSaveDataInDirection (DunRoomControl theController, DunRoomControl.DungeonRoomExits dir)
+		public DunRoomControl returnDungeonRoomSaveDataInDirection (DunRoomControl theController, MainNavigationController.DungeonExits dir)
 		{
 
 				int finalZ = theController.myZ;
@@ -23,28 +23,34 @@ public class DunControl : MonoBehaviour
 				int finalY = theController.myY;
 
 				switch (dir) {
-				case DunRoomControl.DungeonRoomExits.North:
+				case MainNavigationController.DungeonExits.NorthDoor:
 						finalY++;
 						break;
-				case DunRoomControl.DungeonRoomExits.South:
+				case MainNavigationController.DungeonExits.SouthDoor:
 						finalY--;
 						break;
-				case DunRoomControl.DungeonRoomExits.East:
+				case MainNavigationController.DungeonExits.WestDoor:
 						finalX--;
 						break;
-				case DunRoomControl.DungeonRoomExits.West:
+				case MainNavigationController.DungeonExits.EastDoor:
 						finalX++;
 						break;
-				case DunRoomControl.DungeonRoomExits.StairsUp:
+				case MainNavigationController.DungeonExits.LeftStairsUp:
 						finalZ++;
 						break;
-				case DunRoomControl.DungeonRoomExits.StairsDown:
+				case MainNavigationController.DungeonExits.RightStairsUp:
+						finalZ++;
+						break;
+				case MainNavigationController.DungeonExits.LeftStairsDown:
 						finalZ--;
 						break;
-				case DunRoomControl.DungeonRoomExits.TrapdoorDown:
+				case MainNavigationController.DungeonExits.RightStairsDown:
 						finalZ--;
 						break;
-				case DunRoomControl.DungeonRoomExits.CollapsedTrapdoorDown:
+				case MainNavigationController.DungeonExits.TrapdoorVisibleDown:
+						finalZ--;
+						break;
+				case MainNavigationController.DungeonExits.TrapdoorHiddenDown:
 						finalZ--;
 						break;
 				default:

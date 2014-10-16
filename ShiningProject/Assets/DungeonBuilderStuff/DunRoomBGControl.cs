@@ -5,8 +5,11 @@ public class DunRoomBGControl : MonoBehaviour
 {
 
 		public GameObject myCurrentBGObjectArt;
+		public DunBackdropSwitch myDunBackdropSwitch;
 		
 		public DunRoomBGBucketControl.BackgroundType myBackgroundType = DunRoomBGBucketControl.BackgroundType.DungeonDefault;
+		public DunRoomControl myDunRoomControl;
+		
 
 		// Use this for initialization
 		void Start ()
@@ -20,11 +23,32 @@ public class DunRoomBGControl : MonoBehaviour
 	
 		}
 
+		public void tearDownSelf ()
+		{
+				myCurrentBGObjectArt.SetActive (false);
+				Destroy (myCurrentBGObjectArt);
+		}
+
+		public void tintBGContents (Color aColor)
+		{
+				foreach (SpriteRenderer aRenderer in myCurrentBGObjectArt.GetComponentsInChildren<SpriteRenderer>()) {
+						aRenderer.color = aColor;
+				}
+		}
+
 		public void activate (DunRoomControl theDunRoomControl)
 		{
+
+				myDunRoomControl = theDunRoomControl;
 				GameObject theRoom = theDunRoomControl.gameObject;
 				
-				MainDungeonData.singleton.theDunRoomBGBucketControl.addBackgroundObjectToRoom (this, theRoom);
+				GameObject thePrefab = MainDungeonData.singleton.theDunRoomBGBucketControl.getBackgroundPrefabForRoom (this, theRoom);
+
+				myCurrentBGObjectArt = MainMakeStuffController.instantiatePrefabInObject (thePrefab, theRoom);
+
+				myDunBackdropSwitch = myCurrentBGObjectArt.GetComponent<DunBackdropSwitch> ();
+				myDunBackdropSwitch.setupBaseRoom (theDunRoomControl);
+				myDunBackdropSwitch.setExitsForBackdrop ();
 		}
 
 		public void loadDataOntoSelfFromSaveData (DunRoomBGControl theSaveData)

@@ -33,12 +33,12 @@ public class DunRoomBGBucketControl : MonoBehaviour
 	
 		}
 
-		public void addBackgroundObjectToRoom (DunRoomBGControl theController, GameObject theRoom)
+		public GameObject getBackgroundPrefabForRoom (DunRoomBGControl theController, GameObject theRoom)
 		{
 				switch (theController.myBackgroundType) {
 
 				default:
-						MainMakeStuffController.instantiatePrefabInObject (theBackgroundPrefabs [0], theRoom);
+						return theBackgroundPrefabs [0];
 						break;
 
 				}

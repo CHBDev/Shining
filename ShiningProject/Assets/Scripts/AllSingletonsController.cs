@@ -14,6 +14,7 @@ public class AllSingletonsController : MonoBehaviour
 						DontDestroyOnLoad (gameObject);
 						singleton = this;
 				} else if (singleton != this) {
+						gameObject.SetActive (false);
 						Destroy (gameObject);
 				}
 		}
