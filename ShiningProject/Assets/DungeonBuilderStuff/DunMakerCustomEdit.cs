@@ -11,6 +11,9 @@ public class DunMakerCustomEdit : Editor
 		
 				DunMakerControl myScript = (DunMakerControl)target;
 				
+				if (GUILayout.Button ("Do Offline Maker Map")) {
+						MainDunMapControl.l ();
+				}
 				if (GUILayout.Button ("Load Import Slot")) {
 						myScript.loadImportSlotIntoEditSlot ();
 				}

@@ -53,6 +53,11 @@ public class MainMakeStuffController : CHBController
 	
 		}
 
+		public static Sprite returnWhiteBoxSprite ()
+		{
+				return Resources.Load<Sprite> ("16by16White");
+		}
+
 		public Vector2 returnCharacterHolderControllerDefaultScale ()
 		{
 				float allEm = theCharacterPrefabBucketController.baseCharacterHolderScale;
