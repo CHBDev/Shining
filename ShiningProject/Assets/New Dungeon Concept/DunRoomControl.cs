@@ -20,6 +20,9 @@ public class DunRoomControl : MonoBehaviour
 
 		public MainNavigationController.DungeonExits[] myDungeonExits;
 
+		[HideInInspector]
+		public bool
+				canAllowRandomSpawns;
 		
 		[HideInInspector]
 		public GameObject
@@ -149,37 +152,8 @@ public class DunRoomControl : MonoBehaviour
 
 		}
 
-		public void setRefForParentAndParentTransform ()
-		{
-				myRoomObject = this.gameObject;
-				myRoomObjectTransform = myRoomObject.transform;
-		}
 
-		public void moveRoomToCamera ()
-		{
-				myRoomObjectTransform.localPosition = new Vector2 (3000f, 3000f);
-		}
 
-		public void buildDungeonRoomForMaker ()
-		{
-
-				if (myDungeonExits == null) {
-						myDungeonExits = new MainNavigationController.DungeonExits[0];
-				}
-				
-				
-				myDunRoomBGControl.activate (this);
-				myDunRoomSetDecControl.activate (this);
-
-				if (shouldTintBackground == true) {
-						myDunRoomBGControl.tintBGContents (myTintColor);
-				}
-
-				//note we do not turn on enemies by default in dungeon for performance
-				//myDunRoomEncounterControl.activate (gameObject);
-				
-
-		}
 
 		public void activateDungeonRoomForRuntime ()
 		{
@@ -193,7 +167,9 @@ public class DunRoomControl : MonoBehaviour
 
 				//enemy activate doesn't do anything, as the room goes and does it all right now.
 
+				myTintColor.a = 255;
 				if (shouldTintBackground == true) {
+
 						myDunRoomBGControl.tintBGContents (myTintColor);
 				}
 
@@ -202,14 +178,8 @@ public class DunRoomControl : MonoBehaviour
 		}
 
 
-
-		public void setMyPosition (int zz, int xx, int yy)
-		{
-				myZ = zz;
-				myX = xx;
-				myY = yy;
-		}
 	
+
 		public void setupEnemies ()
 		{
 				

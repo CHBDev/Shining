@@ -6,10 +6,13 @@ public class DunControl : MonoBehaviour
 
 
 		public DunRoomControl[,,] theRooms;
+		public DunChunkControl[,,] theChunks;
 
-		
+		[HideInInspector]
+		public int
+				roomsInX, roomsInY;
 
-		public int numberOfLevels, roomsInX, roomsInY;
+		public int numberOfLevels, chunksInX, chunksInY;
 
 		public int startRoomZ, startRoomY, startRoomX;
 

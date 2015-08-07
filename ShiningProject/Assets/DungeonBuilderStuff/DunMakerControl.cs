@@ -9,6 +9,8 @@ public class DunMakerControl : MonoBehaviour
 
 		public DunRoomControl[,,] currentRooms;
 		
+		static int roomsInChunkWidth = 3;
+		static int roomsinChunkHeight = 3;
 
 		void Awake ()
 		{
@@ -24,10 +26,11 @@ public class DunMakerControl : MonoBehaviour
 		}
 
 		
-
+		[HideInInspector]
+		public int
+				roomsInX, roomsInY;
 		
-		
-		public int numberOfLevels, roomsInX, roomsInY;
+		public int numberOfLevels, chunksInX, chunksInY;
 		
 		public GameObject editSlotForDungeonActualObject;
 		public GameObject importSlotForDungeonExportObject;
@@ -163,9 +166,14 @@ public class DunMakerControl : MonoBehaviour
 				DunControl theController = theDungeon.AddComponent<DunControl> ();
 				
 				theController.numberOfLevels = numberOfLevels;
+				theController.chunksInX = chunksInX;
+				theController.chunksInY = chunksInY;
+
+				roomsInX = chunksInX * roomsInChunkWidth;
+				roomsInY = chunksInY * roomsinChunkHeight;
+
 				theController.roomsInX = roomsInX;
 				theController.roomsInY = roomsInY;
-
 
 				editSlotForDungeonActualObject = theDungeon;
 				
@@ -186,9 +194,7 @@ public class DunMakerControl : MonoBehaviour
 								for (int y = 0; y < roomsInY; y++) {
 					
 										Vector2 thisPos = determineActualScreenPosForRoom (z, x, y);
-					
-					
-					
+
 										GameObject theRoom = MainMakeStuffController.newGameObjectInObject (theDungeon, thisPos);
 
 										
@@ -229,7 +235,7 @@ public class DunMakerControl : MonoBehaviour
 				float netRoomHeight = roomHeightMod4by3 + roomHeightBuffer;
 				
 
-				float xPos = z * (roomsInX * netRoomWidth) + (x * netRoomWidth);
+				float xPos = z * (roomsInX * netRoomWidth) + (x * netRoomWidth) + (z * roomWidthBuffer * 2);
 				float yPos = y * netRoomHeight;
 
 				

@@ -11,19 +11,33 @@ public class DunMakerCustomEdit : Editor
 		
 				DunMakerControl myScript = (DunMakerControl)target;
 				
-				if (GUILayout.Button ("Do Offline Maker Map")) {
-						MainDunMapControl.l ();
+				if (myScript.importSlotForDungeonExportObject != null) {
+						if (GUILayout.Button ("Do Offline Maker Map")) {
+								MainDunMapControl.doMakerMapForDunControl (myScript.importSlotForDungeonExportObject);
+						}
+				} else {
+						if (GUILayout.Button ("NO IMPORT SLOT FOR MAP")) {
+
+						}
 				}
-				if (GUILayout.Button ("Load Import Slot")) {
-						myScript.loadImportSlotIntoEditSlot ();
-				}
-				if (GUILayout.Button ("Export to Prefab")) {
-						myScript.exportEditSlotToPrefab ();
-				}
-				if (GUILayout.Button ("New Dungeon")) {
-						myScript.newObjectInEditSlot ();
+
+				if (Application.isPlaying == true) {
+						if (GUILayout.Button ("Load Import Slot")) {
+								myScript.loadImportSlotIntoEditSlot ();
+						}
+						if (GUILayout.Button ("Export to Prefab")) {
+								myScript.exportEditSlotToPrefab ();
+						}
+						if (GUILayout.Button ("New Dungeon")) {
+								myScript.newObjectInEditSlot ();
+						}
+
+				} else {
+						if (GUILayout.Button ("MAKER DISABLED/HIT PLAY BUTTON")) {
+								Debug.Log ("need to be online to use maker functions");
+						}
 				}
 				
-				
-		}
+		}	
+		
 }
